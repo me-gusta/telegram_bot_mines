@@ -154,7 +154,7 @@ async def cryptobot_deposit(query: types.CallbackQuery):
     }
     async with aiohttp.ClientSession(headers=headers) as client_session:
         resp = await client_session.post(CRYPTO_PAY_URL + 'createInvoice',
-                                         data={'asset': 'TON', 'amount': amount / 100})
+                                         data={'asset': 'TON', 'amount': amount})
         text = await resp.text()
     root_logger.info(f'CRYPTO_PAY createInvoice {text=}')
     invoice_dict = ujson.loads(text)
@@ -180,6 +180,7 @@ async def cryptobot_deposit(query: types.CallbackQuery):
 
 async def on_text(message: types.Message):
     user = get_or_create_user(message.from_user, do_commit=False)
+    await message.delete()
     if user.state.startswith(UserState.ON_DEPOSIT_AMOUNT):
         try:
             amount = to_decimal(message.text.replace(',', '.'))
@@ -224,7 +225,6 @@ async def on_text(message: types.Message):
         )
     user.state = UserState.NONE
     session.commit()
-    await message.delete()
 
 
 async def withdrawal_request_accept(query: types.CallbackQuery):
@@ -233,7 +233,7 @@ async def withdrawal_request_accept(query: types.CallbackQuery):
     request_id = WithdrawRequestAcceptCQ.accept_get(query)
     request: WithdrawRequest = session.query(WithdrawRequest).filter(WithdrawRequest.id == request_id).first()
 
-    root_logger.info(f'withdrawal_request_accept. {request=}')
+    root_logger.info(f'withdrawal_request_accept. {request.user=}')
     if request.is_payed:
         return
     headers = {

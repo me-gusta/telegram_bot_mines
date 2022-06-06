@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-04 22:18+0300\n"
+"POT-Creation-Date: 2022-06-06 22:18+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -46,23 +46,23 @@ msgid ""
 "*Choose an option*"
 msgstr ""
 
-#: handlers_bot/common.py:55
+#: handlers_bot/common.py:54 handlers_server/webhooks.py:40
 msgid "Games"
 msgstr ""
 
-#: handlers_bot/common.py:56
+#: handlers_bot/common.py:55
 msgid "Wallet"
 msgstr ""
 
-#: handlers_bot/common.py:57
+#: handlers_bot/common.py:56
 msgid "News"
 msgstr ""
 
-#: handlers_bot/common.py:58
+#: handlers_bot/common.py:57
 msgid "Language"
 msgstr ""
 
-#: handlers_bot/common.py:60
+#: handlers_bot/common.py:59
 msgid "Support"
 msgstr ""
 
@@ -94,8 +94,8 @@ msgstr ""
 #: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
 #: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:100
 #: handlers_bot/callbacks/wallet.py:115 handlers_bot/callbacks/wallet.py:127
-#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:194
-#: handlers_bot/callbacks/wallet.py:214
+#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:193
+#: handlers_bot/callbacks/wallet.py:213
 msgid "Back"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgid ""
 msgstr ""
 
 #: handlers_bot/callbacks/wallet.py:92 handlers_bot/callbacks/wallet.py:141
-#: handlers_bot/callbacks/wallet.py:193 handlers_bot/callbacks/wallet.py:213
+#: handlers_bot/callbacks/wallet.py:192 handlers_bot/callbacks/wallet.py:212
 msgid "Confirm"
 msgstr ""
 
@@ -191,19 +191,19 @@ msgstr ""
 msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:139 handlers_bot/callbacks/wallet.py:191
+#: handlers_bot/callbacks/wallet.py:139 handlers_bot/callbacks/wallet.py:190
 msgid "Are you sure you want to deposit {} TON"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:162
+#: handlers_bot/callbacks/wallet.py:161
 msgid "Something went wrong. Please contact our support: @{}"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:163
+#: handlers_bot/callbacks/wallet.py:162
 msgid "Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:169
+#: handlers_bot/callbacks/wallet.py:168
 msgid ""
 "To finish the payment:\n"
 "1. Press \"💳 Go to Payment\"\n"
@@ -211,22 +211,28 @@ msgid ""
 "3. Follow @CryptoBot instructions"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:174
+#: handlers_bot/callbacks/wallet.py:173
 msgid "Go to Payment"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:176
+#: handlers_bot/callbacks/wallet.py:175 handlers_server/webhooks.py:41
 msgid "Back to Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:211
+#: handlers_bot/callbacks/wallet.py:210
 msgid "Are you sure you want to withdraw {} 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:254
+#: handlers_bot/callbacks/wallet.py:253
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
+msgstr ""
+
+#: handlers_server/webhooks.py:38
+msgid ""
+"You deposited {amount} 💎 to you wallet!\n"
+"\n"
 msgstr ""
 
 #~ msgid ""

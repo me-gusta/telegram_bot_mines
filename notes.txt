@@ -11,10 +11,12 @@ pybabel compile -d files/locales -D mybot
 Step 5: When you change the code of your bot you need to update po & mo files.
 
 Step 5.1: regenerate pot file: command from step 1
+pybabel extract . -o files/locales/mybot.pot
 Step 5.2: update po files #
 pybabel update -d files/locales -D mybot -i files/locales/mybot.pot
 Step 5.3: update your translations
 Step 5.4: compile mo files command from step 4
+pybabel compile -d files/locales -D mybot
 
 
 

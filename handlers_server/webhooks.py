@@ -35,7 +35,7 @@ async def crypto_pay_webhook(request: web.Request):
     if invoice is None or invoice.is_payed:
         return Response(text='ok')
 
-    text = _('You deposited {amount} 💎 to you wallet!\n\n')
+    text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=invoice.amount)
     buttons = [
         [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data=GamesCQ.GAMES)],
         [types.InlineKeyboardButton(_('Back to Menu'), callback_data=MenuCQ.MENU)]

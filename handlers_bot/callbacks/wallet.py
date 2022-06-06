@@ -147,14 +147,13 @@ async def cryptobot_confirm(query: types.CallbackQuery):
 async def cryptobot_deposit(query: types.CallbackQuery):
     root_logger.debug('cryptobot_deposit')
     amount: Decimal = CryptoBotCQ.deposit_get(query)
-    amount = amount / 100
     headers = {
         'Crypto-Pay-API-Token': config.crypto_pay_token,
         'Content-Type': 'application/x-www-form-urlencoded'
     }
     async with aiohttp.ClientSession(headers=headers) as client_session:
         resp = await client_session.post(CRYPTO_PAY_URL + 'createInvoice',
-                                         data={'asset': 'TON', 'amount': amount})
+                                         data={'asset': 'TON', 'amount': amount / 100})
         text = await resp.text()
     root_logger.info(f'CRYPTO_PAY createInvoice {text=}')
     invoice_dict = ujson.loads(text)

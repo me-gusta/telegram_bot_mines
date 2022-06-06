@@ -129,7 +129,7 @@ def run_polling():
     t2.join()
 
 
-# app = make_app(init_bot=False)
+app = make_app(init_bot=False)
 
 if __name__ == '__main__':
     run_polling()

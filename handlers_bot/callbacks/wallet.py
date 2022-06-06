@@ -86,6 +86,7 @@ async def withdraw_request(query: types.CallbackQuery):
     session.commit()
     operator_text = f'new withdrawal request\n' \
                     f'user: {user}\n' \
+                    f'balance: {user.balance}\n' \
                     f'amount: {amount}\n\n' \
                     f'*choose option*'
     operator_buttons = [
@@ -203,6 +204,8 @@ async def on_text(message: types.Message):
         try:
             amount = to_decimal(message.text.replace(',', '.'))
         except decimal.InvalidOperation:
+            return
+        if amount > user.balance:
             return
         if amount < MIN_WITHDRAW or amount > MAX_WITHDRAW:
             return

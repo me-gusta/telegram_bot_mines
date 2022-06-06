@@ -1,0 +1,230 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-06-04 22:18+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: handlers_bot/common.py:25 handlers_bot/common.py:27
+msgid "hello"
+msgstr ""
+
+#: handlers_bot/common.py:26 handlers_bot/common.py:27
+msgid "you look great today"
+msgstr ""
+
+#: handlers_bot/common.py:26 handlers_bot/common.py:27
+msgid "nice to see you again"
+msgstr ""
+
+#: handlers_bot/common.py:27
+msgid "have a nice day"
+msgstr ""
+
+#: handlers_bot/common.py:28
+msgid "good luck"
+msgstr ""
+
+#: handlers_bot/common.py:46
+msgid ""
+"{welcome}, {name}!\n"
+"_Your balance_: {balance} 💎\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+
+#: handlers_bot/common.py:55
+msgid "Games"
+msgstr ""
+
+#: handlers_bot/common.py:56
+msgid "Wallet"
+msgstr ""
+
+#: handlers_bot/common.py:57
+msgid "News"
+msgstr ""
+
+#: handlers_bot/common.py:58
+msgid "Language"
+msgstr ""
+
+#: handlers_bot/common.py:60
+msgid "Support"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:14
+msgid ""
+"🕹️ Games\n"
+"💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
+"💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n"
+"🚀 *Rocket Launch*: _[soon]_ Hop on a starship and earn up to x10000!\n"
+"\n"
+"_You can play every game for free if you set your bet to 0_\n"
+"\n"
+"*Choose a game*"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:22
+msgid "Mines"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:23
+msgid "Coinflip"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:24
+msgid "Rocket Launch"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:25 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
+#: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:100
+#: handlers_bot/callbacks/wallet.py:115 handlers_bot/callbacks/wallet.py:127
+#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:194
+#: handlers_bot/callbacks/wallet.py:214
+msgid "Back"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:33
+msgid ""
+"This game is still in development. Subscribe to our 📰 News to get "
+"notified!"
+msgstr ""
+
+#: handlers_bot/callbacks/callbacks.py:45
+msgid ""
+"Your current language: {language}\n"
+"\n"
+"*Choose a language*"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:26
+msgid ""
+"👛 Wallet\n"
+"_Your Balance_: {balance} 💎\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:31
+msgid "Deposit"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:32
+msgid "Withdraw"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:43
+msgid ""
+"🔼 Deposit\n"
+"⚠ Currently we are accepting Toncoin deposits only via @CryptoBot\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:47
+msgid "🤖 @CryptoBot"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:48
+msgid "ℹ How to use @CryptoBot"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:58
+msgid ""
+"🔼 Withdraw\n"
+"_Your Balance_: {balance} 💎\n"
+"_Withdraw limit: from 0.5 up to 1000 💎_\n"
+"\n"
+"*Send amount you want to withdraw*"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:63
+msgid "About Withdrawals"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:71
+msgid ""
+"⚠ Withdrawals can take up to 24h\n"
+"⚠ Minimum amount: 0.5 💎\n"
+"⚠ Maximum amount: 1000 💎"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:92 handlers_bot/callbacks/wallet.py:141
+#: handlers_bot/callbacks/wallet.py:193 handlers_bot/callbacks/wallet.py:213
+msgid "Confirm"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:97
+msgid ""
+"Your withdrawal request is being proceeded\n"
+"⚠ Withdrawals can take up to 24h"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:106
+msgid ""
+"🤖 @Cryptobot deposit\n"
+"_Conversion rate: 1 TON = 1 💎_\n"
+"\n"
+"*Choose amount to deposit*"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:114
+msgid "Custom Amount"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:124
+msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:139 handlers_bot/callbacks/wallet.py:191
+msgid "Are you sure you want to deposit {} TON"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:162
+msgid "Something went wrong. Please contact our support: @{}"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:163
+msgid "Menu"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:169
+msgid ""
+"To finish the payment:\n"
+"1. Press \"💳 Go to Payment\"\n"
+"2. Press \"START\"\n"
+"3. Follow @CryptoBot instructions"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:174
+msgid "Go to Payment"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:176
+msgid "Back to Menu"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:211
+msgid "Are you sure you want to withdraw {} 💎"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:254
+msgid ""
+"✅ Your withdrawal request has been processed.\n"
+"{amount} 💎 sent to you wallet"
+msgstr ""
+

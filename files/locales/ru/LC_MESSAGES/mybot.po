@@ -1,0 +1,280 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-06-04 22:18+0300\n"
+"PO-Revision-Date: 2022-06-04 22:02+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: handlers_bot/common.py:25 handlers_bot/common.py:27
+msgid "hello"
+msgstr "привет"
+
+#: handlers_bot/common.py:26 handlers_bot/common.py:27
+msgid "you look great today"
+msgstr "вы сегодня отлично выглядите"
+
+#: handlers_bot/common.py:26 handlers_bot/common.py:27
+msgid "nice to see you again"
+msgstr "так приятно видеть вас снова"
+
+#: handlers_bot/common.py:27
+msgid "have a nice day"
+msgstr "добрый день"
+
+#: handlers_bot/common.py:28
+msgid "good luck"
+msgstr "удачи"
+
+#: handlers_bot/common.py:46
+msgid ""
+"{welcome}, {name}!\n"
+"_Your balance_: {balance} 💎\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+"{welcome}, {name}!\n"
+"_Ваш баланс_: {balance} 💎\n"
+"\n"
+"*Выберите пункт меню*"
+
+#: handlers_bot/common.py:55
+msgid "Games"
+msgstr "Игры"
+
+#: handlers_bot/common.py:56
+msgid "Wallet"
+msgstr "Кошелек"
+
+#: handlers_bot/common.py:57
+msgid "News"
+msgstr "Новости"
+
+#: handlers_bot/common.py:58
+msgid "Language"
+msgstr "Язык"
+
+#: handlers_bot/common.py:60
+msgid "Support"
+msgstr "Поддержка"
+
+#: handlers_bot/callbacks/callbacks.py:14
+msgid ""
+"🕹️ Games\n"
+"💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
+"💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n"
+"🚀 *Rocket Launch*: _[soon]_ Hop on a starship and earn up to x10000!\n"
+"\n"
+"_You can play every game for free if you set your bet to 0_\n"
+"\n"
+"*Choose a game*"
+msgstr ""
+"🕹️ Игры\n"
+"💣 *Мины*: Откройте все алмазы, чтобы увеличить выигрыш!\n"
+"💸 *Монетка*: _[soon]_ Простая игра 50 на 50.\n"
+"🚀 *Ракета*: _[soon]_ Запрыгивай на звездолет и зарабатывай до х10000!\n"
+"\n"
+"_Вы можете играть в каждую игру бесплатно, если установите свою ставку "
+"равной 0_\n"
+"\n"
+"*Choose a game*"
+
+#: handlers_bot/callbacks/callbacks.py:22
+msgid "Mines"
+msgstr "Мины"
+
+#: handlers_bot/callbacks/callbacks.py:23
+msgid "Coinflip"
+msgstr "Монетка"
+
+#: handlers_bot/callbacks/callbacks.py:24
+msgid "Rocket Launch"
+msgstr "Ракета"
+
+#: handlers_bot/callbacks/callbacks.py:25 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
+#: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:100
+#: handlers_bot/callbacks/wallet.py:115 handlers_bot/callbacks/wallet.py:127
+#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:194
+#: handlers_bot/callbacks/wallet.py:214
+msgid "Back"
+msgstr "Назад"
+
+#: handlers_bot/callbacks/callbacks.py:33
+msgid ""
+"This game is still in development. Subscribe to our 📰 News to get "
+"notified!"
+msgstr ""
+"Эта игра все еще находится в разработке. Подпишитесь на наши новости 📰, "
+"чтобы получить уведомление о выходе!"
+
+#: handlers_bot/callbacks/callbacks.py:45
+msgid ""
+"Your current language: {language}\n"
+"\n"
+"*Choose a language*"
+msgstr ""
+"Ваш язык: {language}\n"
+"\n"
+"*Выберите язык*"
+
+#: handlers_bot/callbacks/wallet.py:26
+msgid ""
+"👛 Wallet\n"
+"_Your Balance_: {balance} 💎\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+"👛 Кошелек\n"
+"_Ваш баланс_: {balance} 💎\n"
+"\n"
+"*Выберите пункт меню*"
+
+#: handlers_bot/callbacks/wallet.py:31
+msgid "Deposit"
+msgstr "Внести"
+
+#: handlers_bot/callbacks/wallet.py:32
+msgid "Withdraw"
+msgstr "Вывести"
+
+#: handlers_bot/callbacks/wallet.py:43
+msgid ""
+"🔼 Deposit\n"
+"⚠ Currently we are accepting Toncoin deposits only via @CryptoBot\n"
+"\n"
+"*Choose an option*"
+msgstr ""
+"🔼 Внести\n"
+"⚠ В настоящее время мы принимаем депозиты в Toncoin только через "
+"@CryptoBot\n"
+"\n"
+"*Выберите пункт меню*"
+
+#: handlers_bot/callbacks/wallet.py:47
+msgid "🤖 @CryptoBot"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:48
+msgid "ℹ How to use @CryptoBot"
+msgstr "ℹ Как использовать @CryptoBot"
+
+#: handlers_bot/callbacks/wallet.py:58
+msgid ""
+"🔼 Withdraw\n"
+"_Your Balance_: {balance} 💎\n"
+"_Withdraw limit: from 0.5 up to 1000 💎_\n"
+"\n"
+"*Send amount you want to withdraw*"
+msgstr ""
+"🔼 Вывести\n"
+"_Ваш баланс_: {balance} 💎\n"
+"_Ограничение вывода: от 0.5 до 1000 💎_\n"
+"\n"
+"*Отправьте сумму, которую вы хотите вывести*"
+
+#: handlers_bot/callbacks/wallet.py:63
+msgid "About Withdrawals"
+msgstr "Правила вывода"
+
+#: handlers_bot/callbacks/wallet.py:71
+msgid ""
+"⚠ Withdrawals can take up to 24h\n"
+"⚠ Minimum amount: 0.5 💎\n"
+"⚠ Maximum amount: 1000 💎"
+msgstr ""
+"⚠ Вывод средств может занять до 24 часов\n"
+"⚠ Минимальная сумма: 0.5 💎\n"
+"⚠ Максимальная сумма: 1000 💎"
+
+#: handlers_bot/callbacks/wallet.py:92 handlers_bot/callbacks/wallet.py:141
+#: handlers_bot/callbacks/wallet.py:193 handlers_bot/callbacks/wallet.py:213
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: handlers_bot/callbacks/wallet.py:97
+msgid ""
+"Your withdrawal request is being proceeded\n"
+"⚠ Withdrawals can take up to 24h"
+msgstr ""
+"Запрос на вывод средств обрабатывается\n"
+" ⚠ Обработка может занять до 24 часов"
+
+#: handlers_bot/callbacks/wallet.py:106
+msgid ""
+"🤖 @Cryptobot deposit\n"
+"_Conversion rate: 1 TON = 1 💎_\n"
+"\n"
+"*Choose amount to deposit*"
+msgstr ""
+"🤖 депозит через @Cryptobot\n"
+"_Конвертация: 1 TON = 1 💎_\n"
+"\n"
+"*Выберите сумму для внесения*"
+
+#: handlers_bot/callbacks/wallet.py:114
+msgid "Custom Amount"
+msgstr "Другая сумма"
+
+#: handlers_bot/callbacks/wallet.py:124
+msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
+msgstr "Отправьте пользовательскую сумму. От 0.5 до 1000 💎"
+
+#: handlers_bot/callbacks/wallet.py:139 handlers_bot/callbacks/wallet.py:191
+msgid "Are you sure you want to deposit {} TON"
+msgstr "Вы уверены, что хотите внести {} TON"
+
+#: handlers_bot/callbacks/wallet.py:162
+msgid "Something went wrong. Please contact our support: @{}"
+msgstr "то-то пошло не так. Пожалуйста, свяжитесь с нашей службой поддержки: @{}"
+
+#: handlers_bot/callbacks/wallet.py:163
+msgid "Menu"
+msgstr "Меню"
+
+#: handlers_bot/callbacks/wallet.py:169
+#, fuzzy
+msgid ""
+"To finish the payment:\n"
+"1. Press \"💳 Go to Payment\"\n"
+"2. Press \"START\"\n"
+"3. Follow @CryptoBot instructions"
+msgstr ""
+"Чтобы совершить оплату:\n"
+"1. Нажмите \"💳 Перейти к оплате\"\n"
+"2. Нажмите \"НАЧАТЬ\"\n"
+"3. Следуйте инструкциям в @CryptoBot"
+
+#: handlers_bot/callbacks/wallet.py:174
+msgid "Перейти к оплате"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:176
+msgid "Back to Menu"
+msgstr "Назад в меню"
+
+#: handlers_bot/callbacks/wallet.py:211
+msgid "Are you sure you want to withdraw {} 💎"
+msgstr "Вы уверены, что хотите вывести {} 💎"
+
+#: handlers_bot/callbacks/wallet.py:254
+msgid ""
+"✅ Your withdrawal request has been processed.\n"
+"{amount} 💎 sent to you wallet"
+msgstr ""
+"✅ Ваш запрос на вывод средств был обработан.\n"
+"{сумма} 💎 отправлено на ваш кошелек"
+

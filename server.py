@@ -4,7 +4,7 @@ import traceback
 
 from aiogram import Dispatcher, executor
 from aiohttp import web
-from aiohttp.web_exceptions import HTTPBadRequest
+from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 
 import handlers_server.api_mines as api
 from bot import bot
@@ -20,7 +20,7 @@ from handlers_bot.commands import send_welcome
 
 def init_dispatcher() -> Dispatcher:
     async def error_handler(update, error):
-        print(traceback.print_exc())
+        root_logger.error(''.join(traceback.format_exc()))
         return True
 
     dp = Dispatcher(bot)
@@ -35,19 +35,21 @@ def make_app(init_bot=False):
     @web.middleware
     async def cors_middleware(request: web.Request, handler):
         response = await handler(request)
-        if request.headers['Origin'] == 'http://127.0.0.1:8080' or \
-                request.headers['Origin'] == 'https://bot-frontend-demo.web.app':
+        if request.headers.get('Origin') == 'http://127.0.0.1:8080' or \
+                request.headers.get('Origin') == 'https://bot-frontend-demo.web.app':
             response.headers['Access-Control-Allow-Origin'] = '*'
             response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
         return response
 
     @web.middleware
-    async def debug_middleware(request, handler):
-        root_logger.warning('DUBUG MIDDLEWARE')
+    async def debug_middleware(request: web.Request, handler):
+        root_logger.warning(f'DUBUG MIDDLEWARE. {request.method}, {request.path}')
         try:
             response = await handler(request)
             return response
-        except Exception as e:
+        except HTTPNotFound:
+            root_logger.error(f'HTTPNotFound 404')
+        except Exception:
             root_logger.error(''.join(traceback.format_exc()))
         return HTTPBadRequest(text='Something is wrong')
 
@@ -78,13 +80,14 @@ def make_app(init_bot=False):
 
     aiohttp_app = web.Application(middlewares=[cors_middleware])
     if config.debug:
-        aiohttp_app.middlewares.append(debug_middleware)
+        aiohttp_app.middlewares.insert(0, debug_middleware)
 
     aiohttp_app.on_startup.append(startup_db)
 
     root_logger.info('Initializing routes')
 
-    aiohttp_app.router.add_route('GET', '/', api.index)
+    aiohttp_app.router.add_route('GET', '/test', api.index)
+
     aiohttp_app.router.add_route('POST', '/getUser', api.GetUserApi)
     aiohttp_app.router.add_route('OPTIONS', '/getUser', api.GetUserApi)
 
@@ -126,7 +129,7 @@ def run_polling():
     t2.join()
 
 
-app = make_app(init_bot=False)
+# app = make_app(init_bot=False)
 
 if __name__ == '__main__':
     run_polling()

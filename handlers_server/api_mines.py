@@ -6,7 +6,6 @@ from decimal import Decimal, ROUND_DOWN
 import ujson
 from aiohttp import web
 from aiohttp.web_exceptions import HTTPBadRequest
-from aiohttp.web_response import Response
 from pydantic import BaseModel
 
 from core import constants
@@ -20,8 +19,7 @@ from handlers_server.helpers import validate_telegram_string, ApiView
 
 async def index(request: web.Request):
     root_logger.warning('Index page')
-    a = 1 /0
-    return Response(text='Hello! How is ur day today bro???')
+    return web.Response(text='Hello! How is ur day today bro???')
 
 
 class GetUserApi(ApiView):

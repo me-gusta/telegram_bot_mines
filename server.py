@@ -54,11 +54,15 @@ def make_app(init_bot=False):
         return HTTPBadRequest(text='Something is wrong')
 
     async def startup_telegram_bot(app: web.Application):
+        root_logger.info('Initializing bot')
         dp = init_dispatcher()
         app['dp'] = dp
-        await dp.bot.delete_webhook(drop_pending_updates=True)
+        try:
+            await dp.bot.delete_webhook(drop_pending_updates=True)
 
-        await dp.bot.set_webhook(config.server_name + WEBHOOK_PATH)
+            await dp.bot.set_webhook(config.server_name + WEBHOOK_PATH)
+        except Exception:
+            root_logger.error(''.join(traceback.format_exc()))
 
     async def shutdown_telegram_bot(app: web.Application):
         root_logger.warning('Shutting down..')
@@ -84,6 +88,12 @@ def make_app(init_bot=False):
 
     aiohttp_app.on_startup.append(startup_db)
 
+    if init_bot:
+        aiohttp_app.router.add_route('POST', WEBHOOK_PATH, telegram_webhook)
+
+        aiohttp_app.on_startup.append(startup_telegram_bot)
+        aiohttp_app.on_shutdown.append(shutdown_telegram_bot)
+
     root_logger.info('Initializing routes')
 
     aiohttp_app.router.add_route('GET', '/test', api.index)
@@ -100,12 +110,6 @@ def make_app(init_bot=False):
     aiohttp_app.router.add_route('POST', '/cashout', api.CashoutApi)
     aiohttp_app.router.add_route('OPTIONS', '/cashout', api.CashoutApi)
 
-    if init_bot:
-        root_logger.info('Initializing bot')
-        aiohttp_app.router.add_route('POST', WEBHOOK_PATH, telegram_webhook)
-
-        aiohttp_app.on_startup.append(startup_telegram_bot)
-        aiohttp_app.on_shutdown.append(shutdown_telegram_bot)
     return aiohttp_app
 
 
@@ -129,7 +133,7 @@ def run_polling():
     t2.join()
 
 
-app = make_app(init_bot=False)
+app = make_app(init_bot=True)
 
 if __name__ == '__main__':
     run_polling()

@@ -96,7 +96,7 @@ def make_app(init_bot=False):
 
     root_logger.info('Initializing routes')
 
-    aiohttp_app.router.add_route('GET', CRYPTO_PAY_WEBHOOK_PATH, webhooks.crypto_pay_webhook)
+    aiohttp_app.router.add_route('POST', CRYPTO_PAY_WEBHOOK_PATH, webhooks.crypto_pay_webhook)
 
     aiohttp_app.router.add_route('GET', '/test', api.index)
 

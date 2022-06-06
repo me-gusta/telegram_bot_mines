@@ -79,6 +79,7 @@ def make_app(init_bot=False):
     aiohttp_app = web.Application(middlewares=[cors_middleware])
     if config.debug:
         aiohttp_app.middlewares.append(debug_middleware)
+
     aiohttp_app.on_startup.append(startup_db)
 
     root_logger.info('Initializing routes')
@@ -123,6 +124,7 @@ def run_polling():
     t2.start()
     t1.join()
     t2.join()
+
 
 app = make_app(init_bot=False)
 

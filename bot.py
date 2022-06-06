@@ -19,3 +19,4 @@ if config.run_testnet:
 else:
     bot = Bot(token=config.token)#, server=TelegramAPIServerTest.make())
 
+Bot.set_current(bot)

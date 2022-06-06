@@ -48,7 +48,7 @@ def make_app(init_bot=False):
             response = await handler(request)
             return response
         except Exception as e:
-            traceback.print_exc()
+            root_logger.error(''.join(traceback.format_exc()))
         return HTTPBadRequest(text='Something is wrong')
 
     async def startup_telegram_bot(app: web.Application):

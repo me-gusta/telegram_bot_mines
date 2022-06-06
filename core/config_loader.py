@@ -20,7 +20,7 @@ class Config(BaseModel):
     webapp_url: str
     server_name: str
 
-    run_testnet: bool
+    dev_mode: bool
     debug: bool
 
     secret: bytes = b''
@@ -32,7 +32,10 @@ class Config(BaseModel):
 
 def load_config() -> Config:
     with open(FILES_DIR / 'config.json', 'r', encoding='utf-8') as f:
-        return Config(**ujson.loads(f.read()))
-
+        config = Config(**ujson.loads(f.read()))
+    if config.dev_mode:
+        with open(FILES_DIR / 'config_dev.json', 'r', encoding='utf-8') as f:
+            config = Config(**ujson.loads(f.read()))
+    return config
 
 config: Config = load_config()

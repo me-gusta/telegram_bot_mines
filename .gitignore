@@ -3,3 +3,4 @@ alembic.ini
 __pycache__
 .idea
 config.json
+config_dev.json

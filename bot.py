@@ -14,7 +14,7 @@ class TelegramAPIServerTest(TelegramAPIServer):
         )
 
 
-if config.run_testnet:
+if config.dev_mode:
     bot = Bot(token=config.token, server=TelegramAPIServerTest.make())
 else:
     bot = Bot(token=config.token)#, server=TelegramAPIServerTest.make())

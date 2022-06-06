@@ -10,6 +10,7 @@ from aiohttp.web_response import Response
 from bot import bot
 from core.config_loader import config
 from core.logging_config import root_logger
+from core.pure import to_decimal
 from db.engine import session
 from db.models import Invoice
 from handlers_bot.common import GamesCQ, MenuCQ
@@ -41,6 +42,7 @@ async def crypto_pay_webhook(request: web.Request):
     ]
 
     invoice.is_payed = True
+    invoice.user.balance += invoice.amount
     session.commit()
     with suppress(MessageNotModified):
         await bot.edit_message_text(

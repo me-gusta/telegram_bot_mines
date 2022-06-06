@@ -19,6 +19,7 @@ from handlers_server.helpers import validate_telegram_string, ApiView
 
 
 async def index(request: web.Request):
+    root_logger.warning('Index page')
     return Response(text='Hello! How is ur day today bro???')
 
 

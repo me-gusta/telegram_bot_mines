@@ -1,5 +1,4 @@
 import asyncio
-import logging
 import threading
 import traceback
 
@@ -11,6 +10,7 @@ import handlers_server.api_mines as api
 from bot import bot
 from core.config_loader import config
 from core.constants import WEBHOOK_PATH
+from core.logging_config import root_logger
 from db.engine import create_tables
 from handlers_bot.callbacks.callbacks import setup as setup_callbacks
 from handlers_server.webhooks import telegram_webhook
@@ -43,6 +43,7 @@ def make_app(init_bot=False):
 
     @web.middleware
     async def debug_middleware(request, handler):
+        root_logger.warning('DUBUG MIDDLEWARE')
         try:
             response = await handler(request)
             return response
@@ -58,7 +59,7 @@ def make_app(init_bot=False):
         await dp.bot.set_webhook(config.server_name + WEBHOOK_PATH)
 
     async def shutdown_telegram_bot(app: web.Application):
-        logging.warning('Shutting down..')
+        root_logger.warning('Shutting down..')
 
         dp = app['dp']
 
@@ -69,10 +70,10 @@ def make_app(init_bot=False):
         await dp.storage.close()
         await dp.storage.wait_closed()
 
-        logging.warning('Bye!')
+        root_logger.warning('Bye!')
 
     async def startup_db(app: web.Application):
-        logging.info('Initializing database')
+        root_logger.info('Initializing database')
         await create_tables()
 
     aiohttp_app = web.Application(middlewares=[cors_middleware])
@@ -80,7 +81,9 @@ def make_app(init_bot=False):
         aiohttp_app.middlewares.append(debug_middleware)
     aiohttp_app.on_startup.append(startup_db)
 
-    aiohttp_app.router.add_route('POST', '/', api.index)
+    root_logger.info('Initializing routes')
+
+    aiohttp_app.router.add_route('GET', '/', api.index)
     aiohttp_app.router.add_route('POST', '/getUser', api.GetUserApi)
     aiohttp_app.router.add_route('OPTIONS', '/getUser', api.GetUserApi)
 
@@ -94,6 +97,7 @@ def make_app(init_bot=False):
     aiohttp_app.router.add_route('OPTIONS', '/cashout', api.CashoutApi)
 
     if init_bot:
+        root_logger.info('Initializing bot')
         aiohttp_app.router.add_route('POST', WEBHOOK_PATH, telegram_webhook)
 
         aiohttp_app.on_startup.append(startup_telegram_bot)
@@ -120,8 +124,7 @@ def run_polling():
     t1.join()
     t2.join()
 
-
-app = make_app()
+app = make_app(init_bot=False)
 
 if __name__ == '__main__':
     run_polling()

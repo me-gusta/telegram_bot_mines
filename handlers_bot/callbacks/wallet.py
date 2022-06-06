@@ -163,7 +163,7 @@ async def cryptobot_deposit(query: types.CallbackQuery):
         buttons = [[types.InlineKeyboardButton('⬅ ' + _('Menu'), callback_data=MenuCQ.MENU)]]
     else:
         user = get_or_create_user(query.from_user, do_commit=False)
-        invoice = Invoice(user=user, amount=amount, hash=invoice_dict['result']['hash'])
+        invoice = Invoice(user=user, amount=amount, hash=invoice_dict['result']['hash'], message_id=query.message.message_id)
         session.add(invoice)
         session.commit()
         text = _('To finish the payment:\n'

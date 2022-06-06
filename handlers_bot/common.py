@@ -51,7 +51,6 @@ def generate_main_menu(user: User) -> (str, List[List[types.InlineKeyboardButton
         balance=user.balance,
     )
     buttons = [
-        # [types.InlineKeyboardButton('Start Game', web_app=types.WebAppInfo(url=config.webapp_url))],
         [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data=GamesCQ.GAMES)],
         [types.InlineKeyboardButton('👛 ' + _('Wallet'), callback_data=WalletCQ.WALLET)],
         [types.InlineKeyboardButton('📰 ' + _('News'), url='https://t.me/SupaMegaHelp')],

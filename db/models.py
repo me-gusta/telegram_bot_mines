@@ -31,7 +31,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     user_id = Column(BigInteger, unique=True)
     username = Column(String(32), default='')
-    first_name = Column(String(64))
+    first_name = Column(String(64), default='')
     last_name = Column(String(64), default='')
     language_code = Column(String(10), default='en')
     state = Column(String(64), default=UserState.NONE)
@@ -40,7 +40,10 @@ class User(Base):
     balance = Column(DECIMAL, default=0)
 
     def __str__(self) -> str:
-        return f'<User {self.id}>'
+        if self.username:
+            return f'<User {self.id} @{self.username}>'
+        else:
+            return f'<User {self.id}>'
 
     def change_balance(self, n: Union[float, Decimal]):
         value = Decimal(str(n)) if isinstance(n, float) else n
@@ -105,6 +108,7 @@ class Invoice(Base):
     user = relationship('User')
     amount = Column(DECIMAL)
     hash = Column(String(32))
+    message_id = Column(Integer)
     is_payed = Column(Boolean, default=False)
 
 

@@ -66,6 +66,7 @@ async def language_set(query: types.CallbackQuery):
     session.commit()
     await menu(query)
 
+
 async def close(query: types.CallbackQuery):
     await query.message.delete()
 

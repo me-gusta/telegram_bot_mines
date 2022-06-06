@@ -9,11 +9,11 @@ from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 import handlers_server.api_mines as api
 from bot import bot
 from core.config_loader import config
-from core.constants import WEBHOOK_PATH
+from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH
 from core.logging_config import root_logger
 from db.engine import create_tables
 from handlers_bot.callbacks.callbacks import setup as setup_callbacks
-from handlers_server.webhooks import telegram_webhook
+from handlers_server import webhooks
 from i18n import i18n_middleware
 from handlers_bot.commands import send_welcome
 
@@ -89,12 +89,14 @@ def make_app(init_bot=False):
     aiohttp_app.on_startup.append(startup_db)
 
     if init_bot:
-        aiohttp_app.router.add_route('POST', WEBHOOK_PATH, telegram_webhook)
+        aiohttp_app.router.add_route('POST', WEBHOOK_PATH, webhooks.telegram_webhook)
 
         aiohttp_app.on_startup.append(startup_telegram_bot)
         aiohttp_app.on_shutdown.append(shutdown_telegram_bot)
 
     root_logger.info('Initializing routes')
+
+    aiohttp_app.router.add_route('GET', CRYPTO_PAY_WEBHOOK_PATH, webhooks.crypto_pay_webhook)
 
     aiohttp_app.router.add_route('GET', '/test', api.index)
 

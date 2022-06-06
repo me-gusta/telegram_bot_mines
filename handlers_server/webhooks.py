@@ -45,7 +45,7 @@ async def crypto_pay_webhook(request: web.Request):
     with suppress(MessageNotModified):
         await bot.edit_message_text(
                 text=text,
-                chat_id=invoice.user.id,
+                chat_id=invoice.user.user_id,
                 message_id=invoice.message_id,
                 parse_mode='markdown',
                 reply_markup=types.InlineKeyboardMarkup(1, buttons),

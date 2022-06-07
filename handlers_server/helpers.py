@@ -18,7 +18,7 @@ from db.helpers import get_or_create_user
 from db.models import User
 
 
-def validate_telegram_string(raw_string: str, do_commit=True) -> User:
+async def validate_telegram_string(raw_string: str, do_commit=True) -> User:
     data_check_string = unquote(raw_string)
     data_check_arr = data_check_string.split('&')
     data_check_arr.sort()

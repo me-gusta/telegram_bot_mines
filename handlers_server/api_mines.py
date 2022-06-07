@@ -30,7 +30,7 @@ class GetUserApi(ApiView):
 
     async def post(self):
         params = await self.retrieve_fetch_params(self.request)
-        user = validate_telegram_string(params.data_check_string)
+        user = await validate_telegram_string(params.data_check_string)
         last_game = get_running_mines_game(user)
         self.logger.info(f'User: {user}. Game: {last_game}')
 
@@ -63,7 +63,7 @@ class NewGameApi(ApiView):
 
     async def post(self):
         params = await self.retrieve_fetch_params(self.request)
-        user = validate_telegram_string(params.data_check_string, do_commit=False)
+        user = await validate_telegram_string(params.data_check_string, do_commit=False)
         last_game = get_running_mines_game(user)
         if last_game:
             return self.json_response(
@@ -103,7 +103,7 @@ class RevealCellApi(ApiView):
 
     async def post(self):
         params = await self.retrieve_fetch_params(self.request)
-        user = validate_telegram_string(params.data_check_string, do_commit=False)
+        user = await validate_telegram_string(params.data_check_string, do_commit=False)
         last_game = get_running_mines_game(user)
 
         self.logger.info(f'cell: {params.cell_id}; game: {last_game}')
@@ -159,7 +159,7 @@ class CashoutApi(ApiView):
 
     async def post(self):
         params = await self.retrieve_fetch_params(self.request)
-        user = validate_telegram_string(params.data_check_string)
+        user = await validate_telegram_string(params.data_check_string)
         last_game = get_running_mines_game(user)
         self.logger.info(f'user: {user}, game: {last_game}')
 

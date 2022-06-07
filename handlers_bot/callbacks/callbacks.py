@@ -4,6 +4,7 @@ from core.config_loader import config
 from core.constants import AVAILABLE_TRANSLATIONS
 from db.engine import session
 from db.helpers import get_or_create_user
+from handlers_bot.callbacks.referral import setup as setup_referral
 from handlers_bot.callbacks.wallet import setup as setup_wallet
 from handlers_bot.common import answer_query, MenuCQ, generate_main_menu, GamesCQ, get_flag, LanguageCQ
 from i18n import _
@@ -86,3 +87,4 @@ def setup(dp: Dispatcher):
     dp.register_callback_query_handler(close, lambda call: call.data == 'close')
 
     setup_wallet(dp)
+    setup_referral(dp)

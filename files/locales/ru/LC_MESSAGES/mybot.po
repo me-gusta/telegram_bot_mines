@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-06 22:18+0300\n"
+"POT-Creation-Date: 2022-06-07 21:33+0300\n"
 "PO-Revision-Date: 2022-06-04 22:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -64,14 +64,18 @@ msgid "News"
 msgstr "Новости"
 
 #: handlers_bot/common.py:57
-msgid "Language"
-msgstr "Язык"
-
-#: handlers_bot/common.py:59
 msgid "Support"
 msgstr "Поддержка"
 
-#: handlers_bot/callbacks/callbacks.py:14
+#: handlers_bot/common.py:58
+msgid "Language"
+msgstr "Язык"
+
+#: handlers_bot/common.py:60
+msgid "Referral Program"
+msgstr "Реферальная программа"
+
+#: handlers_bot/callbacks/callbacks.py:15
 msgid ""
 "🕹️ Games\n"
 "💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
@@ -92,28 +96,29 @@ msgstr ""
 "\n"
 "*Выберите игру*"
 
-#: handlers_bot/callbacks/callbacks.py:22
+#: handlers_bot/callbacks/callbacks.py:23
 msgid "Mines"
 msgstr "Мины"
 
-#: handlers_bot/callbacks/callbacks.py:23
+#: handlers_bot/callbacks/callbacks.py:24
 msgid "Coinflip"
 msgstr "Монетка"
 
-#: handlers_bot/callbacks/callbacks.py:24
+#: handlers_bot/callbacks/callbacks.py:25
 msgid "Rocket Launch"
 msgstr "Ракета"
 
-#: handlers_bot/callbacks/callbacks.py:25 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
+#: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
 #: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
-#: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:100
-#: handlers_bot/callbacks/wallet.py:115 handlers_bot/callbacks/wallet.py:127
-#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:193
-#: handlers_bot/callbacks/wallet.py:213
+#: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:101
+#: handlers_bot/callbacks/wallet.py:116 handlers_bot/callbacks/wallet.py:128
+#: handlers_bot/callbacks/wallet.py:143 handlers_bot/callbacks/wallet.py:195
+#: handlers_bot/callbacks/wallet.py:217
 msgid "Back"
 msgstr "Назад"
 
-#: handlers_bot/callbacks/callbacks.py:33
+#: handlers_bot/callbacks/callbacks.py:34
 msgid ""
 "This game is still in development. Subscribe to our 📰 News to get "
 "notified!"
@@ -121,7 +126,7 @@ msgstr ""
 "Эта игра все еще находится в разработке. Подпишитесь на наши новости 📰, "
 "чтобы получить уведомление о выходе!"
 
-#: handlers_bot/callbacks/callbacks.py:45
+#: handlers_bot/callbacks/callbacks.py:46
 msgid ""
 "Your current language: {language}\n"
 "\n"
@@ -130,6 +135,73 @@ msgstr ""
 "Ваш язык: {language}\n"
 "\n"
 "*Выберите язык*"
+
+#: handlers_bot/callbacks/referral.py:12
+msgid ""
+"🤑 Referral Program\n"
+"\n"
+"Invite your friends and earn up to *15%* of all their winning and losing "
+"bets!\n"
+"\n"
+"Your share: {share}%\n"
+"Invited: {count}\n"
+"Total income: {balance} 💎\n"
+"\n"
+"Invite link: `https://t.me/LuckyTonBot?start={ref}`"
+msgstr ""
+"🤑 Реферальная программа\n"
+"\n"
+"Приглашайте друзей и получайте до *15%* от их выигрышных и проигрышных "
+"ставок\n"
+"\n"
+"Ваш процент: {share}%\n"
+"Рефералы: {count}\n"
+"Заработок: {balance} 💎\n"
+"\n"
+"Ссылка для приглашения: `https://t.me/LuckyTonBot?start={ref}`"
+
+#: handlers_bot/callbacks/referral.py:22
+msgid "Invite a friend"
+msgstr "Пригласить друга"
+
+#: handlers_bot/callbacks/referral.py:23
+msgid "Rules"
+msgstr "Правила"
+
+#: handlers_bot/callbacks/referral.py:30
+msgid ""
+"ℹ Referral program rules\n"
+"\n"
+"Invite your friends and earn up to *15%* of their bets!\n"
+"\n"
+"• Starting share: 3%\n"
+"• 25 invitations: 4%\n"
+"• 100 invitations: 5%\n"
+"• 500 invitations: 6%\n"
+"\n"
+"If you are a content maker and have a large audience get in touch with "
+"us. We can discuss special referral program with a bigger share up to 15%"
+msgstr ""
+"ℹ Правила реферальной программы\n"
+"\n"
+"Приглашайте друзей, чтобы получить до *15%* от их ставок!\n"
+"\n"
+"• Начальный процента: 3%\n"
+"• 25 приглашений: 4%\n"
+"• 100 приглашений: 5%\n"
+"• 500 приглашений: 6%\n"
+"\n"
+"Если вы создаете контент для большой аудитории, то не медлите связаться с"
+" нами. Мы можем предложить вам специальные условия, предусматривающие "
+"более высокую доходность (до 15%)"
+
+#: handlers_bot/callbacks/referral.py:39
+msgid "Contact Us"
+msgstr "Связаться с нами"
+
+#: handlers_bot/callbacks/referral.py:47
+msgid "Try your luck and win TON with me!\n"
+msgstr "Испытай свою удачу и выигрывай криптовалюту TON вместе со мной!\n"
 
 #: handlers_bot/callbacks/wallet.py:26
 msgid ""
@@ -158,7 +230,7 @@ msgid ""
 "\n"
 "*Choose an option*"
 msgstr ""
-"🔼 Внести\n"
+"🔼 Пополнить\n"
 "⚠ В настоящее время мы принимаем депозиты в Toncoin только через "
 "@CryptoBot\n"
 "\n"
@@ -200,12 +272,12 @@ msgstr ""
 "⚠ Минимальная сумма: 0.5 💎\n"
 "⚠ Максимальная сумма: 1000 💎"
 
-#: handlers_bot/callbacks/wallet.py:92 handlers_bot/callbacks/wallet.py:141
-#: handlers_bot/callbacks/wallet.py:192 handlers_bot/callbacks/wallet.py:212
+#: handlers_bot/callbacks/wallet.py:93 handlers_bot/callbacks/wallet.py:142
+#: handlers_bot/callbacks/wallet.py:194 handlers_bot/callbacks/wallet.py:216
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: handlers_bot/callbacks/wallet.py:97
+#: handlers_bot/callbacks/wallet.py:98
 msgid ""
 "Your withdrawal request is being proceeded\n"
 "⚠ Withdrawals can take up to 24h"
@@ -213,62 +285,63 @@ msgstr ""
 "Запрос на вывод средств обрабатывается\n"
 " ⚠ Обработка может занять до 24 часов"
 
-#: handlers_bot/callbacks/wallet.py:106
+#: handlers_bot/callbacks/wallet.py:107
 msgid ""
 "🤖 @Cryptobot deposit\n"
 "_Conversion rate: 1 TON = 1 💎_\n"
 "\n"
 "*Choose amount to deposit*"
 msgstr ""
-"🤖 депозит через @Cryptobot\n"
+"🤖 Пополнение через @Cryptobot\n"
 "_Конвертация: 1 TON = 1 💎_\n"
 "\n"
 "*Выберите сумму для внесения*"
 
-#: handlers_bot/callbacks/wallet.py:114
+#: handlers_bot/callbacks/wallet.py:115
 msgid "Custom Amount"
 msgstr "Другая сумма"
 
-#: handlers_bot/callbacks/wallet.py:124
+#: handlers_bot/callbacks/wallet.py:125
 msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
 msgstr "Отправьте пользовательскую сумму. От 0.5 до 1000 💎"
 
-#: handlers_bot/callbacks/wallet.py:139 handlers_bot/callbacks/wallet.py:190
+#: handlers_bot/callbacks/wallet.py:140 handlers_bot/callbacks/wallet.py:192
 msgid "Are you sure you want to deposit {} TON"
 msgstr "Вы уверены, что хотите внести {} TON"
 
-#: handlers_bot/callbacks/wallet.py:161
+#: handlers_bot/callbacks/wallet.py:162
 msgid "Something went wrong. Please contact our support: @{}"
 msgstr "то-то пошло не так. Пожалуйста, свяжитесь с нашей службой поддержки: @{}"
 
-#: handlers_bot/callbacks/wallet.py:162
+#: handlers_bot/callbacks/wallet.py:163
 msgid "Menu"
 msgstr "Меню"
 
-#: handlers_bot/callbacks/wallet.py:168
+#: handlers_bot/callbacks/wallet.py:169
 msgid ""
 "To finish the payment:\n"
 "1. Press \"💳 Go to Payment\"\n"
 "2. Press \"START\"\n"
 "3. Follow @CryptoBot instructions"
-msgstr "Чтобы завершить оплату:\n"
+msgstr ""
+"Чтобы завершить оплату:\n"
 "1. Нажмите \"💳 Перейти к оплате\"\n"
 "2. Нажмите \"НАЧАТЬ\"\n"
 "3. Следуйте инструкциям в @CryptoBot"
 
-#: handlers_bot/callbacks/wallet.py:173
+#: handlers_bot/callbacks/wallet.py:174
 msgid "Go to Payment"
 msgstr "Перейти к оплате"
 
-#: handlers_bot/callbacks/wallet.py:175 handlers_server/webhooks.py:41
+#: handlers_bot/callbacks/wallet.py:176 handlers_server/webhooks.py:41
 msgid "Back to Menu"
 msgstr "Назад в меню"
 
-#: handlers_bot/callbacks/wallet.py:210
+#: handlers_bot/callbacks/wallet.py:214
 msgid "Are you sure you want to withdraw {} 💎"
 msgstr "Вы уверены, что хотите вывести {} 💎"
 
-#: handlers_bot/callbacks/wallet.py:253
+#: handlers_bot/callbacks/wallet.py:256
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
@@ -280,7 +353,9 @@ msgstr ""
 msgid ""
 "You deposited {amount} 💎 to you wallet!\n"
 "\n"
-msgstr "Вы пополнили баланс на {amount} 💎!\n\n"
+msgstr ""
+"Вы пополнили баланс на {amount} 💎!\n"
+"\n"
 
 #~ msgid "Перейти к оплате"
 #~ msgstr ""

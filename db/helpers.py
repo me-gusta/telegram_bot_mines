@@ -7,11 +7,12 @@ from sqlalchemy import and_
 
 from bot import bot
 from core.config_loader import config
+from core.logging_config import root_logger
 from db.engine import session
 from db.models import User, MinesGameSettings, MinesGame, MinesGameStatus
 
 
-async def get_or_create_user(user_data: types.User, do_commit=True) -> User:
+async def get_or_create_user(user_data: types.User, do_commit=True, referrer_user_id: int = 0) -> User:
     try:
         user: User = session.query(User).filter(User.user_id == user_data.id).first()
         user.username = user_data.username
@@ -19,11 +20,18 @@ async def get_or_create_user(user_data: types.User, do_commit=True) -> User:
         user.last_name = user_data.last_name
         user.last_active = datetime.datetime.now()
     except AttributeError:
+        root_logger.info('new user. adding to database')
         user = User(user_id=user_data.id,
                     username=user_data.username,
                     first_name=user_data.first_name,
                     last_name=user_data.last_name,
-                    language_code=user_data.language_code)
+                    language_code=user_data.language_code,
+                    referrer_user_id=referrer_user_id)
+        if referrer_user_id:
+            referrer: User = session.query(User).filter(User.user_id == referrer_user_id).first()
+            if referrer:
+                root_logger.info(f'new user. adding referrer, {referrer}')
+                referrer.referral_count += 1
         mines_game_settings = MinesGameSettings(user=user)
         session.add(user)
         session.add(mines_game_settings)

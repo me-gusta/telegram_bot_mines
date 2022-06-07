@@ -11,9 +11,10 @@ from pydantic import BaseModel
 from core import constants
 from core.logging_config import root_logger
 from core.mines_payouts import payouts_table
+from core.pure import to_decimal
 from db.engine import session
 from db.helpers import get_running_mines_game
-from db.models import MinesGame, MinesGameStatus
+from db.models import MinesGame, MinesGameStatus, User
 from handlers_server.helpers import validate_telegram_string, ApiView
 
 
@@ -88,8 +89,17 @@ class NewGameApi(ApiView):
         session.add(game)
         user.mines_game_settings.last_bet = bet
         user.mines_game_settings.last_mines = params.mines_amount
-        session.commit()
         self.logger.info(f'User: {user}; game: {game}')
+
+        if user.referrer_user_id:
+            referrer: User = session.query(User).filter(User.user_id == user.referrer_user_id).first()
+            if referrer:
+                income = to_decimal(bet * (referrer.referral_share / 100))
+                referrer.referral_balance += income
+                referrer.balance += income
+                self.logger.info(f'User has a referrer. {referrer} gets {income}')
+
+        session.commit()
 
         return self.json_response({'status': 'ok', 'hash': game.hash})
 

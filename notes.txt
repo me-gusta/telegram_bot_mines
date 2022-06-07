@@ -24,3 +24,6 @@ Alembic
 
 alembic revision -m ""
 alembic upgrade head
+
+alter non null columns
+https://stackoverflow.com/questions/33705697/alembic-integrityerror-column-contains-null-values-when-adding-non-nullable

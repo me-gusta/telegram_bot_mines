@@ -53,10 +53,11 @@ def generate_main_menu(user: User) -> (str, List[List[types.InlineKeyboardButton
     buttons = [
         [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data=GamesCQ.GAMES)],
         [types.InlineKeyboardButton('👛 ' + _('Wallet'), callback_data=WalletCQ.WALLET)],
-        [types.InlineKeyboardButton('📰 ' + _('News'), url='https://t.me/SupaMegaHelp')],
+        [types.InlineKeyboardButton('📰 ' + _('News'), url='https://t.me/SupaMegaHelp'),
+         types.InlineKeyboardButton('🆘 ' + _('Support'), url='https://t.me/' + SUPPORT_USERNAME)],
         [types.InlineKeyboardButton(get_flag(user.language_code) + ' ' + _('Language'),
                                     callback_data=LanguageCQ.CHOICE),
-         types.InlineKeyboardButton('🆘 ' + _('Support'), url='https://t.me/' + SUPPORT_USERNAME)]
+         types.InlineKeyboardButton('🤑 ' + _('Referral Program'), callback_data=ReferralCQ.REFERRAL)],
     ]
     return text, buttons
 
@@ -140,7 +141,12 @@ class WithdrawRequestAcceptCQ:
     @staticmethod
     def accept(request_id: int):
         return WithdrawRequestAcceptCQ.ACCEPT + str(request_id)
+
     @staticmethod
     def accept_get(query) -> Decimal:
         return to_decimal(query.data.removeprefix(WithdrawRequestAcceptCQ.ACCEPT))
 
+
+class ReferralCQ:
+    REFERRAL = 'referral'
+    INFO = 'referral-info'

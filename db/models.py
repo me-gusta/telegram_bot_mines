@@ -1,3 +1,5 @@
+import base64
+import binascii
 import datetime
 import enum
 import random
@@ -39,7 +41,11 @@ class User(Base):
     last_active = Column(DateTime(), default=datetime.datetime.now)
     balance = Column(DECIMAL, default=0)
 
-    def __str__(self) -> str:
+    referrer_user_id = Column(BigInteger, default=0)
+    referral_count = Column(Integer, default=0)
+    referral_balance = Column(DECIMAL, default=0)
+
+    def __repr__(self):
         if self.username:
             return f'<User {self.id} @{self.username}>'
         else:
@@ -50,6 +56,29 @@ class User(Base):
         total = Decimal(str(self.balance)) + value
         total = total.quantize(Decimal('.01'), rounding=ROUND_DOWN)
         self.balance = total
+
+    @property
+    def ref(self):
+        return base64.b64encode(str(self.user_id).encode('utf-8')).decode('utf-8').replace('=', '')
+
+    @staticmethod
+    def ref_decode(ref: str) -> int:
+        if ref == '':
+            return 0
+        try:
+            return int(base64.b64decode(ref + '==='))
+        except (binascii.Error, ValueError):
+            return 0
+
+    @property
+    def referral_share(self) -> Decimal:
+        if self.referral_count >= 500:
+            return Decimal(6)
+        elif self.referral_count >= 100:
+            return Decimal(5)
+        elif self.referral_count >= 25:
+            return Decimal(4)
+        return Decimal(3)
 
 
 class MinesGameSettings(Base):
@@ -121,4 +150,3 @@ class WithdrawRequest(Base):
     is_payed = Column(Boolean, default=False)
     date = Column(DateTime(), default=datetime.datetime.now)
     spend_id = Column(String, default=random.randbytes(8).hex())
-

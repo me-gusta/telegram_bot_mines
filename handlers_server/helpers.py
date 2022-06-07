@@ -32,7 +32,7 @@ def validate_telegram_string(raw_string: str, do_commit=True) -> User:
         raise HTTPBadRequest(text='Validation Failed')
     else:
         user_data = ujson.loads(data_check_arr[-1].removeprefix('user='))
-        user = get_or_create_user(types.User(**user_data), do_commit)
+        user = await get_or_create_user(types.User(**user_data), do_commit)
         return user
 
 

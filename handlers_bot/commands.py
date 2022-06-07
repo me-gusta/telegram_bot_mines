@@ -14,7 +14,7 @@ async def send_welcome(message: types.Message):
     """
     # user = message.from_user.to_python()
     # print(user)
-    user = get_or_create_user(message.from_user)
+    user = await get_or_create_user(message.from_user)
 
     text, buttons = generate_main_menu(user)
 

@@ -34,14 +34,14 @@ async def game_placeholder(query: types.CallbackQuery):
 
 
 async def menu(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user)
+    user = await get_or_create_user(query.from_user)
     text, buttons = generate_main_menu(user)
 
     await answer_query(query, text, buttons)
 
 
 async def language_choice(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user)
+    user = await get_or_create_user(query.from_user)
     text = _('Your current language: {language}\n\n'
              '*Choose a language*').format(
         language=get_flag(user.language_code) + ' ' + user.language_code
@@ -58,7 +58,7 @@ async def language_choice(query: types.CallbackQuery):
 
 
 async def language_set(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     code = LanguageCQ.set_get(query)
     if code not in AVAILABLE_TRANSLATIONS:
         code = 'en'

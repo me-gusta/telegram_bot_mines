@@ -9,7 +9,7 @@ from db.helpers import get_or_create_user
 
 class TranslateMiddleware(I18nMiddleware):
     async def get_user_locale(self, action: str, args: Tuple[Any]) -> Optional[str]:
-        user = get_or_create_user(types.User.get_current())
+        user = await get_or_create_user(types.User.get_current())
         return user.language_code
 
 

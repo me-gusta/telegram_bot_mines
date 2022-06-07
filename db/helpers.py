@@ -4,11 +4,12 @@ from typing import Union
 from aiogram import types
 from sqlalchemy import and_
 
+from bot import bot
 from db.engine import session
 from db.models import User, MinesGameSettings, MinesGame, MinesGameStatus
 
 
-def get_or_create_user(user_data: types.User, do_commit=True) -> User:
+async def get_or_create_user(user_data: types.User, do_commit=True) -> User:
     try:
         user: User = session.query(User).filter(User.user_id == user_data.id).first()
         user.username = user_data.username

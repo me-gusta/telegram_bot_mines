@@ -20,7 +20,7 @@ from i18n import _
 
 async def wallet(query: types.CallbackQuery):
     """ Show wallet menu """
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     user.state = UserState.NONE
     session.commit()
     text = _('👛 Wallet\n'
@@ -36,7 +36,7 @@ async def wallet(query: types.CallbackQuery):
 
 
 async def deposit(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     user.state = UserState.NONE
     session.commit()
 
@@ -52,7 +52,7 @@ async def deposit(query: types.CallbackQuery):
 
 
 async def withdraw(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     user.state = UserState.on_withdraw_amount(query.message.message_id)
     session.commit()
     text = _('🔼 Withdraw\n'
@@ -67,7 +67,7 @@ async def withdraw(query: types.CallbackQuery):
 
 
 async def withdraw_info(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user)
+    user = await get_or_create_user(query.from_user)
     text = _('⚠ Withdrawals can take up to 24h\n'
              '⚠ Minimum amount: 0.5 💎\n'
              '⚠ Maximum amount: 1000 💎').format(balance=user.balance)
@@ -78,7 +78,7 @@ async def withdraw_info(query: types.CallbackQuery):
 
 
 async def withdraw_request(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     user.state = UserState.NONE
     amount = WalletCQ.withdraw_request_get(query)
     request = WithdrawRequest(user=user, amount=amount)
@@ -119,7 +119,7 @@ async def cryptobot_payment_option(query: types.CallbackQuery):
 
 
 async def cryptobot_custom_amount(query: types.CallbackQuery):
-    user = get_or_create_user(query.from_user, do_commit=False)
+    user = await get_or_create_user(query.from_user, do_commit=False)
     user.state = UserState.on_deposit_amount(query.message.message_id)
     session.commit()
     text = _('Send custom amount for deposit. From 0.5 to 1000 💎')
@@ -134,7 +134,7 @@ async def cryptobot_confirm(query: types.CallbackQuery):
     root_logger.debug('cryptobot_confirm')
     amount: float = CryptoBotCQ.confirm_get(query)
 
-    user = get_or_create_user(query.from_user)
+    user = await get_or_create_user(query.from_user)
     root_logger.info(f'CONFIRM | {user=} {amount=}')
 
     text = _('Are you sure you want to deposit {} TON').format(amount)
@@ -162,7 +162,7 @@ async def cryptobot_deposit(query: types.CallbackQuery):
         text = _('Something went wrong. Please contact our support: @{}').format(SUPPORT_USERNAME)
         buttons = [[types.InlineKeyboardButton('⬅ ' + _('Menu'), callback_data=MenuCQ.MENU)]]
     else:
-        user = get_or_create_user(query.from_user, do_commit=False)
+        user = await get_or_create_user(query.from_user, do_commit=False)
         invoice = Invoice(user=user, amount=amount, hash=invoice_dict['result']['hash'], message_id=query.message.message_id)
         session.add(invoice)
         session.commit()
@@ -179,7 +179,7 @@ async def cryptobot_deposit(query: types.CallbackQuery):
 
 
 async def on_text(message: types.Message):
-    user = get_or_create_user(message.from_user, do_commit=False)
+    user = await get_or_create_user(message.from_user, do_commit=False)
     await message.delete()
     if user.state.startswith(UserState.ON_DEPOSIT_AMOUNT):
         try:

@@ -53,7 +53,7 @@ def generate_main_menu(user: User) -> (str, List[List[types.InlineKeyboardButton
     buttons = [
         [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data=GamesCQ.GAMES)],
         [types.InlineKeyboardButton('👛 ' + _('Wallet'), callback_data=WalletCQ.WALLET)],
-        [types.InlineKeyboardButton('📰 ' + _('News'), url='https://t.me/SupaMegaHelp'),
+        [types.InlineKeyboardButton('📰 ' + _('News'), url='https://t.me/+f_W40vMsyms4NjYy'),
          types.InlineKeyboardButton('🆘 ' + _('Support'), url='https://t.me/' + SUPPORT_USERNAME)],
         [types.InlineKeyboardButton(get_flag(user.language_code) + ' ' + _('Language'),
                                     callback_data=LanguageCQ.CHOICE),

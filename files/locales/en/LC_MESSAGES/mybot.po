@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-07 21:33+0300\n"
+"POT-Creation-Date: 2022-06-07 22:05+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -94,8 +94,8 @@ msgstr ""
 msgid "Rocket Launch"
 msgstr ""
 
-#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
-#: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:23
+#: handlers_bot/callbacks/referral.py:39 handlers_bot/callbacks/wallet.py:33
 #: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
 #: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:101
 #: handlers_bot/callbacks/wallet.py:116 handlers_bot/callbacks/wallet.py:128
@@ -117,7 +117,7 @@ msgid ""
 "*Choose a language*"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:12
+#: handlers_bot/callbacks/referral.py:11
 msgid ""
 "🤑 Referral Program\n"
 "\n"
@@ -131,15 +131,15 @@ msgid ""
 "Invite link: `https://t.me/LuckyTonBot?start={ref}`"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:22
+#: handlers_bot/callbacks/referral.py:21
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:23
+#: handlers_bot/callbacks/referral.py:22
 msgid "Rules"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:30
+#: handlers_bot/callbacks/referral.py:29
 msgid ""
 "ℹ Referral program rules\n"
 "\n"
@@ -154,12 +154,16 @@ msgid ""
 "us. We can discuss special referral program with a bigger share up to 15%"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:39
+#: handlers_bot/callbacks/referral.py:38
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:47
-msgid "Try your luck and win TON with me!\n"
+#: handlers_bot/callbacks/referral.py:46
+msgid "🍀 Try your luck and win TON with me!\n"
+msgstr ""
+
+#: handlers_bot/callbacks/referral.py:51
+msgid "Invite Friend"
 msgstr ""
 
 #: handlers_bot/callbacks/wallet.py:26
@@ -300,5 +304,8 @@ msgstr ""
 #~ "To finish the payment:\n"
 #~ "1. Press \"💳 Go to Payment\"\n"
 #~ "2. Press \"START\"3. Follow @CryptoBot instructions"
+#~ msgstr ""
+
+#~ msgid "Try your luck and win TON with me!\n"
 #~ msgstr ""
 

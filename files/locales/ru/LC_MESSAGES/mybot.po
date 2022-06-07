@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-07 21:33+0300\n"
+"POT-Creation-Date: 2022-06-07 22:05+0300\n"
 "PO-Revision-Date: 2022-06-04 22:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -108,8 +108,8 @@ msgstr "Монетка"
 msgid "Rocket Launch"
 msgstr "Ракета"
 
-#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
-#: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:23
+#: handlers_bot/callbacks/referral.py:39 handlers_bot/callbacks/wallet.py:33
 #: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
 #: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:101
 #: handlers_bot/callbacks/wallet.py:116 handlers_bot/callbacks/wallet.py:128
@@ -136,7 +136,7 @@ msgstr ""
 "\n"
 "*Выберите язык*"
 
-#: handlers_bot/callbacks/referral.py:12
+#: handlers_bot/callbacks/referral.py:11
 msgid ""
 "🤑 Referral Program\n"
 "\n"
@@ -160,15 +160,15 @@ msgstr ""
 "\n"
 "Ссылка для приглашения: `https://t.me/LuckyTonBot?start={ref}`"
 
-#: handlers_bot/callbacks/referral.py:22
+#: handlers_bot/callbacks/referral.py:21
 msgid "Invite a friend"
 msgstr "Пригласить друга"
 
-#: handlers_bot/callbacks/referral.py:23
+#: handlers_bot/callbacks/referral.py:22
 msgid "Rules"
 msgstr "Правила"
 
-#: handlers_bot/callbacks/referral.py:30
+#: handlers_bot/callbacks/referral.py:29
 msgid ""
 "ℹ Referral program rules\n"
 "\n"
@@ -195,13 +195,17 @@ msgstr ""
 " нами. Мы можем предложить вам специальные условия, предусматривающие "
 "более высокую доходность (до 15%)"
 
-#: handlers_bot/callbacks/referral.py:39
+#: handlers_bot/callbacks/referral.py:38
 msgid "Contact Us"
 msgstr "Связаться с нами"
 
-#: handlers_bot/callbacks/referral.py:47
-msgid "Try your luck and win TON with me!\n"
-msgstr "Испытай свою удачу и выигрывай криптовалюту TON вместе со мной!\n"
+#: handlers_bot/callbacks/referral.py:46
+msgid "🍀 Try your luck and win TON with me!\n"
+msgstr "🍀 Испытай свою удачу и выигрывай криптовалюту TON вместе со мной!\n"
+
+#: handlers_bot/callbacks/referral.py:51
+msgid "Invite Friend"
+msgstr "Пригласить друга"
 
 #: handlers_bot/callbacks/wallet.py:26
 msgid ""

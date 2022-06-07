@@ -18,7 +18,8 @@ async def referral(query: types.CallbackQuery):
                                                                            share=user.referral_share,
                                                                            balance=user.referral_balance)
     buttons = [
-        [types.InlineKeyboardButton('🤝 ' + _('Invite a friend'), switch_inline_query='invite')],
+        [types.InlineKeyboardButton('🤝 ' + _('Invite a friend'),
+                                    switch_inline_query='invite from ' + user.first_name)],
         [types.InlineKeyboardButton('ℹ ' + _('Rules'), callback_data=ReferralCQ.INFO)],
         [types.InlineKeyboardButton('⬅ ' + _('Back'), callback_data=MenuCQ.MENU)]
     ]
@@ -44,18 +45,19 @@ async def info(query: types.CallbackQuery):
 async def inline(query: types.InlineQuery):
     user = await get_or_create_user(query.from_user)
     text = _('🍀 Try your luck and win TON with me!\n') + 'https://t.me/LuckyTonBot?start=' + user.ref
+    print(text)
     results = [
         types.InlineQueryResultArticle(
             id='result',
-            title='Invite Friend',
+            title=_('Invite Friend'),
             input_message_content=types.InputMessageContent(message_text=text),
             thumb_url='https://bot-frontend-demo.web.app/img/other/refer.png'
         )
     ]
-    await query.answer(results)
+    await query.answer(results, cache_time=1)
 
 
 def setup(dp: Dispatcher):
     dp.register_callback_query_handler(referral, lambda call: call.data == ReferralCQ.REFERRAL)
     dp.register_callback_query_handler(info, lambda call: call.data == ReferralCQ.INFO)
-    dp.register_inline_handler(inline, lambda call: call.query == 'invite')
+    dp.register_inline_handler(inline)

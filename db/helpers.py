@@ -27,8 +27,9 @@ async def get_or_create_user(user_data: types.User, do_commit=True, referrer_use
                     last_name=user_data.last_name,
                     language_code=user_data.language_code,
                     referrer_user_id=referrer_user_id)
+        referrer: Union[User, None] = None
         if referrer_user_id:
-            referrer: User = session.query(User).filter(User.user_id == referrer_user_id).first()
+            referrer = session.query(User).filter(User.user_id == referrer_user_id).first()
             if referrer:
                 root_logger.info(f'new user. adding referrer, {referrer}')
                 referrer.referral_count += 1
@@ -38,7 +39,8 @@ async def get_or_create_user(user_data: types.User, do_commit=True, referrer_use
         with suppress(Exception):
             await bot.send_message(chat_id=config.operator_id, text=f'New User\n'
                                                                     f'user: {user}\n'
-                                                                    f'date: {datetime.datetime.now()}')
+                                                                    f'date: {datetime.datetime.now()}'
+                                                                    f'referrer: {referrer if referrer else referrer_user_id}')
 
     if do_commit:
         session.commit()

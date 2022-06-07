@@ -8,8 +8,8 @@ CRYPTO_PAY_WEBHOOK_PATH = '/3d215a6e-36b9-447d-ade2-0dc4616f2a99'
 
 WEBHOOK_PATH = '/d8b7311d-9805-42db-9c19-144baa3bb9b3'
 
-SUPPORT_USERNAME = 'SupaMegaHelp'
-CRYPTOBOT_GUIDE_URL = 'https://telegra.ph/hello-03-27-3'
+SUPPORT_USERNAME = 'LuckyTonSupport'
+CRYPTOBOT_GUIDE_URL = 'https://telegra.ph/Kak-popolnit-balans-igrovogo-bota-LuckyTonBot-s-pomoshchyu-CryptoBot-06-07'
 
 MIN_BET = 0
 MAX_BET = 20000

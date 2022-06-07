@@ -1,10 +1,12 @@
 import datetime
+from contextlib import suppress
 from typing import Union
 
 from aiogram import types
 from sqlalchemy import and_
 
 from bot import bot
+from core.config_loader import config
 from db.engine import session
 from db.models import User, MinesGameSettings, MinesGame, MinesGameStatus
 
@@ -25,6 +27,11 @@ async def get_or_create_user(user_data: types.User, do_commit=True) -> User:
         mines_game_settings = MinesGameSettings(user=user)
         session.add(user)
         session.add(mines_game_settings)
+        with suppress(Exception):
+            await bot.send_message(chat_id=config.operator_id, text=f'New User\n'
+                                                                    f'user: {user}\n'
+                                                                    f'date: {datetime.datetime.now()}')
+
     if do_commit:
         session.commit()
     return user

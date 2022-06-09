@@ -119,11 +119,15 @@ class MinesGame(Base):
     def mines(self):
         return ujson.loads(self.mines_json)
 
-    @cached_property
+    @property
     def revealed(self):
-        return ujson.loads(self.revealed_json)
+        if not hasattr(self, '_revealed'):
+            self._revealed = ujson.loads(self.revealed_json)
+        return self._revealed
 
     def set_revealed(self, revealed: List[int]):
+        if hasattr(self, '_revealed'):
+            del self._revealed
         self.revealed_json = ujson.dumps(revealed)
 
     def __str__(self) -> str:

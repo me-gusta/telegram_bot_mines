@@ -42,6 +42,7 @@ class GetUserApi(ApiView):
 
 
 def generate_mine_field(mines_amount: int) -> dict:
+    random.seed(3)
     field_size = 25
     mines = random.sample(range(0, field_size), mines_amount)
     check_string = ''
@@ -140,7 +141,7 @@ class RevealCellApi(ApiView):
             last_game.set_revealed(last_game.revealed + [params.cell_id])
             # Win game (revealed every cell)
             if len(last_game.revealed) + len(last_game.mines) == 25:
-                last_game = MinesGameStatus.WON
+                last_game.status = MinesGameStatus.WON
                 bet = Decimal(str(last_game.bet))
                 win_amount = Decimal(
                     str(payouts_table[len(last_game.mines)][len(last_game.revealed) - 1])) * bet - bet

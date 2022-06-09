@@ -43,9 +43,10 @@ async def deposit(query: types.CallbackQuery):
     text = _('🔼 Deposit\n'
              '⚠ Currently we are accepting Toncoin deposits only via @CryptoBot\n\n'
              '*Choose an option*')
+    guide_url = _('https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-bot-using-CryptoBot-06-09')
     buttons = [
         [types.InlineKeyboardButton(_('🤖 @CryptoBot'), callback_data=CryptoBotCQ.PAYMENT_OPTION)],
-        [types.InlineKeyboardButton(_('ℹ How to use @CryptoBot'), url=CRYPTOBOT_GUIDE_URL)],
+        [types.InlineKeyboardButton(_('ℹ How to use @CryptoBot'), url=guide_url)],
         [types.InlineKeyboardButton('⬅ ' + _('Back'), callback_data=WalletCQ.WALLET)]
     ]
     await answer_query(query, text, buttons)

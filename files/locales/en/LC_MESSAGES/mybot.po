@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-07 22:05+0300\n"
+"POT-Creation-Date: 2022-06-09 18:02+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -94,13 +94,13 @@ msgstr ""
 msgid "Rocket Launch"
 msgstr ""
 
-#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:23
-#: handlers_bot/callbacks/referral.py:39 handlers_bot/callbacks/wallet.py:33
-#: handlers_bot/callbacks/wallet.py:49 handlers_bot/callbacks/wallet.py:64
-#: handlers_bot/callbacks/wallet.py:75 handlers_bot/callbacks/wallet.py:101
-#: handlers_bot/callbacks/wallet.py:116 handlers_bot/callbacks/wallet.py:128
-#: handlers_bot/callbacks/wallet.py:143 handlers_bot/callbacks/wallet.py:195
-#: handlers_bot/callbacks/wallet.py:217
+#: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
+#: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
+#: handlers_bot/callbacks/wallet.py:51 handlers_bot/callbacks/wallet.py:66
+#: handlers_bot/callbacks/wallet.py:77 handlers_bot/callbacks/wallet.py:103
+#: handlers_bot/callbacks/wallet.py:118 handlers_bot/callbacks/wallet.py:130
+#: handlers_bot/callbacks/wallet.py:145 handlers_bot/callbacks/wallet.py:197
+#: handlers_bot/callbacks/wallet.py:219
 msgid "Back"
 msgstr ""
 
@@ -135,11 +135,11 @@ msgstr ""
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:22
+#: handlers_bot/callbacks/referral.py:23
 msgid "Rules"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:29
+#: handlers_bot/callbacks/referral.py:30
 msgid ""
 "ℹ Referral program rules\n"
 "\n"
@@ -154,15 +154,15 @@ msgid ""
 "us. We can discuss special referral program with a bigger share up to 15%"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:38
+#: handlers_bot/callbacks/referral.py:39
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:46
+#: handlers_bot/callbacks/referral.py:47
 msgid "🍀 Try your luck and win TON with me!\n"
 msgstr ""
 
-#: handlers_bot/callbacks/referral.py:51
+#: handlers_bot/callbacks/referral.py:52
 msgid "Invite Friend"
 msgstr ""
 
@@ -190,15 +190,21 @@ msgid ""
 "*Choose an option*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:47
+#: handlers_bot/callbacks/wallet.py:46
+msgid ""
+"https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-"
+"bot-using-CryptoBot-06-09"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:49
 msgid "🤖 @CryptoBot"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:48
+#: handlers_bot/callbacks/wallet.py:50
 msgid "ℹ How to use @CryptoBot"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:58
+#: handlers_bot/callbacks/wallet.py:60
 msgid ""
 "🔼 Withdraw\n"
 "_Your Balance_: {balance} 💎\n"
@@ -207,29 +213,29 @@ msgid ""
 "*Send amount you want to withdraw*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:63
+#: handlers_bot/callbacks/wallet.py:65
 msgid "About Withdrawals"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:71
+#: handlers_bot/callbacks/wallet.py:73
 msgid ""
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Minimum amount: 0.5 💎\n"
 "⚠ Maximum amount: 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:93 handlers_bot/callbacks/wallet.py:142
-#: handlers_bot/callbacks/wallet.py:194 handlers_bot/callbacks/wallet.py:216
+#: handlers_bot/callbacks/wallet.py:95 handlers_bot/callbacks/wallet.py:144
+#: handlers_bot/callbacks/wallet.py:196 handlers_bot/callbacks/wallet.py:218
 msgid "Confirm"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:98
+#: handlers_bot/callbacks/wallet.py:100
 msgid ""
 "Your withdrawal request is being proceeded\n"
 "⚠ Withdrawals can take up to 24h"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:107
+#: handlers_bot/callbacks/wallet.py:109
 msgid ""
 "🤖 @Cryptobot deposit\n"
 "_Conversion rate: 1 TON = 1 💎_\n"
@@ -237,27 +243,27 @@ msgid ""
 "*Choose amount to deposit*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:115
+#: handlers_bot/callbacks/wallet.py:117
 msgid "Custom Amount"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:125
+#: handlers_bot/callbacks/wallet.py:127
 msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:140 handlers_bot/callbacks/wallet.py:192
+#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:194
 msgid "Are you sure you want to deposit {} TON"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:162
+#: handlers_bot/callbacks/wallet.py:164
 msgid "Something went wrong. Please contact our support: @{}"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:163
+#: handlers_bot/callbacks/wallet.py:165
 msgid "Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:169
+#: handlers_bot/callbacks/wallet.py:171
 msgid ""
 "To finish the payment:\n"
 "1. Press \"💳 Go to Payment\"\n"
@@ -265,19 +271,19 @@ msgid ""
 "3. Follow @CryptoBot instructions"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:174
+#: handlers_bot/callbacks/wallet.py:176
 msgid "Go to Payment"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:176 handlers_server/webhooks.py:41
+#: handlers_bot/callbacks/wallet.py:178 handlers_server/webhooks.py:41
 msgid "Back to Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:214
+#: handlers_bot/callbacks/wallet.py:216
 msgid "Are you sure you want to withdraw {} 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:256
+#: handlers_bot/callbacks/wallet.py:258
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"

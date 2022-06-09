@@ -12,7 +12,7 @@ SUPPORT_USERNAME = 'LuckyTonSupport'
 CRYPTOBOT_GUIDE_URL = 'https://telegra.ph/Kak-popolnit-balans-igrovogo-bota-LuckyTonBot-s-pomoshchyu-CryptoBot-06-07'
 
 MIN_BET = 0
-MAX_BET = 20000
+MAX_BET = 5000
 
 MIN_DEPOSIT = 0.5
 MAX_DEPOSIT = 1000

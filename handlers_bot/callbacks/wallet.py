@@ -7,7 +7,7 @@ from aiogram import types, Dispatcher
 
 from bot import bot
 from core.config_loader import config
-from core.constants import CRYPTO_PAY_URL, SUPPORT_USERNAME, CRYPTOBOT_GUIDE_URL, MIN_DEPOSIT, MAX_DEPOSIT, \
+from core.constants import CRYPTO_PAY_URL, SUPPORT_USERNAME, MIN_DEPOSIT, MAX_DEPOSIT, \
     MIN_WITHDRAW, MAX_WITHDRAW
 from core.logging_config import root_logger
 from core.pure import to_decimal

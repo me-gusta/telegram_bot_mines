@@ -42,7 +42,6 @@ class GetUserApi(ApiView):
 
 
 def generate_mine_field(mines_amount: int) -> dict:
-    random.seed(3)
     field_size = 25
     mines = random.sample(range(0, field_size), mines_amount)
     check_string = ''

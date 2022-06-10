@@ -27,7 +27,7 @@ def random_welcome():
         _('hello'), _('you look great today'), _('nice to see you again'), _('have a nice day'),
         _('good luck')
     ]
-    return random.choice(phrases).capitalize()
+    return _('hello')
 
 
 async def answer_query(query: types.CallbackQuery, text: str,

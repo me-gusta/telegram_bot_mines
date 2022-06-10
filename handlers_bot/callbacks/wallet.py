@@ -272,6 +272,7 @@ async def withdrawal_request_accept(query: types.CallbackQuery):
     else:
         await bot.send_message(config.operator_id, text=f'SUCCESS\n{response_data=}')
 
+    request.user.balance -= request.amount
     request.is_payed = True
     session.commit()
 

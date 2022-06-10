@@ -250,7 +250,7 @@ async def withdrawal_request_accept(query: types.CallbackQuery):
         root_logger.info(text)
         await bot.send_message(config.operator_id, text=text)
         await bot.send_message(request.user.user_id,
-                               text=_('Your withdrawal request has been declined.\n'
+                               text=_('❌ Your withdrawal request has been declined.\n'
                                       'Reason: not enough funds in your wallet'),
                                reply_markup=types.InlineKeyboardMarkup(1, buttons))
         return

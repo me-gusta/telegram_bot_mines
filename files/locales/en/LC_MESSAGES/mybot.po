@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-09 18:02+0300\n"
+"POT-Creation-Date: 2022-06-10 22:53+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -96,10 +96,10 @@ msgstr ""
 
 #: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
 #: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
-#: handlers_bot/callbacks/wallet.py:51 handlers_bot/callbacks/wallet.py:66
-#: handlers_bot/callbacks/wallet.py:77 handlers_bot/callbacks/wallet.py:103
-#: handlers_bot/callbacks/wallet.py:118 handlers_bot/callbacks/wallet.py:130
-#: handlers_bot/callbacks/wallet.py:145 handlers_bot/callbacks/wallet.py:197
+#: handlers_bot/callbacks/wallet.py:50 handlers_bot/callbacks/wallet.py:65
+#: handlers_bot/callbacks/wallet.py:76 handlers_bot/callbacks/wallet.py:102
+#: handlers_bot/callbacks/wallet.py:117 handlers_bot/callbacks/wallet.py:129
+#: handlers_bot/callbacks/wallet.py:144 handlers_bot/callbacks/wallet.py:197
 #: handlers_bot/callbacks/wallet.py:219
 msgid "Back"
 msgstr ""
@@ -196,15 +196,15 @@ msgid ""
 "bot-using-CryptoBot-06-09"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:49
+#: handlers_bot/callbacks/wallet.py:48
 msgid "🤖 @CryptoBot"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:50
+#: handlers_bot/callbacks/wallet.py:49
 msgid "ℹ How to use @CryptoBot"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:60
+#: handlers_bot/callbacks/wallet.py:59
 msgid ""
 "🔼 Withdraw\n"
 "_Your Balance_: {balance} 💎\n"
@@ -213,29 +213,29 @@ msgid ""
 "*Send amount you want to withdraw*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:65
+#: handlers_bot/callbacks/wallet.py:64
 msgid "About Withdrawals"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:73
+#: handlers_bot/callbacks/wallet.py:72
 msgid ""
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Minimum amount: 0.5 💎\n"
 "⚠ Maximum amount: 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:95 handlers_bot/callbacks/wallet.py:144
+#: handlers_bot/callbacks/wallet.py:94 handlers_bot/callbacks/wallet.py:143
 #: handlers_bot/callbacks/wallet.py:196 handlers_bot/callbacks/wallet.py:218
 msgid "Confirm"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:100
+#: handlers_bot/callbacks/wallet.py:99
 msgid ""
 "Your withdrawal request is being proceeded\n"
 "⚠ Withdrawals can take up to 24h"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:109
+#: handlers_bot/callbacks/wallet.py:108
 msgid ""
 "🤖 @Cryptobot deposit\n"
 "_Conversion rate: 1 TON = 1 💎_\n"
@@ -243,23 +243,23 @@ msgid ""
 "*Choose amount to deposit*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:117
+#: handlers_bot/callbacks/wallet.py:116
 msgid "Custom Amount"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:127
+#: handlers_bot/callbacks/wallet.py:126
 msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:194
+#: handlers_bot/callbacks/wallet.py:141 handlers_bot/callbacks/wallet.py:194
 msgid "Are you sure you want to deposit {} TON"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:164
+#: handlers_bot/callbacks/wallet.py:163
 msgid "Something went wrong. Please contact our support: @{}"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:165
+#: handlers_bot/callbacks/wallet.py:164
 msgid "Menu"
 msgstr ""
 
@@ -283,7 +283,13 @@ msgstr ""
 msgid "Are you sure you want to withdraw {} 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:258
+#: handlers_bot/callbacks/wallet.py:253
+msgid ""
+"❌ Your withdrawal request has been declined.\n"
+"Reason: not enough funds in your wallet"
+msgstr ""
+
+#: handlers_bot/callbacks/wallet.py:278
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
@@ -313,5 +319,10 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Try your luck and win TON with me!\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your withdrawal request has been declined.\n"
+#~ "Reason: not enough funds in your wallet"
 #~ msgstr ""
 

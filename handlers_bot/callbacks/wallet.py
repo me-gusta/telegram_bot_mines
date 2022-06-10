@@ -164,7 +164,8 @@ async def cryptobot_deposit(query: types.CallbackQuery):
         buttons = [[types.InlineKeyboardButton('⬅ ' + _('Menu'), callback_data=MenuCQ.MENU)]]
     else:
         user = await get_or_create_user(query.from_user, do_commit=False)
-        invoice = Invoice(user=user, amount=amount, hash=invoice_dict['result']['hash'], message_id=query.message.message_id)
+        invoice = Invoice(user=user, amount=amount, hash=invoice_dict['result']['hash'],
+                          message_id=query.message.message_id)
         session.add(invoice)
         session.commit()
         text = _('To finish the payment:\n'
@@ -229,6 +230,10 @@ async def on_text(message: types.Message):
 
 
 async def withdrawal_request_accept(query: types.CallbackQuery):
+    buttons = [
+        [types.InlineKeyboardButton(text='OK', callback_data='close')]
+    ]
+
     if query.from_user.id != config.operator_id:
         return
     request_id = WithdrawRequestAcceptCQ.accept_get(query)
@@ -236,29 +241,42 @@ async def withdrawal_request_accept(query: types.CallbackQuery):
 
     root_logger.info(f'withdrawal_request_accept. {request.user=}')
     if request.is_payed:
+        text = f'withdrawal_request_accept. CANCELED. already payed'
+        root_logger.info(text)
+        await bot.send_message(config.operator_id, text=text)
         return
+    if request.user.balance < request.amount:
+        text = f'withdrawal_request_accept. CANCELED. not enough funds in user\'s wallet'
+        root_logger.info(text)
+        await bot.send_message(config.operator_id, text=text)
+        await bot.send_message(request.user.user_id,
+                               text=_('Your withdrawal request has been declined.\n'
+                                      'Reason: not enough funds in your wallet'),
+                               reply_markup=types.InlineKeyboardMarkup(1, buttons))
+        return
+
     headers = {
         'Crypto-Pay-API-Token': config.crypto_pay_token,
         'Content-Type': 'application/x-www-form-urlencoded'
     }
+    data = {'asset': 'TON',
+            'amount': request.amount,
+            'user_id': request.user.user_id,
+            'spend_id': str(hash(str(request.spend_id) + '.Iasgfuih'))}
     async with aiohttp.ClientSession(headers=headers) as client_session:
-        resp = await client_session.post(CRYPTO_PAY_URL + 'transfer',
-                                         data={'asset': 'TON',
-                                               'amount': request.amount,
-                                               'user_id': request.user.user_id,
-                                               'spend_id': request.spend_id})
-        text = await resp.text()
-    root_logger.info(f'CRYPTO_PAY transfer {text=}')
+        resp = await client_session.post(CRYPTO_PAY_URL + 'transfer', data=data)
+        response_data = ujson.loads(await resp.text())
+    root_logger.info(f'withdrawal_request_accept. CRYPTO_PAY transfer {data=}\n {response_data=}')
+    if not response_data['ok']:
+        await bot.send_message(config.operator_id, text=f'ERROR\n{response_data=}')
+    else:
+        await bot.send_message(config.operator_id, text=f'SUCCESS\n{response_data=}')
 
-    # TODO: CRYPTO PAY API
     request.is_payed = True
     session.commit()
 
     text = _('✅ Your withdrawal request has been processed.\n'
              '{amount} 💎 sent to you wallet').format(amount=request.amount)
-    buttons = [
-        [types.InlineKeyboardButton(text='OK', callback_data='close')]
-    ]
 
     await bot.send_message(request.user.user_id, text=text, reply_markup=types.InlineKeyboardMarkup(1, buttons))
     await query.answer()
@@ -278,8 +296,5 @@ def setup(dp: Dispatcher):
     dp.register_callback_query_handler(cryptobot_confirm, lambda call: call.data.startswith(CryptoBotCQ.CONFIRM))
     dp.register_callback_query_handler(cryptobot_deposit, lambda call: call.data.startswith(CryptoBotCQ.DEPOSIT))
 
-
     dp.register_callback_query_handler(withdrawal_request_accept,
                                        lambda call: call.data.startswith(WithdrawRequestAcceptCQ.ACCEPT))
-
-

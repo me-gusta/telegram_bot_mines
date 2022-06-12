@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-10 22:53+0300\n"
+"POT-Creation-Date: 2022-06-12 15:19+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Generated-By: Babel 2.9.1\n"
 
 #: handlers_bot/common.py:25 handlers_bot/common.py:27
+#: handlers_bot/common.py:30
 msgid "hello"
 msgstr ""
 
@@ -231,7 +232,7 @@ msgstr ""
 
 #: handlers_bot/callbacks/wallet.py:99
 msgid ""
-"Your withdrawal request is being proceeded\n"
+"Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h"
 msgstr ""
 
@@ -289,7 +290,7 @@ msgid ""
 "Reason: not enough funds in your wallet"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:278
+#: handlers_bot/callbacks/wallet.py:279
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
@@ -324,5 +325,10 @@ msgstr ""
 #~ msgid ""
 #~ "Your withdrawal request has been declined.\n"
 #~ "Reason: not enough funds in your wallet"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your withdrawal request is being proceeded\n"
+#~ "⚠ Withdrawals can take up to 24h"
 #~ msgstr ""
 

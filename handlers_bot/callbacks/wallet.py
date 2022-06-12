@@ -97,6 +97,7 @@ async def withdraw_request(query: types.CallbackQuery):
                            reply_markup=types.InlineKeyboardMarkup(1, operator_buttons))
 
     text = _('Your withdrawal request is being processed\n'
+             
              '⚠ Withdrawals can take up to 24h').format(balance=user.balance)
     buttons = [
         [types.InlineKeyboardButton('⬅ ' + _('Back'), callback_data=WalletCQ.WITHDRAW)]

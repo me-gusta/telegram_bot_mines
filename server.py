@@ -2,8 +2,7 @@ import asyncio
 import threading
 import traceback
 
-from aiogram import Dispatcher, executor, types, Bot
-from aiogram.dispatcher.middlewares import BaseMiddleware
+from aiogram import Dispatcher, executor
 from aiohttp import web
 from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 
@@ -13,31 +12,10 @@ from core.config_loader import config
 from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH
 from core.logging_config import root_logger
 from db.engine import create_tables
-from db.helpers import get_or_create_user
-from handlers_bot.nodes.main_menu import MainMenu
-from handlers_bot.telegram_dispatcher import TelegramDispatcher
+from handlers_bot.callbacks.callbacks import setup as setup_callbacks
 from handlers_server import webhooks
 from i18n import i18n_middleware
-
-
-class GetUserMiddleware(BaseMiddleware):
-    logger = root_logger.getChild('GetUserMiddleware')
-
-    async def on_pre_process_update(self, update: types.Update, data: dict):
-        if update.message:
-            user_data = update.message.from_user
-        elif update.callback_query:
-            user_data = update.callback_query.from_user
-        elif update.inline_query:
-            user_data = update.inline_query.from_user
-        else:
-            self.logger.error('Cannot extract user.')
-            raise ValueError('Cannot extract user.')
-
-        user = await get_or_create_user(user_data)
-        self.logger.info('')
-        self.logger.info('====== user: %s ======', user)
-        Dispatcher.get_current().current_user = user
+from handlers_bot.commands import send_welcome
 
 
 def init_dispatcher() -> Dispatcher:
@@ -45,14 +23,11 @@ def init_dispatcher() -> Dispatcher:
         root_logger.error(''.join(traceback.format_exc()))
         return True
 
-    dp = TelegramDispatcher(bot)
-    dp.middleware.setup(GetUserMiddleware())
+    dp = Dispatcher(bot)
     dp.middleware.setup(i18n_middleware)
-    # dp.register_message_handler(send_welcome, commands=['start'])
+    dp.register_message_handler(send_welcome, commands=['start'])
     dp.register_errors_handler(error_handler)
-    MainMenu().setup(dp)
-
-    # setup_callbacks(dp)
+    setup_callbacks(dp)
     return dp
 
 
@@ -141,8 +116,6 @@ def make_app(init_bot=False):
 
 
 def run_polling():
-    if config.dev_mode:
-        root_logger.info('--- DEV MODE ---')
     dp = init_dispatcher()
 
     def polling_thread(loop):

@@ -36,12 +36,9 @@ class User(Base):
     first_name = Column(String(64), default='')
     last_name = Column(String(64), default='')
     language_code = Column(String(10), default='en')
-
     state = Column(String(64), default=UserState.NONE)
-    menu_message_id = Column(BigInteger, default=0)
 
     last_active = Column(DateTime(), default=datetime.datetime.now)
-
     balance = Column(DECIMAL, default=0)
 
     referrer_user_id = Column(BigInteger, default=0)
@@ -50,9 +47,9 @@ class User(Base):
 
     def __repr__(self):
         if self.username:
-            return f'<User {self.id} @{self.username}:{self.state}>'
+            return f'<User {self.id} @{self.username}>'
         else:
-            return f'<User {self.id}:{self.state}>'
+            return f'<User {self.id}>'
 
     def change_balance(self, n: Union[float, Decimal]):
         value = Decimal(str(n)) if isinstance(n, float) else n

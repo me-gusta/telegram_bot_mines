@@ -32,7 +32,6 @@ def random_welcome():
 
 async def answer_query(query: types.CallbackQuery, text: str,
                        buttons: List[List[types.InlineKeyboardButton]]):
-    print(buttons)
     with suppress(MessageNotModified):
         await query.message.edit_text(text,
                                       reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=buttons),

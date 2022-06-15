@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 import ujson
 from pydantic import BaseModel
 import hashlib
@@ -14,14 +12,8 @@ class DB(BaseModel):
     password: str
 
 
-class Wallet(BaseModel):
-    min_deposit: Decimal
-    max_deposit: Decimal
-
-
 class Config(BaseModel):
     db: DB
-    wallet: Wallet
     operator_id: int
     token: str
     crypto_pay_token: str
@@ -45,6 +37,5 @@ def load_config() -> Config:
         with open(FILES_DIR / 'config_dev.json', 'r', encoding='utf-8') as f:
             config = Config(**ujson.loads(f.read()))
     return config
-
 
 config: Config = load_config()

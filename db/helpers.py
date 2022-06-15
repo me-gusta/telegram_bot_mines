@@ -12,9 +12,7 @@ from db.engine import session
 from db.models import User, MinesGameSettings, MinesGame, MinesGameStatus
 
 
-async def get_or_create_user(user_data: types.User,
-                             do_commit=True,
-                             referrer_user_id: int = 0) -> User:
+async def get_or_create_user(user_data: types.User, do_commit=True, referrer_user_id: int = 0) -> User:
     try:
         user: User = session.query(User).filter(User.user_id == user_data.id).first()
         user.username = user_data.username

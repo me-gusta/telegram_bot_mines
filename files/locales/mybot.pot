@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-12 15:19+0300\n"
+"POT-Creation-Date: 2022-06-15 16:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Generated-By: Babel 2.9.1\n"
 
 #: handlers_bot/common.py:25 handlers_bot/common.py:27
-#: handlers_bot/common.py:30
+#: handlers_bot/common.py:30 handlers_bot/nodes/main_menu.py:24
+#: handlers_bot/nodes/wallet.py:61
 msgid "hello"
 msgstr ""
 
@@ -46,7 +47,8 @@ msgid ""
 "*Choose an option*"
 msgstr ""
 
-#: handlers_bot/common.py:54 handlers_server/webhooks.py:40
+#: handlers_bot/common.py:54 handlers_bot/nodes/games.py:8
+#: handlers_server/webhooks.py:40
 msgid "Games"
 msgstr ""
 
@@ -68,6 +70,10 @@ msgstr ""
 
 #: handlers_bot/common.py:60
 msgid "Referral Program"
+msgstr ""
+
+#: handlers_bot/node.py:40
+msgid "Choose an Option"
 msgstr ""
 
 #: handlers_bot/callbacks/callbacks.py:15
@@ -97,10 +103,10 @@ msgstr ""
 #: handlers_bot/callbacks/callbacks.py:26 handlers_bot/callbacks/referral.py:24
 #: handlers_bot/callbacks/referral.py:40 handlers_bot/callbacks/wallet.py:33
 #: handlers_bot/callbacks/wallet.py:50 handlers_bot/callbacks/wallet.py:65
-#: handlers_bot/callbacks/wallet.py:76 handlers_bot/callbacks/wallet.py:102
-#: handlers_bot/callbacks/wallet.py:117 handlers_bot/callbacks/wallet.py:129
-#: handlers_bot/callbacks/wallet.py:144 handlers_bot/callbacks/wallet.py:197
-#: handlers_bot/callbacks/wallet.py:219
+#: handlers_bot/callbacks/wallet.py:76 handlers_bot/callbacks/wallet.py:103
+#: handlers_bot/callbacks/wallet.py:118 handlers_bot/callbacks/wallet.py:130
+#: handlers_bot/callbacks/wallet.py:145 handlers_bot/callbacks/wallet.py:198
+#: handlers_bot/callbacks/wallet.py:220
 msgid "Back"
 msgstr ""
 
@@ -174,7 +180,7 @@ msgid ""
 "*Choose an option*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:31
+#: handlers_bot/callbacks/wallet.py:31 handlers_bot/nodes/wallet.py:35
 msgid "Deposit"
 msgstr ""
 
@@ -190,7 +196,7 @@ msgid ""
 "*Choose an option*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:46
+#: handlers_bot/callbacks/wallet.py:46 handlers_bot/nodes/wallet.py:53
 msgid ""
 "https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-"
 "bot-using-CryptoBot-06-09"
@@ -224,8 +230,9 @@ msgid ""
 "⚠ Maximum amount: 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:94 handlers_bot/callbacks/wallet.py:143
-#: handlers_bot/callbacks/wallet.py:196 handlers_bot/callbacks/wallet.py:218
+#: handlers_bot/callbacks/wallet.py:94 handlers_bot/callbacks/wallet.py:144
+#: handlers_bot/callbacks/wallet.py:197 handlers_bot/callbacks/wallet.py:219
+#: handlers_bot/nodes/confirm.py:19 handlers_bot/nodes/confirm.py:31
 msgid "Confirm"
 msgstr ""
 
@@ -235,7 +242,7 @@ msgid ""
 "⚠ Withdrawals can take up to 24h"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:108
+#: handlers_bot/callbacks/wallet.py:109
 msgid ""
 "🤖 @Cryptobot deposit\n"
 "_Conversion rate: 1 TON = 1 💎_\n"
@@ -243,27 +250,27 @@ msgid ""
 "*Choose amount to deposit*"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:116
+#: handlers_bot/callbacks/wallet.py:117
 msgid "Custom Amount"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:126
+#: handlers_bot/callbacks/wallet.py:127
 msgid "Send custom amount for deposit. From 0.5 to 1000 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:141 handlers_bot/callbacks/wallet.py:194
+#: handlers_bot/callbacks/wallet.py:142 handlers_bot/callbacks/wallet.py:195
 msgid "Are you sure you want to deposit {} TON"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:163
+#: handlers_bot/callbacks/wallet.py:164
 msgid "Something went wrong. Please contact our support: @{}"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:164
+#: handlers_bot/callbacks/wallet.py:165
 msgid "Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:171
+#: handlers_bot/callbacks/wallet.py:172
 msgid ""
 "To finish the payment:\n"
 "1. Press \"💳 Go to Payment\"\n"
@@ -271,28 +278,101 @@ msgid ""
 "3. Follow @CryptoBot instructions"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:176
+#: handlers_bot/callbacks/wallet.py:177
 msgid "Go to Payment"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:178 handlers_server/webhooks.py:41
+#: handlers_bot/callbacks/wallet.py:179 handlers_server/webhooks.py:41
 msgid "Back to Menu"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:216
+#: handlers_bot/callbacks/wallet.py:217
 msgid "Are you sure you want to withdraw {} 💎"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:253
+#: handlers_bot/callbacks/wallet.py:254
 msgid ""
 "❌ Your withdrawal request has been declined.\n"
 "Reason: not enough funds in your wallet"
 msgstr ""
 
-#: handlers_bot/callbacks/wallet.py:279
+#: handlers_bot/callbacks/wallet.py:280
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
+msgstr ""
+
+#: handlers_bot/nodes/confirm.py:23
+msgid "Are you sure you want to confirm {msg}?"
+msgstr ""
+
+#: handlers_bot/nodes/confirm.py:37
+msgid "deposit {amount} TON"
+msgstr ""
+
+#: handlers_bot/nodes/decimal_input.py:21
+msgid "Please enter or choose the amount"
+msgstr ""
+
+#: handlers_bot/nodes/decimal_input.py:41
+msgid ""
+"{error}{text}Limits:\n"
+"• Minimum: {min}\n"
+"• Maximum: {max}"
+msgstr ""
+
+#: handlers_bot/nodes/decimal_input.py:63
+msgid "The entered value is not a number."
+msgstr ""
+
+#: handlers_bot/nodes/decimal_input.py:67
+msgid "The entered number is less than the minimum."
+msgstr ""
+
+#: handlers_bot/nodes/decimal_input.py:69
+msgid "The entered number is greater than the maximum."
+msgstr ""
+
+#: handlers_bot/nodes/games.py:9
+msgid "Choose a Game"
+msgstr ""
+
+#: handlers_bot/nodes/games.py:13
+msgid ""
+"💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
+"💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n"
+"🚀 *Rocket Launch*: _[soon]_ Hop on a starship and earn up to x10000!\n"
+"\n"
+"_You can play every game for free if you set your bet to 0_"
+msgstr ""
+
+#: handlers_bot/nodes/main_menu.py:22
+msgid ""
+"{welcome}, {name}!\n"
+"_Your balance_: {balance} 💎"
+msgstr ""
+
+#: handlers_bot/nodes/wallet.py:25
+msgid "cryptobotpay"
+msgstr ""
+
+#: handlers_bot/nodes/wallet.py:43
+msgid "Conversion rate: 1 TON = 1 💎"
+msgstr ""
+
+#: handlers_bot/nodes/wallet.py:47
+msgid "deposit {amount}"
+msgstr ""
+
+#: handlers_bot/nodes/wallet.py:52
+msgid "How to use @CryptoBot"
+msgstr ""
+
+#: handlers_bot/nodes/wallet.py:59
+msgid ""
+"_Your Balance_: {balance} 💎\n"
+"\n"
+"⚠ Currently we are accepting Toncoin deposits only via @CryptoBot"
 msgstr ""
 
 #: handlers_server/webhooks.py:38

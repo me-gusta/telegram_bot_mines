@@ -129,7 +129,7 @@ class Node:
 
     @property
     def title(self) -> str:
-        return 'Node'
+        return 'Nothing'
 
     @property
     def header(self) -> str:
@@ -141,7 +141,7 @@ class Node:
 
     @property
     def text(self) -> str:
-        return 'Node text'
+        return ''
 
     @property
     def buttons(self) -> List[List[Button]]:

@@ -49,11 +49,6 @@ class MainMenu(Node):
             [TransitionButton(to_node=Settings), TransitionButton(to_node=Referral)]
         ]
 
-    def _compile_markup(self) -> types.InlineKeyboardMarkup:
-        keyboard = super(MainMenu, self)._compile_markup()
-        keyboard.add(types.InlineKeyboardButton(text='lol', callback_data='shma'))
-        return keyboard
-
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         if is_msg(update):
             referrer_id = User.ref_decode(update.get_args())

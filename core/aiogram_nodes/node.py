@@ -35,7 +35,7 @@ class Button:
 
 
 class TransitionButton(Button):
-    to_node: 'Node'
+    to_node: Union['Node', None]
 
     def __init__(self, to_node: Union[Type['Node'], str], props: dict = None, text: str = ''):
         self.text = text
@@ -48,6 +48,7 @@ class TransitionButton(Button):
                 data[Shortcuts.TRANSITION_TO_NODE] = to_node
             else:
                 data[Shortcuts.TRANSITION_TO_NODE] = StateManager.get(to_node)
+            self.to_node = None
         else:
             self.to_node = to_node(**props)
             data[Shortcuts.TRANSITION_TO_NODE] = to_node.state()
@@ -57,7 +58,10 @@ class TransitionButton(Button):
     def _compile_text(self) -> str:
         text = super(TransitionButton, self)._compile_text()
         if not text:
-            text = self.to_node.emoji + ' ' + self.to_node.title
+            if self.to_node:
+                text = self.to_node.emoji + ' ' + self.to_node.title
+            else:
+                text = '--'
         return text
 
 

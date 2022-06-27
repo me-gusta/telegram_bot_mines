@@ -1,13 +1,19 @@
+import decimal
 from decimal import Decimal
 from typing import Union, List
 
+import aiohttp
+import ujson
 from aiogram import types
 from pydantic import BaseModel
 
+from core.aiogram_nodes.util import get_current_user
 from core.config_loader import config
-from core.constants import URL_ENG_GUIDE
+from core.constants import URL_ENG_GUIDE, CRYPTO_PAY_URL
 from core.pure import to_decimal
-from core.aiogram_nodes.node import Node, URLButton, Button
+from core.aiogram_nodes.node import Node, URLButton, Button, NullNode, ErrorNode
+from db.engine import session
+from db.models import Invoice
 from handlers_bot.nodes.decimal_input import DecimalInput
 from i18n import _
 
@@ -18,6 +24,7 @@ class DepositCryptoBot(Node):
 
     class Props(BaseModel):
         data: Decimal = to_decimal(0)
+        invoice_hash: str = ''
 
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
@@ -36,10 +43,49 @@ class DepositCryptoBot(Node):
                  '2. Press "START"\n'
                  '3. Follow @CryptoBot instructions').format(amount=self.props.data)
 
+    @property
+    def buttons(self) -> List[List[Button]]:
+        return [
+            [URLButton(url='https://t.me/CryptoBot?start=' + self.props.invoice_hash,
+                       text='💳 ' + _('Go to Payment'))]
+        ]
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
-        if self.props.data > config.wallet.max_deposit or self.props.data < config.wallet.min_deposit:
-            self._logger.warn(f'wrong input data %s', self.props.data)
+        try:
+            amount = to_decimal(self.props.data)
+        except decimal.InvalidOperation:
+            self._logger.warn(f'invalid input data %s', self.props.data)
+            return NullNode()
+
+        if amount > config.wallet.max_deposit or amount < config.wallet.min_deposit:
+            self._logger.warn(f'invalid input amount %s', amount)
+            return NullNode()
+        headers = {
+            'Crypto-Pay-API-Token': config.crypto_pay_token,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        async with aiohttp.ClientSession(headers=headers) as client_session:
+            resp = await client_session.post(CRYPTO_PAY_URL + 'createInvoice',
+                                             data={'asset': 'TON', 'amount': amount})
+            if resp.status != 200:
+                self._logger.error('response status %s', resp.status)
+                return ErrorNode(msg='Unable to deposit...')
+            text = await resp.text()
+        try:
+            invoice_dict = ujson.loads(text)
+        except ujson.JSONDecodeError:
+            self._logger.error('unable to decode: %s', text)
+            return ErrorNode(msg='Unable to deposit...')
+
+        if not invoice_dict.get('ok'):
+            self._logger.error('invoice is not ok: %s', text)
+            return ErrorNode(msg='Unable to deposit...')
+
+        invoice = Invoice(user=get_current_user(), amount=amount, hash=invoice_dict['result']['hash'])
+        session.add(invoice)
+        self._logger.info('new deposit invoice: %s', invoice)
+        self.props.invoice_hash = invoice.hash
         return None
 
 

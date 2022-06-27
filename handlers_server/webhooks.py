@@ -3,7 +3,7 @@ from contextlib import suppress
 
 import ujson
 from aiogram import Dispatcher, types
-from aiogram.utils.exceptions import MessageNotModified
+from aiogram.utils.exceptions import MessageNotModified, TelegramAPIError
 from aiohttp import web
 from aiohttp.web_response import Response
 
@@ -43,16 +43,15 @@ async def crypto_pay_webhook(request: web.Request):
     invoice.is_payed = True
     invoice.user.balance += invoice.amount
     session.commit()
-    with suppress(MessageNotModified):
-        await bot.edit_message_text(
+    with suppress(TelegramAPIError):
+        await bot.send_message(
                 text=text,
                 chat_id=invoice.user.user_id,
-                message_id=invoice.message_id,
                 parse_mode='markdown',
                 reply_markup=types.InlineKeyboardMarkup(1, buttons),
             )
     await bot.send_message(config.operator_id,
-                           text=f'TOP UP\n'
+                           text=f'DEPOSIT\n'
                                 f'user: {invoice.user}\n'
                                 f'amount: {invoice.amount}')
     return Response(text='ok')

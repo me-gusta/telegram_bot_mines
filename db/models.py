@@ -145,8 +145,13 @@ class Invoice(Base):
     user = relationship('User')
     amount = Column(DECIMAL)
     hash = Column(String(32))
-    message_id = Column(Integer)
     is_payed = Column(Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Invoice {self.id} {self.amount}>'
+
+
+
 
 
 class WithdrawRequest(Base):

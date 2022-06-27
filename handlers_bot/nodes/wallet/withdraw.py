@@ -2,12 +2,15 @@ from contextlib import suppress
 from decimal import Decimal
 from typing import Union, List
 
+import aiohttp
+import ujson
 from aiogram import types
 from aiogram.utils.exceptions import TelegramAPIError
 from pydantic import BaseModel
 
 from bot import bot
 from core.config_loader import config
+from core.constants import CRYPTO_PAY_URL
 from core.pure import to_decimal
 from core.aiogram_nodes.node import Node, TransitionButton, Button, ErrorNode
 from core.aiogram_nodes.util import is_cq
@@ -59,6 +62,42 @@ class ConfirmWithdrawalAdmin(Node):
             return ErrorNode(msg=f'user has not enough funds\n'
                                  f'balance: {request.user.balance}\n'
                                  f'amount: {request.amount}')
+        headers = {
+            'Crypto-Pay-API-Token': config.crypto_pay_token,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        data = {'asset': 'TON',
+                'amount': request.amount,
+                'user_id': request.user.user_id,
+                'spend_id': str(hash(str(request.spend_id) + '.Iasgfuih'))}
+        async with aiohttp.ClientSession(headers=headers) as client_session:
+            resp = await client_session.post(CRYPTO_PAY_URL + 'transfer', data=data)
+            text = await resp.text()
+            if resp.status != 200:
+                self._logger.error('response status %s. %s', resp.status, text)
+                return ErrorNode(msg=f'Unable to transfer. response status: {resp.status}\n```{text}```')
+        try:
+            response_data = ujson.loads(text)
+        except ujson.JSONDecodeError:
+            self._logger.error('unable to decode: %s', text)
+            return ErrorNode(msg=f'Unable to decode.\n```{text}```')
+
+        if not response_data.get('ok'):
+            self._logger.error('transfer is not ok: %s', text)
+            return ErrorNode(msg=f'Unable to transfer.\n```{text}```')
+
+        request.user.balance -= request.amount
+        request.is_payed = True
+
+        with suppress(TelegramAPIError):
+            await bot.send_message(
+                chat_id=request.user.user_id,
+                text=_('✅ Your withdrawal request has been processed.\n'
+                       '{amount} 💎 sent to you wallet').format(amount=request.amount),
+                reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
+                    TransitionButton(to_node='MainMenu', text='Main Menu').compile()
+                ]])
+            )
 
         return None
 

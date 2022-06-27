@@ -6,6 +6,7 @@ from aiogram.utils.exceptions import MessageNotModified
 from pydantic import BaseModel
 
 from core.config_loader import config
+from core.constants import URL_SUPPORT
 from core.logging_config import root_logger
 from db.engine import session
 from core.aiogram_nodes.telegram_dispatcher import TelegramDispatcher
@@ -165,13 +166,14 @@ class Node:
     @property
     def dispatch(self):
         async def _dispatch(update: Union[types.CallbackQuery, types.Message]):
-            self._logger.info('dispatch with props: %s', self.props)
+            self._logger.info('start dispatch')
             # before
             if is_cq(update):
                 decoded_data = decode_callback_data(update.data)
                 if decoded_data[Shortcuts.TRANSITION_TO_NODE] == self.state() and decoded_data.get(
                         Shortcuts.TRANSITION_TO_NODE_PROPS):
                     self.props = self.Props(**decoded_data.get(Shortcuts.TRANSITION_TO_NODE_PROPS))
+            self._logger.info('props: %s', self.props)
 
             user = get_current_user()
             user.state = self.state()
@@ -180,12 +182,12 @@ class Node:
 
             # process
             self._logger.info('process()')
-            session.commit()
             if self.only_admin and update.from_user.id != config.operator_id:
                 self._logger.info('skip process. user is not an operator')
                 switch_node = NullNode()
             else:
                 switch_node = await self.process(update)
+            session.commit()
 
             # switch
             if switch_node:
@@ -259,3 +261,26 @@ class Node:
 
 class NullNode(Node):
     pass
+
+
+class ErrorNode(Node):
+    emoji = '🚫'
+    menu_btn = True
+
+    class Props(BaseModel):
+        msg: str = ''
+
+    @property
+    def title(self) -> str:
+        return _('Something went wrong....')
+
+    @property
+    def text(self) -> str:
+        msg = self.props.msg + '\n\n' if self.props.msg else ''
+        return msg + _('Please contact our support for details or try again.')
+
+    @property
+    def buttons(self) -> List[List[Button]]:
+        return [
+            [URLButton(url=URL_SUPPORT, text='🆘 ' + _('Support'))]
+        ]

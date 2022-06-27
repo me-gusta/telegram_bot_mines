@@ -1,83 +1,82 @@
 import decimal
 from decimal import Decimal
-from typing import Any, Union, Callable, List
+from typing import Union, List
 
 from aiogram import types
+from pydantic import BaseModel
 
-from core.config_loader import config
 from core.pure import to_decimal
-from handlers_bot.node import Node, RenderProps, is_msg
-from handlers_bot.nodes.confirm import confirm_ton
+from core.aiogram_nodes.node import Node, TransitionButton, Button
+from core.aiogram_nodes.util import is_msg
+from handlers_bot.nodes.confirm import Confirm
 from i18n import _
 
 
 class DecimalInput(Node):
+    next_state: str = '1'
     min: Decimal = to_decimal(1)
     max: Decimal = to_decimal(100)
-    amounts = [[to_decimal(1), to_decimal(10)], [to_decimal(50), to_decimal(100)]]
 
     on_text = True
-    back_btn = True
 
-    error_msg = ''
-    next_node: Callable[[Decimal], Node] = None  # Decimal -> Node
-    confirm_text: Callable[[], str] = lambda: _('input {amount} TON')
-
-    children = [
-        []
-    ]
-
-    def __init__(self, **data: Any):
-        super().__init__(**data)
-        buttons = []
-        for group in self.amounts:
-            buttons.append([
-                confirm_ton(x, self.next_node, lambda: self.confirm_text().format(amount=x)) for x in group
-            ])
-        self.children = buttons + self.children
-
+    class Props(BaseModel):
+        amounts: List[List[Decimal]] = [[to_decimal(1), to_decimal(10)], [to_decimal(50), to_decimal(100)]]
+        amount: Decimal = 0
+        error_msg: str = ''
 
     @property
-    def footer(self) -> str:
-        return _('Please enter or choose the amount')
+    def confirm_msg(self) -> str:
+        return _('input {amount} TON')
 
     @property
     def custom_text(self) -> str:
-        return ''
+        return _('----')
 
     @property
-    def message(self) -> str:
+    def text(self) -> str:
         return _('{error}{text}'
                  'Limits:\n'
                  '• Minimum: {min}\n'
                  '• Maximum: {max}').format(
             text=self.custom_text + '\n\n' if self.custom_text else '',
-            error='🚫 ' + f'*{self.error_msg}*' + '\n\n' if self.error_msg else '',
+            error='🚫 ' + f'*{self.props.error_msg}*' + '\n\n' if self.props.error_msg else '',
             min=self.min,
             max=self.max)
 
-    async def pre_render(self):
-        self.error_msg = ''
+    @property
+    def buttons(self) -> List[List[Button]]:
+        def btn_text(x: Decimal):
+            string = str(x).split('.')[0]
+            return f'{string} TON'
 
-    async def render(self,
-                     update: Union[types.CallbackQuery, types.Message]) -> RenderProps:
-        props = RenderProps()
+        return [
+            [TransitionButton(text=btn_text(x),
+                              props={'amount': x, 'next_state': self.next_state},
+                              to_node=self.state()) for x in group] for group in self.props.amounts
+        ]
+
+    async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         if is_msg(update):
             await update.delete()
-            self.logger.info('got new message')
+            self._logger.info('got new input. text = %s', update.text)
             try:
                 amount = to_decimal(update.text.replace(',', '.'))
             except decimal.InvalidOperation:
-                self.error_msg = _('The entered value is not a number.')
-                return props
+                self.props.error_msg = _('The entered value is not a number.')
+                return
 
             if amount < self.min:
-                self.error_msg = _('The entered number is less than the minimum.')
+                self.props.error_msg = _('The entered number is less than the minimum.')
+                return
             elif amount > self.max:
-                self.error_msg = _('The entered number is greater than the maximum.')
-            confirm = confirm_ton(amount, self.next_node, lambda: self.confirm_text().format(amount=amount))
-            confirm.ancestor = self
-            props.redirect_to = confirm
-            return props
-        return props
+                self.props.error_msg = _('The entered number is greater than the maximum.')
+                return
+            self.props.amount = amount
 
+        if self.props.amount > 0:
+            msg = self.confirm_msg.format(amount=self.props.amount)
+            confirm = Confirm(back_to=self.state(),
+                              msg=msg,
+                              data=self.props.amount,
+                              next_state=self.next_state)
+            return confirm

@@ -1,105 +1,83 @@
-import base64
 from decimal import Decimal
-from typing import Union
+from typing import Union, List
 
-import ujson
 from aiogram import types
+from pydantic import BaseModel
 
 from core.config_loader import config
+from core.constants import URL_ENG_GUIDE
 from core.pure import to_decimal
-from handlers_bot.node import Node, Link, is_cq, RenderProps
+from core.aiogram_nodes.node import Node, URLButton, Button
 from handlers_bot.nodes.decimal_input import DecimalInput
 from i18n import _
 
 
-class CryptoBotDI(DecimalInput):
+class DepositCryptoBot(Node):
     emoji = '🤖'
+    menu_btn = True
+
+    class Props(BaseModel):
+        data: Decimal = to_decimal(0)
+
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            if isinstance(self.data, float):
+                self.data = to_decimal(self.data)
+
+    @property
+    def title(self) -> str:
+        return _('Deposit via @CryptoBot')
+
+    @property
+    def text(self) -> str:
+        return _('You are depositing {amount} TON to your wallet\n\n'
+                 'To finish the payment:\n'
+                 '1. Press "💳 Go to Payment"\n'
+                 '2. Press "START"\n'
+                 '3. Follow @CryptoBot instructions').format(amount=self.props.data)
+
+
+    async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
+        if self.props.data > config.wallet.max_deposit or self.props.data < config.wallet.min_deposit:
+            self._logger.warn(f'wrong input data %s', self.props.data)
+        return None
+
+
+class CryptoBotDI(DecimalInput):
+    emoji = '💎'
     min = config.wallet.min_deposit
     max = config.wallet.max_deposit
 
+    next_state = DepositCryptoBot.state()
 
-    @property
-    def title(self) -> str:
-        return _('Deposit via @CryptoBot')
-
-    children = [
-        [Link(emoji='ℹ',
-              custom_title=lambda: _('How to use @CryptoBot'),
-              url=_(
-                  'https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-bot-using-CryptoBot-06-09'))]]
-
-    @property
-    def custom_text(self) -> str:
-        return _('Conversion rate: 1 TON = 1 💎')
-
-
-class CryptoBotPay(Node):
-    amount: Decimal = Decimal(0)
-
-    print_header = False
-
-    menu_btn = True
-
-    @property
-    def title(self) -> str:
-        return _('Deposit via @CryptoBot')
-
-    @property
-    def message(self) -> str:
-        return _('To finish the payment:\n'
-                 '1. Press "💳 Go to Payment"\n'
-                 '2. Press "START"\n'
-                 '3. Follow @CryptoBot instructions')
-
-
-    async def render(self, update: Union[types.CallbackQuery, types.Message]) -> RenderProps:
-        if is_cq(update):
-            data = ujson.loads(base64.b64decode(update.data))
-            amount = to_decimal(data['d'])
-            self.logger.info('request deposit: %s', amount)
-            self.children = [
-                [Link(emoji='💳',
-                      custom_title=lambda : _('Go to Payment'),
-                      url='https://t.me/big_xyu')]
-            ]
-        return RenderProps()
-
-
-class Deposit(Node):
-    emoji = '💳'
-    commands = ['deposit']
-    back_btn = True
-
-    children = [
-        [CryptoBotDI(
-            next_node=lambda x: CryptoBotPay(amount=x),
-            confirm_text = lambda: _('deposit {amount}')
-        )]
-    ]
+    back_to = 'MainMenu'
 
     @property
     def title(self) -> str:
         return _('Deposit')
 
     @property
-    def message(self) -> str:
-        return _('_Your Balance_: {balance} 💎\n\n'
-                 '⚠ Currently we are accepting Toncoin deposits only via @CryptoBot').format(
-            welcome=_('hello'),
-            balance=self.user.balance)
+    def header(self) -> str:
+        return '🤖' + ' ' + _('Deposit via @CryptoBot')
 
+    @property
+    def footer(self) -> str:
+        return _('Please enter or choose the amount for deposit.')
 
-# DecimalInput(
-#             emoji='🤖',
-#             # title='@CryptoBot',
-#             text=_('Conversion rate: 1 TON = 1 💎'),
-#
-#             min=config.wallet.min_deposit,
-#             max=config.wallet.max_deposit,
-#             confirm_text=_('deposit {amount}'),
-#             next=lambda x: CryptoBotPay(amount=x),
-#             variable_state='Deposit',
-#             children=[[Link(emoji='ℹ',
-#                             title=_('How to use @CryptoBot'),
-#                             url=_(
-#                                 'https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-bot-using-CryptoBot-06-09'))]])
+    @property
+    def confirm_msg(self) -> str:
+        return _('deposit {amount} TON')
+
+    @property
+    def custom_text(self) -> str:
+        return _('⚠ Right now we only accept deposit via @CryptoBot\n'
+                 '⚠ Conversion rate: 1 TON = 1 💎')
+
+    @property
+    def buttons(self) -> List[List[Button]]:
+        buttons = super(CryptoBotDI, self).buttons
+
+        buttons += [
+            [URLButton(url=_(URL_ENG_GUIDE), text=_('ℹ How to use @CryptoBot'))]
+        ]
+        return buttons

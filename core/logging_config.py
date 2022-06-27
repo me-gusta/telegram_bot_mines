@@ -5,7 +5,7 @@ logging_config = dict(
     version=1,
     formatters={
         'f': {'format':
-                  '%(asctime)s | %(name)s | %(levelname)s | %(message)s'}
+                  '%(asctime)s | %(name)-23s | %(levelname)-5s | %(message)s'}
     },
     handlers={
         'h': {'class': 'logging.StreamHandler',

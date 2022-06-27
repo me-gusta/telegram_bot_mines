@@ -13,7 +13,6 @@ from core.logging_config import root_logger
 from core.pure import to_decimal
 from db.engine import session
 from db.models import Invoice
-from handlers_bot.common import GamesCQ, MenuCQ
 from i18n import _
 
 async def telegram_webhook(request: web.Request):
@@ -37,8 +36,8 @@ async def crypto_pay_webhook(request: web.Request):
 
     text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=invoice.amount)
     buttons = [
-        [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data=GamesCQ.GAMES)],
-        [types.InlineKeyboardButton(_('Back to Menu'), callback_data=MenuCQ.MENU)]
+        [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data='')],
+        [types.InlineKeyboardButton(_('Back to Menu'), callback_data='MenuCQ.MENU')]
     ]
 
     invoice.is_payed = True

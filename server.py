@@ -1,43 +1,26 @@
 import asyncio
 import threading
 import traceback
+from pathlib import Path
+from typing import Type
 
-from aiogram import Dispatcher, executor, types, Bot
-from aiogram.dispatcher.middlewares import BaseMiddleware
+from aiogram import Dispatcher, executor
 from aiohttp import web
 from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 
 import handlers_server.api_mines as api
 from bot import bot
+from core.aiogram_nodes.get_user_middleware import GetUserMiddleware
 from core.config_loader import config
-from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH
+from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH, BASE_DIR
 from core.logging_config import root_logger
 from db.engine import create_tables
-from db.helpers import get_or_create_user
-from handlers_bot.nodes.main_menu import MainMenu
-from handlers_bot.telegram_dispatcher import TelegramDispatcher
+from core.aiogram_nodes.node import Node
+from core.aiogram_nodes.telegram_dispatcher import TelegramDispatcher
+from handlers_bot.fallback import setup as setup_fallback
+from handlers_bot.inline_queries import inline_query_referral
 from handlers_server import webhooks
 from i18n import i18n_middleware
-
-
-class GetUserMiddleware(BaseMiddleware):
-    logger = root_logger.getChild('GetUserMiddleware')
-
-    async def on_pre_process_update(self, update: types.Update, data: dict):
-        if update.message:
-            user_data = update.message.from_user
-        elif update.callback_query:
-            user_data = update.callback_query.from_user
-        elif update.inline_query:
-            user_data = update.inline_query.from_user
-        else:
-            self.logger.error('Cannot extract user.')
-            raise ValueError('Cannot extract user.')
-
-        user = await get_or_create_user(user_data)
-        self.logger.info('')
-        self.logger.info('====== user: %s ======', user)
-        Dispatcher.get_current().current_user = user
 
 
 def init_dispatcher() -> Dispatcher:
@@ -50,9 +33,37 @@ def init_dispatcher() -> Dispatcher:
     dp.middleware.setup(i18n_middleware)
     # dp.register_message_handler(send_welcome, commands=['start'])
     dp.register_errors_handler(error_handler)
-    MainMenu().setup(dp)
 
-    # setup_callbacks(dp)
+    def all_subclasses(cls: Type):
+        def _all_subclasses(cls: Type):
+            out = []
+            for sub in cls.__subclasses__():
+                out.append(sub)
+                out.extend(_all_subclasses(sub))
+            return out
+        subclasses = list(set(_all_subclasses(cls)))
+        subclasses.sort(key=lambda x: x.__name__)
+        return subclasses
+
+    def import_node_dir(dir: Path, parent: str):
+        for path in dir.iterdir():
+            if path.name.startswith('_'):
+                continue
+            if path.is_dir():
+                import_node_dir(path, parent + '.' + path.name)
+            else:
+                string = f'from {parent} import {path.name}'[:-3:]
+                root_logger.info('DYNAMIC IMPORT: %s', string)
+                exec(string)
+
+    import_node_dir(BASE_DIR / 'handlers_bot/nodes', 'handlers_bot.nodes')
+
+    for node_cls in all_subclasses(Node):
+        root_logger.info('init_dispatcher. connect %s', node_cls)
+        node_cls().setup(dp)
+
+    dp.register_inline_handler(inline_query_referral)
+    setup_fallback(dp)
     return dp
 
 
@@ -103,7 +114,7 @@ def make_app(init_bot=False):
 
         root_logger.warning('Bye!')
 
-    async def startup_db(app: web.Application):
+    async def startup_db(_: web.Application):
         root_logger.info('Initializing database')
         await create_tables()
 

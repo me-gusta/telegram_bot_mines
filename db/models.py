@@ -50,9 +50,9 @@ class User(Base):
 
     def __repr__(self):
         if self.username:
-            return f'<User {self.id} @{self.username}:{self.state}>'
+            return f'<User {self.id} @{self.username}>'
         else:
-            return f'<User {self.id}:{self.state}>'
+            return f'<User {self.id}>'
 
     def change_balance(self, n: Union[float, Decimal]):
         value = Decimal(str(n)) if isinstance(n, float) else n
@@ -82,6 +82,7 @@ class User(Base):
         elif self.referral_count >= 25:
             return Decimal(4)
         return Decimal(3)
+
 
 
 class MinesGameSettings(Base):

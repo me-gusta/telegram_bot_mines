@@ -17,6 +17,8 @@ class DB(BaseModel):
 class Wallet(BaseModel):
     min_deposit: Decimal
     max_deposit: Decimal
+    min_withdraw: Decimal
+    max_withdraw: Decimal
 
 
 class Config(BaseModel):

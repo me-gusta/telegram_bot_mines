@@ -1,5 +1,5 @@
 import functools
-from typing import Union, Any, Type, List
+from typing import Union, Any, Type, List, Optional
 
 from aiogram import types, Bot
 from aiogram.utils.exceptions import MessageNotModified
@@ -107,6 +107,8 @@ class Node:
 
     only_admin: bool = False
 
+    parse_mode: Optional[str] = 'markdown'
+
     class Props(BaseModel):
         any: Any
 
@@ -206,7 +208,6 @@ class Node:
             # compile
             text = self._compile_text()
             markup = self._compile_markup()
-
             # reset
             self.props = self.Props()
 
@@ -219,13 +220,13 @@ class Node:
                     message_id=user.menu_message_id,
                     text=text,
                     reply_markup=markup,
-                    parse_mode='markdown')
+                    parse_mode=self.parse_mode)
             except (MessageNotModified, SkipMessageEditing):
                 await Bot.get_current().send_message(
                     chat_id=user.user_id,
                     text=text,
                     reply_markup=markup,
-                    parse_mode='markdown')
+                    parse_mode=self.parse_mode)
 
             if is_cq(update):
                 await update.answer()
@@ -270,6 +271,7 @@ class NullNode(Node):
 class ErrorNode(Node):
     emoji = '🚫'
     menu_btn = True
+    parse_mode = None
 
     class Props(BaseModel):
         msg: str = ''

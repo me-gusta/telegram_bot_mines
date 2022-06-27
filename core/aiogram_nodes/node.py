@@ -271,7 +271,6 @@ class NullNode(Node):
 class ErrorNode(Node):
     emoji = '🚫'
     menu_btn = True
-    parse_mode = None
 
     class Props(BaseModel):
         msg: str = ''

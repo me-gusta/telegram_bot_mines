@@ -25,7 +25,7 @@ def random_welcome():
 
 class MainMenu(Node):
     emoji = '🏠'
-    commands = ['start', 'help']
+    commands = ['start', 'help', 'menu']
 
     @property
     def title(self) -> str:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-29 20:23+0300\n"
+"POT-Creation-Date: 2022-06-29 22:13+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -207,11 +207,11 @@ msgstr ""
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:189
+#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:190
 msgid "Withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:71 handlers_bot/nodes/wallet/withdraw.py:154
+#: handlers_bot/nodes/referral.py:71 handlers_bot/nodes/wallet/withdraw.py:155
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
@@ -327,30 +327,32 @@ msgid ""
 "⚠ Minimum amount: 0.5 💎\n"
 "⚠ Maximum amount: 1000 💎\n"
 "⚠ You need to play at least 5 payed games to unlock withdrawals\n"
-"⚠ You can still use your assets while withdrawal request is pending\n"
+"⚠ Cheating, botting and other malicious actions related to the referral "
+"system would not be tolerated.\n"
+"⚠ You can still use your funds while withdrawal request is pending\n"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:150
+#: handlers_bot/nodes/wallet/withdraw.py:151
 msgid "Withdrawal Request"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:193
+#: handlers_bot/nodes/wallet/withdraw.py:194
 msgid "Please enter or choose the amount for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:197
+#: handlers_bot/nodes/wallet/withdraw.py:198
 msgid "withdraw {amount} TON"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:201
+#: handlers_bot/nodes/wallet/withdraw.py:202
 msgid "👛 Your Balance: {balance} 💎"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:219
+#: handlers_bot/nodes/wallet/withdraw.py:220
 msgid "Sorry, your balance is less than the required minimum for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:223
+#: handlers_bot/nodes/wallet/withdraw.py:224
 msgid "Your balance is less than the entered amount"
 msgstr ""
 
@@ -664,5 +666,24 @@ msgstr ""
 #~ " with us. We can discuss special "
 #~ "referral program with a bigger share "
 #~ "up to 15%"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "⚠ Withdrawals can take up to 24h\n"
+#~ "⚠ Minimum amount: 0.5 💎\n"
+#~ "⚠ Maximum amount: 1000 💎\n"
+#~ "⚠ You need to play at least 5 payed games to unlock withdrawals\n"
+#~ "⚠ You can still use your assets while withdrawal request is pending\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "⚠ Withdrawals can take up to 24h\n"
+#~ "⚠ Minimum amount: 0.5 💎\n"
+#~ "⚠ Maximum amount: 1000 💎\n"
+#~ "⚠ You need to play at least 5 payed games to unlock withdrawals\n"
+#~ "⚠ Cheating, botting and other malicious"
+#~ " actions related to the referral "
+#~ "system would not be tolerated.\n"
+#~ "⚠ You can still use your assets while withdrawal request is pending\n"
 #~ msgstr ""
 

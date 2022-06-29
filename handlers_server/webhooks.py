@@ -8,11 +8,14 @@ from aiohttp import web
 from aiohttp.web_response import Response
 
 from bot import bot
+from core.aiogram_nodes.node import TransitionButton
 from core.config_loader import config
 from core.logging_config import root_logger
 from core.pure import to_decimal
 from db.engine import session
 from db.models import Invoice
+from handlers_bot.nodes.games import Games
+from handlers_bot.nodes.main_menu import MainMenu
 from i18n import _
 
 async def telegram_webhook(request: web.Request):
@@ -36,12 +39,19 @@ async def crypto_pay_webhook(request: web.Request):
 
     text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=invoice.amount)
     buttons = [
-        [types.InlineKeyboardButton('🕹️ ' + _('Games'), callback_data='')],
-        [types.InlineKeyboardButton(_('Back to Menu'), callback_data='MenuCQ.MENU')]
+        [TransitionButton(to_node=MainMenu).compile()],
+        [TransitionButton(to_node=Games).compile()]
     ]
 
     invoice.is_payed = True
-    invoice.user.balance += invoice.amount
+    amount = to_decimal(invoice.amount)
+    admin_bonus_text = ''
+    if invoice.user.deposit_bonus:
+        bonus = (amount / 100 * to_decimal(invoice.user.deposit_bonus))
+        admin_bonus_text = f'\n\ndeposit bonus activated. User got {bonus} free TON'
+        amount = amount
+    invoice.user.balance += amount
+    invoice.user.sum_deposit += invoice.amount
     session.commit()
     with suppress(TelegramAPIError):
         await bot.send_message(
@@ -53,7 +63,8 @@ async def crypto_pay_webhook(request: web.Request):
     await bot.send_message(config.operator_id,
                            text=f'DEPOSIT\n'
                                 f'user: {invoice.user}\n'
-                                f'amount: {invoice.amount}')
+                                f'amount: {invoice.amount}'
+                                f'{admin_bonus_text}')
     return Response(text='ok')
 
 

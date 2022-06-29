@@ -49,7 +49,7 @@ class ConfirmWithdrawalAdmin(Node):
             self._logger.warn('request is paid %s', request)
             return ErrorNode(msg='request is paid')
         if request.user.balance < request.amount:
-            self._logger.warn('request is paid %s', request)
+            self._logger.warn('request is canceled. not enough funds %s', request)
             with suppress(TelegramAPIError):
                 await bot.send_message(
                     chat_id=request.user.user_id,
@@ -62,6 +62,20 @@ class ConfirmWithdrawalAdmin(Node):
             return ErrorNode(msg=f'user has not enough funds\n'
                                  f'balance: {request.user.balance}\n'
                                  f'amount: {request.amount}')
+        if request.user.payed_games_played < 5:
+            self._logger.warn('request is canceled. not enough payed_games_played %s', request)
+            with suppress(TelegramAPIError):
+                await bot.send_message(
+                    chat_id=request.user.user_id,
+                    text=_('❌ Your withdrawal request has been declined.\n'
+                           'Reason: you need to play at least 5 payed games to unlock withdrawals\n'
+                           'You played: {amount} games out of 5').format(amount=request.user.payed_games_played),
+                    reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
+                        TransitionButton(to_node='MainMenu', text='Main Menu').compile()
+                    ]])
+                )
+            return ErrorNode(msg=f'user has not enough payed games\n'
+                                 f'{request.user.payed_games_played}/5')
         headers = {
             'Crypto-Pay-API-Token': config.crypto_pay_token,
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -113,7 +127,8 @@ class WithdrawRules(Node):
     def text(self) -> str:
         return _('⚠ Withdrawals can take up to 24h\n'
                  '⚠ Minimum amount: 0.5 💎\n'
-                 '⚠ Maximum amount: 1000 💎\n '
+                 '⚠ Maximum amount: 1000 💎\n'
+                 '⚠ You need to play at least 5 payed games to unlock withdrawals\n'
                  '⚠ You can still use your assets while withdrawal request is pending\n')
 
 
@@ -135,7 +150,7 @@ class WithdrawRequest(Node):
         return _('Withdrawal Request')
 
     @property
-    def message(self) -> str:
+    def text(self) -> str:
         return _('⚠ Your withdrawal request is being processed\n'
                  '⚠ Withdrawals can take up to 24h\n'
                  '⚠ Conversion rate: 1 💎 = 1 TON')

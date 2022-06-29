@@ -38,15 +38,19 @@ class User(Base):
     language_code = Column(String(10), default='en')
 
     state = Column(String(64), default=UserState.NONE)
-    menu_message_id = Column(BigInteger, default=0)
 
     last_active = Column(DateTime(), default=datetime.datetime.now)
+    date_registered = Column(DateTime(), default=datetime.datetime.now)
 
     balance = Column(DECIMAL, default=0)
+    deposit_bonus = Column(Integer, default=0)
 
     referrer_user_id = Column(BigInteger, default=0)
-    referral_count = Column(Integer, default=0)
     referral_balance = Column(DECIMAL, default=0)
+
+    sum_deposit = Column(DECIMAL, default=0)
+
+    payed_games_played = Column(Integer, default=0)
 
     def __repr__(self):
         if self.username:
@@ -73,15 +77,8 @@ class User(Base):
         except (binascii.Error, ValueError):
             return 0
 
-    @property
-    def referral_share(self) -> Decimal:
-        if self.referral_count >= 500:
-            return Decimal(6)
-        elif self.referral_count >= 100:
-            return Decimal(5)
-        elif self.referral_count >= 25:
-            return Decimal(4)
-        return Decimal(3)
+
+
 
 
 
@@ -118,6 +115,7 @@ class MinesGame(Base):
     mines_json = Column(String(255))
     revealed_json = Column(String(255), default='[]')
     status = Column(Enum(MinesGameStatus), default=MinesGameStatus.RUNNING)
+    date = Column(DateTime, default=datetime.datetime.now())
 
     @cached_property
     def mines(self):

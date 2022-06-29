@@ -13,7 +13,7 @@ from core.logging_config import root_logger
 from core.mines_payouts import payouts_table
 from core.pure import to_decimal
 from db.engine import session
-from db.helpers import get_running_mines_game
+from db.helpers import get_running_mines_game, user_referral_stats
 from db.models import MinesGame, MinesGameStatus, User
 from handlers_server.helpers import validate_telegram_string, ApiView
 
@@ -78,6 +78,9 @@ class NewGameApi(ApiView):
         if bet > user.balance:
             raise HTTPBadRequest(text='Not enough funds in the wallet')
 
+        if bet > 0:
+            user.payed_games_played += 1
+
         if params.mines_amount > 24 or params.mines_amount < 1:
             raise HTTPBadRequest(text='Mines amount is out of range')
 
@@ -94,7 +97,8 @@ class NewGameApi(ApiView):
         if user.referrer_user_id:
             referrer: User = session.query(User).filter(User.user_id == user.referrer_user_id).first()
             if referrer:
-                income = to_decimal(bet * (referrer.referral_share / 100))
+                share, _, _ = user_referral_stats(referrer)
+                income = to_decimal(bet * (share / 100))
                 referrer.referral_balance += income
                 referrer.balance += income
                 self.logger.info(f'User has a referrer. {referrer} gets {income}')

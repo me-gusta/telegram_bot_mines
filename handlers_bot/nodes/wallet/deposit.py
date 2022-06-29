@@ -116,8 +116,9 @@ class CryptoBotDI(DecimalInput):
 
     @property
     def custom_text(self) -> str:
-        return _('⚠ Right now we only accept deposit via @CryptoBot\n'
-                 '⚠ Conversion rate: 1 TON = 1 💎')
+        msg = _('⚠ Right now we only accept deposit via @CryptoBot\n'
+                '⚠ Conversion rate: 1 TON = 1 💎')
+        return msg
 
     @property
     def buttons(self) -> List[List[Button]]:

@@ -33,6 +33,8 @@ class Config(BaseModel):
     dev_mode: bool
     debug: bool
 
+    referral_deposit_bonus: int
+
     secret: bytes = b''
 
     def __init__(self, **data):

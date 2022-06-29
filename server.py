@@ -79,7 +79,7 @@ def make_app(init_bot=False):
 
     @web.middleware
     async def debug_middleware(request: web.Request, handler):
-        root_logger.warning(f'DUBUG MIDDLEWARE. {request.method}, {request.path}')
+        # root_logger.warning(f'DUBUG MIDDLEWARE. {request.method}, {request.path}')
         try:
             response = await handler(request)
             return response

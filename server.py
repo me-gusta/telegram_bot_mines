@@ -10,6 +10,7 @@ from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 
 import handlers_server.api_mines as api
 from bot import bot
+from core.aiogram_nodes.debug_whitelist_middleware import DebugWhitelistMiddleware
 from core.aiogram_nodes.get_user_middleware import GetUserMiddleware
 from core.config_loader import config
 from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH, BASE_DIR
@@ -31,7 +32,7 @@ def init_dispatcher() -> Dispatcher:
     dp = TelegramDispatcher(bot)
     dp.middleware.setup(GetUserMiddleware())
     dp.middleware.setup(i18n_middleware)
-    # dp.register_message_handler(send_welcome, commands=['start'])
+    dp.middleware.setup(DebugWhitelistMiddleware())
     dp.register_errors_handler(error_handler)
 
     def all_subclasses(cls: Type):
@@ -64,6 +65,8 @@ def init_dispatcher() -> Dispatcher:
 
     dp.register_inline_handler(inline_query_referral)
     setup_fallback(dp)
+    if config.debug:
+        root_logger.info('---------- DEBUG MODE IS ON ----------')
     return dp
 
 

@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import List
 
 import ujson
 from pydantic import BaseModel
@@ -34,6 +35,7 @@ class Config(BaseModel):
     debug: bool
 
     referral_deposit_bonus: int
+    debug_whitelist: List[int] = list()
 
     secret: bytes = b''
 

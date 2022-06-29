@@ -1,5 +1,6 @@
 import binascii
 import traceback
+import typing
 from typing import TypeVar, Type
 
 import ujson
@@ -21,8 +22,6 @@ class TelegramDispatcher(Dispatcher):
         super().__init__(bot)
 
     async def process_update(self, update: types.Update):
-        if update.callback_query:
-            root_logger.debug('decoded callback data %s', decode_callback_data(update.callback_query.data))
         await super(TelegramDispatcher, self).process_update(update)
 
     @classmethod
@@ -48,32 +47,5 @@ class TelegramDispatcher(Dispatcher):
         return node.__repr_name__() in self.connected_nodes.values()
 
     def connect(self, node):
-        self.connected_nodes[node.state] = node  # .__repr_name__()
-        # self.add_to_tree(node, node.ancestor)
-
-    # def add_to_tree(self, node, ancestor):
-    #     if not ancestor:
-    #         self.trees.append({
-    #             'state': node.state,
-    #             'name': node.__repr_name__(),
-    #             'children': []
-    #         })
-    #         return
-    #
-    #     def iter_tree(tree: list, search_for: str):
-    #         for item in tree:
-    #             if item['state'] == search_for:
-    #                 return item
-    #             else:
-    #                 result = iter_tree(item['children'], search_for)
-    #                 if result:
-    #                     return result
-    #     parent = iter_tree(self.trees, ancestor.state)
-    #     parent['children'].append({
-    #             'state': node.state,
-    #             'name': node.__repr_name__(),
-    #             'children': []
-    #         })
-    #     print(ujson.dumps(self.trees))
-
+        self.connected_nodes[node.state] = node
 

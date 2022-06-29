@@ -9,6 +9,7 @@ class GetUserMiddleware(BaseMiddleware):
     logger = root_logger.getChild('GetUserMiddleware')
 
     async def on_pre_process_update(self, update: types.Update, data: dict):
+        self.logger.info('active')
         if update.message:
             user_data = update.message.from_user
         elif update.callback_query:

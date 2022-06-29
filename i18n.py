@@ -11,6 +11,7 @@ class TranslateMiddleware(I18nMiddleware):
         user = get_current_user()
         return user.language_code
 
+
 i18n_middleware = TranslateMiddleware('mybot', FILES_DIR / 'locales')
 
 _ = i18n_middleware.gettext

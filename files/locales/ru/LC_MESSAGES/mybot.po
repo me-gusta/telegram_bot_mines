@@ -433,7 +433,7 @@ msgstr "вывести {amount} TON"
 
 #: handlers_bot/nodes/wallet/withdraw.py:201
 msgid "👛 Your Balance: {balance} 💎"
-msgstr "👛 Ваш баланс: {balance} 💎\n"
+msgstr "👛 Ваш баланс: {balance} 💎"
 
 #: handlers_bot/nodes/wallet/withdraw.py:219
 msgid "Sorry, your balance is less than the required minimum for withdrawal."

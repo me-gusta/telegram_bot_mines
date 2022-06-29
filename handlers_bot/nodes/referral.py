@@ -23,20 +23,20 @@ class ReferralRules(Node):
     @property
     def text(self) -> str:
         return _('Invite your friends and earn up to *15%* of their bets! '
-                 'Your referrals will get +10% to their first first deposit.\n\n'
-                 'The more people use your invite code, the more percent from their bets you will get.\n'
-                 '3% — Referral deposit 0-50 TON + 5 active referrals\n'
-                 '4% — Referral deposit 50-125 TON + 15 active referrals\n'
-                 '5% — Referral deposit 125-225 TON + 20 active referrals\n'
-                 '6% — Referral deposit 225-350 TON + 25 active referrals\n'
-                 '7% — Referral deposit 350-500 TON + 30 active referrals\n'
-                 '8% — Referral deposit 500-700 TON + 30 active referrals\n'
-                 '9% — Referral deposit 700-1000 TON + 30 active referrals\n'
-                 '10% — Referral deposit 1000-2000 TON + 30 active referrals\n'
-                 '_Active referral is someone who plays at least once a week_\n'
-                 '_Cheating, botting and other malicious actions related to the referral system would not be tolerated._\n\n'
-                 'If you are a content maker and have a large audience get in touch with us. '
-                 'We can discuss special referral program with a bigger share up to 15%')
+                 'Your referrals will get +10% to their first deposit.\n\n') + _(
+            'The more people use your invite code, the more percent from their bets you will get.\n'
+            '3% — Total deposit of referrals 0-50 TON + 5 active referrals\n'
+            '4% — Total deposit of referrals 50-125 TON + 15 active referrals\n'
+            '5% — Total deposit of referrals 125-225 TON + 20 active referrals\n'
+            '6% — Total deposit of referrals 225-350 TON + 25 active referrals\n'
+            '7% — Total deposit of referrals 350-500 TON + 30 active referrals\n'
+            '8% — Total deposit of referrals 500-700 TON + 30 active referrals\n'
+            '9% — Total deposit of referrals 700-1000 TON + 30 active referrals\n'
+            '10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n') + _(
+            '_Active referral is someone who plays at least once a week_\n'
+            '_Cheating, botting and other malicious actions related to the referral system would not be tolerated._\n\n'
+            'If you are a content maker and have a large audience get in touch with us. '
+            'We can discuss special referral program with a bigger share up to 15%')
 
     @property
     def buttons(self) -> List[List[Button]]:

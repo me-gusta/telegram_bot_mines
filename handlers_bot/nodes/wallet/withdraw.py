@@ -117,7 +117,7 @@ class ConfirmWithdrawalAdmin(Node):
 
 
 class WithdrawRules(Node):
-    back_btn = True
+    back_to = 'WithdrawDI'
 
     @property
     def title(self) -> str:

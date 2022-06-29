@@ -33,7 +33,7 @@ def init_dispatcher() -> Dispatcher:
     Dispatcher.set_current(dp)
     dp.middleware.setup(GetUserMiddleware())
 
-    dp.middleware.setup(i18n_middleware)
+    # dp.middleware.setup(i18n_middleware)
     dp.middleware.setup(DebugWhitelistMiddleware())
     root_logger.info(dp.middleware.applications)
 

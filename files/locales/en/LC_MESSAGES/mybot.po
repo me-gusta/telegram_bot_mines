@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-29 22:13+0300\n"
+"POT-Creation-Date: 2022-06-29 22:21+0300\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -194,45 +194,47 @@ msgid ""
 "9% — Referral deposit 700-1000 TON + 30 active referrals\n"
 "10% — Referral deposit 1000-2000 TON + 30 active referrals\n"
 "_Active referral is someone who plays at least once a week_\n"
+"_Cheating, botting and other malicious actions related to the referral "
+"system would not be tolerated._\n"
 "\n"
 "If you are a content maker and have a large audience get in touch with "
 "us. We can discuss special referral program with a bigger share up to 15%"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:43
+#: handlers_bot/nodes/referral.py:44
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:54
+#: handlers_bot/nodes/referral.py:55
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:190
+#: handlers_bot/nodes/referral.py:68 handlers_bot/nodes/wallet/withdraw.py:189
 msgid "Withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:71 handlers_bot/nodes/wallet/withdraw.py:155
+#: handlers_bot/nodes/referral.py:72 handlers_bot/nodes/wallet/withdraw.py:154
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Conversion rate: 1 💎 = 1 TON"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:81
+#: handlers_bot/nodes/referral.py:82
 msgid "Nothing to withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:84
+#: handlers_bot/nodes/referral.py:85
 msgid ""
 "You can not withdraw your referrals balance until you invite 5 active "
 "referrals."
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:104
+#: handlers_bot/nodes/referral.py:105
 msgid "Referral Program"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:111
+#: handlers_bot/nodes/referral.py:112
 msgid ""
 "Invite your friends and earn up to *15%* of all their winning and losing "
 "bets! Your referrals will get +10% to their first first deposit.\n"
@@ -327,32 +329,30 @@ msgid ""
 "⚠ Minimum amount: 0.5 💎\n"
 "⚠ Maximum amount: 1000 💎\n"
 "⚠ You need to play at least 5 payed games to unlock withdrawals\n"
-"⚠ Cheating, botting and other malicious actions related to the referral "
-"system would not be tolerated.\n"
 "⚠ You can still use your funds while withdrawal request is pending\n"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:151
+#: handlers_bot/nodes/wallet/withdraw.py:150
 msgid "Withdrawal Request"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:194
+#: handlers_bot/nodes/wallet/withdraw.py:193
 msgid "Please enter or choose the amount for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:198
+#: handlers_bot/nodes/wallet/withdraw.py:197
 msgid "withdraw {amount} TON"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:202
+#: handlers_bot/nodes/wallet/withdraw.py:201
 msgid "👛 Your Balance: {balance} 💎"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:220
+#: handlers_bot/nodes/wallet/withdraw.py:219
 msgid "Sorry, your balance is less than the required minimum for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:224
+#: handlers_bot/nodes/wallet/withdraw.py:223
 msgid "Your balance is less than the entered amount"
 msgstr ""
 
@@ -685,5 +685,71 @@ msgstr ""
 #~ " actions related to the referral "
 #~ "system would not be tolerated.\n"
 #~ "⚠ You can still use your assets while withdrawal request is pending\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Invite your friends and earn up to"
+#~ " *15%* of their bets! Your referrals"
+#~ " will get +10% to their first "
+#~ "first deposit.\n"
+#~ "\n"
+#~ "The more people use your invite "
+#~ "code, the more percent from their "
+#~ "bets you will get.\n"
+#~ "3% — Referral deposit 0-50 TON + 5 active referrals\n"
+#~ "4% — Referral deposit 50-125 TON + 15 active referrals\n"
+#~ "5% — Referral deposit 125-225 TON + 20 active referrals\n"
+#~ "6% — Referral deposit 225-350 TON + 25 active referrals\n"
+#~ "7% — Referral deposit 350-500 TON + 30 active referrals\n"
+#~ "8% — Referral deposit 500-700 TON + 30 active referrals\n"
+#~ "9% — Referral deposit 700-1000 TON + 30 active referrals\n"
+#~ "10% — Referral deposit 1000-2000 TON + 30 active referrals\n"
+#~ "_Active referral is someone who plays at least once a week_\n"
+#~ "\n"
+#~ "If you are a content maker and "
+#~ "have a large audience get in touch"
+#~ " with us. We can discuss special "
+#~ "referral program with a bigger share "
+#~ "up to 15%"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "⚠ Withdrawals can take up to 24h\n"
+#~ "⚠ Minimum amount: 0.5 💎\n"
+#~ "⚠ Maximum amount: 1000 💎\n"
+#~ "⚠ You need to play at least 5 payed games to unlock withdrawals\n"
+#~ "⚠ Cheating, botting and other malicious"
+#~ " actions related to the referral "
+#~ "system would not be tolerated.\n"
+#~ "⚠ You can still use your funds while withdrawal request is pending\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Invite your friends and earn up to"
+#~ " *15%* of their bets! Your referrals"
+#~ " will get +10% to their first "
+#~ "first deposit.\n"
+#~ "\n"
+#~ "The more people use your invite "
+#~ "code, the more percent from their "
+#~ "bets you will get.\n"
+#~ "3% — Referral deposit 0-50 TON + 5 active referrals\n"
+#~ "4% — Referral deposit 50-125 TON + 15 active referrals\n"
+#~ "5% — Referral deposit 125-225 TON + 20 active referrals\n"
+#~ "6% — Referral deposit 225-350 TON + 25 active referrals\n"
+#~ "7% — Referral deposit 350-500 TON + 30 active referrals\n"
+#~ "8% — Referral deposit 500-700 TON + 30 active referrals\n"
+#~ "9% — Referral deposit 700-1000 TON + 30 active referrals\n"
+#~ "10% — Referral deposit 1000-2000 TON + 30 active referrals\n"
+#~ "_Active referral is someone who plays at least once a week_\n"
+#~ "\n"
+#~ "_Cheating, botting and other malicious "
+#~ "actions related to the referral system"
+#~ " would not be tolerated._\n"
+#~ "If you are a content maker and "
+#~ "have a large audience get in touch"
+#~ " with us. We can discuss special "
+#~ "referral program with a bigger share "
+#~ "up to 15%"
 #~ msgstr ""
 

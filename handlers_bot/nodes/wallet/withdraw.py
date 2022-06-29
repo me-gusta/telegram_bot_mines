@@ -129,7 +129,6 @@ class WithdrawRules(Node):
                  '⚠ Minimum amount: 0.5 💎\n'
                  '⚠ Maximum amount: 1000 💎\n'
                  '⚠ You need to play at least 5 payed games to unlock withdrawals\n'
-                 '⚠ Cheating, botting and other malicious actions related to the referral system would not be tolerated.\n'
                  '⚠ You can still use your funds while withdrawal request is pending\n')
 
 

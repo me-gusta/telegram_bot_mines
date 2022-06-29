@@ -33,7 +33,8 @@ class ReferralRules(Node):
                  '8% — Referral deposit 500-700 TON + 30 active referrals\n'
                  '9% — Referral deposit 700-1000 TON + 30 active referrals\n'
                  '10% — Referral deposit 1000-2000 TON + 30 active referrals\n'
-                 '_Active referral is someone who plays at least once a week_\n\n'
+                 '_Active referral is someone who plays at least once a week_\n'
+                 '_Cheating, botting and other malicious actions related to the referral system would not be tolerated._\n\n'
                  'If you are a content maker and have a large audience get in touch with us. '
                  'We can discuss special referral program with a bigger share up to 15%')
 

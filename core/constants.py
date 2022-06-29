@@ -18,7 +18,7 @@ MIN_WITHDRAW = 0.5
 MAX_WITHDRAW = 1000
 
 URL_ENG_GUIDE = 'https://telegra.ph/How-to-top-up-the-balance-of-the-LuckyTonBot-gaming-bot-using-CryptoBot-06-09'
-URL_SUPPORT = 'https://t.me/LuckyTonSupport'
+URL_SUPPORT = 'https://t.me/LuckyBotSupport'
 URL_NEWS = 'https://t.me/LuckyTonNews'
 
 AVAILABLE_TRANSLATIONS = ['ru', 'en']

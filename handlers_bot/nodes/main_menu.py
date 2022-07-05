@@ -62,6 +62,7 @@ class MainMenu(Node):
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         if is_msg(update):
             user = get_current_user()
+            self._logger.info(user.last_active, user.date_registered)
             if user.last_active == user.date_registered:
                 referrer_id = User.ref_decode(update.get_args())
                 self._logger.info('new user')

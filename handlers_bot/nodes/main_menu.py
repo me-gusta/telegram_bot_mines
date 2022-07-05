@@ -1,3 +1,4 @@
+import datetime
 from typing import Union, List
 
 from aiogram import types
@@ -60,18 +61,9 @@ class MainMenu(Node):
         ]
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
-        user = get_current_user()
-        self._logger.info(user)
-        try:
-            self._logger.info(user.last_active)
-            self._logger.info(user.date_registered)
-            self._logger.info(user.last_active == user.date_registered)
-        except Exception as e:
-            self._logger.info(e)
-            self._logger.info(type(e))
-            self._logger.info(e.args)
         if is_msg(update):
-            if user.last_active == user.date_registered:
+            user = get_current_user()
+            if user.last_active < user.date_registered + datetime.timedelta(seconds=2):
                 referrer_id = User.ref_decode(update.get_args())
                 self._logger.info('new user')
                 referrer: User = session.query(User).filter(User.user_id == referrer_id).first()

@@ -10,7 +10,7 @@ from db.helpers import get_or_create_user
 from i18n import _
 
 class DebugWhitelistMiddleware(BaseMiddleware):
-    logger = root_logger.getChild('AllowedUsersMiddleware')
+    logger = root_logger.getChild('DebugWhitelistMiddleware')
 
     async def on_pre_process_update(self, update: types.Update, data: dict):
         user = get_current_user()
@@ -24,8 +24,5 @@ class DebugWhitelistMiddleware(BaseMiddleware):
             )
             raise ValueError('Bot in debug mode. User rejected')
 
-        self.logger.info('')
         dp = Dispatcher.get_current()
         dp.current_user = user
-        # state = dp.decode_state(user.state).__repr_name__()
-        self.logger.info('====== user: %s; state: %s ======', user, user.state)

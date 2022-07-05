@@ -20,7 +20,8 @@ from i18n import _
 
 async def telegram_webhook(request: web.Request):
     update_text = await request.text()
-    logging.info('New update')
+    logging.info('')
+    logging.info('=== New update ===')
     dp: Dispatcher = request.app['dp']
     await dp.process_updates([types.Update(**ujson.loads(update_text))])
     return Response(text='ok')

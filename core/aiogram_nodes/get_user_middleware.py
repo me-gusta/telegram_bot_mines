@@ -22,8 +22,7 @@ class GetUserMiddleware(BaseMiddleware):
 
         user = await get_or_create_user(user_data)
 
-        self.logger.info('')
         dp = Dispatcher.get_current()
         dp.current_user = user
         # state = dp.decode_state(user.state).__repr_name__()
-        self.logger.info('====== user: %s; state: %s ======', user, user.state)
+        self.logger.info('user: %s; state: %s', user, user.state)

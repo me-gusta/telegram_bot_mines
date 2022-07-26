@@ -14,18 +14,6 @@ from sqlalchemy.orm import relationship, backref, declarative_base
 Base = declarative_base()
 
 
-class UserState:
-    NONE = 'NONE'
-    ON_DEPOSIT_AMOUNT = 'ON_DEPOSIT_AMOUNT-'
-    ON_WITHDRAW_AMOUNT = 'ON_WITHDRAW_AMOUNT-'
-
-    @staticmethod
-    def on_deposit_amount(message_id: int) -> str:
-        return UserState.ON_DEPOSIT_AMOUNT + str(message_id)
-
-    @staticmethod
-    def on_withdraw_amount(message_id: int) -> str:
-        return UserState.ON_WITHDRAW_AMOUNT + str(message_id)
 
 
 class User(Base):
@@ -36,8 +24,6 @@ class User(Base):
     first_name = Column(String(64), default='')
     last_name = Column(String(64), default='')
     language_code = Column(String(10), default='en')
-
-    state = Column(String(64), default=UserState.NONE)
 
     last_active = Column(DateTime(), default=datetime.datetime.now)
     date_registered = Column(DateTime(), default=datetime.datetime.now)
@@ -76,10 +62,6 @@ class User(Base):
             return int(base64.b64decode(ref + '==='))
         except (binascii.Error, ValueError):
             return 0
-
-
-
-
 
 
 class MinesGameSettings(Base):

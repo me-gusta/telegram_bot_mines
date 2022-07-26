@@ -2,6 +2,7 @@ import datetime
 from typing import Union, List
 
 from aiogram import types
+from aiogram.utils.exceptions import BadRequest
 
 from bot import bot
 from core.config_loader import config
@@ -71,8 +72,11 @@ class MainMenu(Node):
                     self._logger.info(f'referer: {referrer}')
                     user.deposit_bonus = config.referral_deposit_bonus
                     user.referrer_user_id = referrer.user_id
-                await bot.send_message(chat_id=config.operator_id, text=f'New User\n'
-                                                                        f'user: {user}\n'
-                                                                        f'date: {user.date_registered}\n'
-                                                                        f'referrer: {referrer}')
+                try:
+                    await bot.send_message(chat_id=config.operator_id, text=f'New User\n'
+                                                                            f'user: {user}\n'
+                                                                            f'date: {user.date_registered}\n'
+                                                                            f'referrer: {referrer}')
+                except BadRequest as e:
+                    self._logger.error(f'Unable to send callback to operator: {e.args}')
         return

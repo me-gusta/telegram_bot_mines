@@ -7,18 +7,20 @@ import ujson
 from aiogram import types
 from aiogram.utils.exceptions import TelegramAPIError
 from pydantic import BaseModel
+from ujson import JSONDecodeError
 
 from bot import bot
+from core.aiogram_nodes.node import Node, TransitionButton, Button, ErrorNode
+from core.aiogram_nodes.util import get_current_user
+from core.aiogram_nodes.util import is_cq
 from core.config_loader import config
 from core.constants import CRYPTO_PAY_URL
 from core.pure import to_decimal
-from core.aiogram_nodes.node import Node, TransitionButton, Button, ErrorNode
-from core.aiogram_nodes.util import is_cq
-from db.engine import session
-from db.models import WithdrawRequest as WR
+from db.engine import dbs
+from db.helpers import get_user_by_user_id
+from db.models import WithdrawRequest as WR, PyObjectId
 from handlers_bot.nodes.confirm import Confirm
 from handlers_bot.nodes.decimal_input import DecimalInput
-from core.aiogram_nodes.util import get_current_user
 from i18n import _
 
 
@@ -27,32 +29,35 @@ class ConfirmWithdrawalAdmin(Node):
     only_admin = True
 
     class Props(BaseModel):
-        request_id: int = 0
+        r: str = '' # request_id
         msg: str = ''
 
     @property
     def title(self) -> str:
         return _('Confirm')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return self.props.msg
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         if not is_cq(update):
             pass
-        request: WR = session.query(WR).filter(WR.id == self.props.request_id).first()
-        if not request:
-            self._logger.error('cannot find request with id %s', self.props.request_id)
+        request_id = PyObjectId(self.props.r)
+        request_query = await dbs.withdraw_requests.find_one({'_id': request_id})
+        if not request_query:
+            self._logger.error('cannot find request with id %s', request_id)
             return ErrorNode(msg='Cannot find request')
+        request = WR(**request_query)
+        request_user = await get_user_by_user_id(request.user_id)
+
         if request.is_payed:
             self._logger.warn('request is paid %s', request)
             return ErrorNode(msg='request is paid')
-        if request.user.balance < request.amount:
+        if request_user.balance < request.amount:
             self._logger.warn('request is canceled. not enough funds %s', request)
             with suppress(TelegramAPIError):
                 await bot.send_message(
-                    chat_id=request.user.user_id,
+                    chat_id=request_user.user_id,
                     text=_('❌ Your withdrawal request has been declined.\n'
                            'Reason: not enough funds in your wallet'),
                     reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
@@ -60,29 +65,29 @@ class ConfirmWithdrawalAdmin(Node):
                     ]])
                 )
             return ErrorNode(msg=f'user has not enough funds\n'
-                                 f'balance: {request.user.balance}\n'
+                                 f'balance: {request_user.balance}\n'
                                  f'amount: {request.amount}')
-        if request.user.payed_games_played < 5:
+        if request_user.payed_games_played < 5:
             self._logger.warn('request is canceled. not enough payed_games_played %s', request)
             with suppress(TelegramAPIError):
                 await bot.send_message(
-                    chat_id=request.user.user_id,
+                    chat_id=request_user.user_id,
                     text=_('❌ Your withdrawal request has been declined.\n'
                            'Reason: you need to play at least 5 payed games to unlock withdrawals\n'
-                           'You played: {amount} games out of 5').format(amount=request.user.payed_games_played),
+                           'You played: {amount} games out of 5').format(amount=request_user.payed_games_played),
                     reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
                         TransitionButton(to_node='MainMenu', text='Main Menu').compile()
                     ]])
                 )
             return ErrorNode(msg=f'user has not enough payed games\n'
-                                 f'{request.user.payed_games_played}/5')
+                                 f'{request_user.payed_games_played}/5')
         headers = {
             'Crypto-Pay-API-Token': config.crypto_pay_token,
             'Content-Type': 'application/x-www-form-urlencoded'
         }
         data = {'asset': 'TON',
                 'amount': request.amount,
-                'user_id': request.user.user_id,
+                'user_id': request_user.user_id,
                 'spend_id': str(hash(str(request.spend_id) + '.Iasgfuih'))}
         async with aiohttp.ClientSession(headers=headers) as client_session:
             resp = await client_session.post(CRYPTO_PAY_URL + 'transfer', data=data)
@@ -92,7 +97,7 @@ class ConfirmWithdrawalAdmin(Node):
                 return ErrorNode(msg=f'Unable to transfer. response status: {resp.status}\n```{text}```')
         try:
             response_data = ujson.loads(text)
-        except ujson.JSONDecodeError:
+        except JSONDecodeError:
             self._logger.error('unable to decode: %s', text)
             return ErrorNode(msg=f'Unable to decode.\n```{text}```')
 
@@ -100,12 +105,14 @@ class ConfirmWithdrawalAdmin(Node):
             self._logger.error('transfer is not ok: %s', text)
             return ErrorNode(msg=f'Unable to transfer.\n```{text}```')
 
-        request.user.balance -= request.amount
+        request_user.balance -= request.amount
         request.is_payed = True
+        dbs.users.update_one({'_id': request_user.id},
+                             {'$set': request.dict()})
 
         with suppress(TelegramAPIError):
             await bot.send_message(
-                chat_id=request.user.user_id,
+                chat_id=request_user.user_id,
                 text=_('✅ Your withdrawal request has been processed.\n'
                        '{amount} 💎 sent to you wallet').format(amount=request.amount),
                 reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
@@ -123,8 +130,7 @@ class WithdrawRules(Node):
     def title(self) -> str:
         return _('About withdrawals')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('⚠ Withdrawals can take up to 24h\n'
                  '⚠ Minimum amount: 0.5 💎\n'
                  '⚠ Maximum amount: 1000 💎\n'
@@ -149,8 +155,7 @@ class WithdrawRequest(Node):
     def title(self) -> str:
         return _('Withdrawal Request')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('⚠ Your withdrawal request is being processed\n'
                  '⚠ Withdrawals can take up to 24h\n'
                  '⚠ Conversion rate: 1 💎 = 1 TON')
@@ -160,9 +165,9 @@ class WithdrawRequest(Node):
         if is_cq(update):
             self._logger.info('request withdraw: %s', amount)
         user = get_current_user()
-        request = WR(user=user, amount=amount)
-        session.add(request)
-        session.commit()
+        request = WR(user_id=user.user_id, amount=amount)
+        await dbs.withdraw_requests.insert_one(request.dict())
+
         await bot.send_message(
             chat_id=config.operator_id,
             text=f'New withdrawal request\n'
@@ -170,7 +175,8 @@ class WithdrawRequest(Node):
                  f'User balance: {user.balance}\n'
                  f'Amount:{request.amount}',
             reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
-                TransitionButton(to_node=ConfirmWithdrawalAdmin, props={'request_id': request.id}).compile()
+                TransitionButton(to_node=ConfirmWithdrawalAdmin,
+                                 props={'r': str(request.id)}).compile()
             ]])
         )
         return None

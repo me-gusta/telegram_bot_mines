@@ -20,8 +20,7 @@ class ReferralRules(Node):
     def title(self) -> str:
         return _('Referral Program Rules')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('Invite your friends and earn up to *15%* of their bets! '
                  'Your referrals will get +10% to their first deposit.\n\n') + _(
             'The more people use your invite code, the more percent from their bets you will get.\n'
@@ -67,8 +66,7 @@ class ReferralWithdraw(Node):
     def title(self) -> str:
         return _('Withdraw')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         msg = self.props.error_msg or _(
             '⚠ Your withdrawal request is being processed\n'
             '⚠ Withdrawals can take up to 24h\n'
@@ -77,7 +75,7 @@ class ReferralWithdraw(Node):
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         user = get_current_user()
-        share, sum_deposit, count = user_referral_stats(user)
+        share, sum_deposit, count = await user_referral_stats(user)
         if user.referral_balance <= 0:
             self.props.error_msg = '❌ ' + _('Nothing to withdraw')
             return
@@ -104,10 +102,9 @@ class Referral(Node):
     def title(self) -> str:
         return _('Referral Program')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         user = get_current_user()
-        share, sum_deposit, count = user_referral_stats(user)
+        share, sum_deposit, count = await user_referral_stats(user)
 
         return _('Invite your friends and earn up to *15%* of all their winning and losing bets! '
                  'Your referrals will get +10% to their first first deposit.\n\n'

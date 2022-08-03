@@ -23,8 +23,7 @@ class Confirm(Node):
     def header(self) -> str:
         return self.emoji + ' ' + _('Confirmation')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('Are you sure you want to {msg}?').format(msg=self.props.msg)
 
     @property

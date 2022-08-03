@@ -25,8 +25,7 @@ class Games(Node):
     def footer(self) -> str:
         return _('Choose a Game')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('💣 *Mines*: Uncover all diamonds to maximize your profit!\n'
                  '💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n'
                  '🚀 *Rocket Launch*: _[soon]_ Hop on a starship and earn up to x10000!\n\n'
@@ -35,7 +34,7 @@ class Games(Node):
     @property
     def buttons(self) -> List[List[Button]]:
         return [
-            [URLButton(text='💣 ' + _('Mines'), url=config.webapp_url, is_webapp=True)],
+            [URLButton(text='💣 ' + _('Mines'), url=config.webapps.mines, is_webapp=True)],
             [TransitionButton(to_node=Games, props={'show_alert': 1}, text='💸 ' + _('Coinflip'))],
             [TransitionButton(to_node=Games, props={'show_alert': 2}, text='🚀 ' + _('Rocket Launch'))]
         ]

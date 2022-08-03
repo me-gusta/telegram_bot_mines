@@ -35,8 +35,7 @@ class Settings(Node):
     def title(self) -> str:
         return _('Settings')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('You can customize bot settings here\n')
 
     @property

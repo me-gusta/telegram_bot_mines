@@ -6,13 +6,14 @@ import aiohttp
 import ujson
 from aiogram import types
 from pydantic import BaseModel
+from ujson import JSONDecodeError
 
 from core.aiogram_nodes.util import get_current_user
 from core.config_loader import config
 from core.constants import URL_ENG_GUIDE, CRYPTO_PAY_URL
 from core.pure import to_decimal
 from core.aiogram_nodes.node import Node, URLButton, Button, NullNode, ErrorNode
-from db.engine import session
+from db.engine import dbs
 from db.models import Invoice
 from handlers_bot.nodes.decimal_input import DecimalInput
 from i18n import _
@@ -35,8 +36,7 @@ class DepositCryptoBot(Node):
     def title(self) -> str:
         return _('Deposit via @CryptoBot')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return _('You are depositing {amount} TON to your wallet\n\n'
                  'To finish the payment:\n'
                  '1. Press "💳 Go to Payment"\n'
@@ -74,7 +74,7 @@ class DepositCryptoBot(Node):
             text = await resp.text()
         try:
             invoice_dict = ujson.loads(text)
-        except ujson.JSONDecodeError:
+        except JSONDecodeError:
             self._logger.error('unable to decode: %s', text)
             return ErrorNode(msg='Unable to deposit...')
 
@@ -82,8 +82,10 @@ class DepositCryptoBot(Node):
             self._logger.error('invoice is not ok: %s', text)
             return ErrorNode(msg='Unable to deposit...')
 
-        invoice = Invoice(user=get_current_user(), amount=amount, hash=invoice_dict['result']['hash'])
-        session.add(invoice)
+        invoice = Invoice(user_id=get_current_user().user_id,
+                          amount=amount,
+                          hash=invoice_dict['result']['hash'])
+        dbs.invoices.insert_one(invoice.dict())
         self._logger.info('new deposit invoice: %s', invoice)
         self.props.invoice_hash = invoice.hash
         return None

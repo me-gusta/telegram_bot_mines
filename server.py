@@ -8,14 +8,12 @@ from aiogram import Dispatcher, executor
 from aiohttp import web
 from aiohttp.web_exceptions import HTTPBadRequest, HTTPNotFound
 
-import handlers_server.api_mines as api
 from bot import bot
 from core.aiogram_nodes.debug_whitelist_middleware import DebugWhitelistMiddleware
 from core.aiogram_nodes.get_user_middleware import GetUserMiddleware
 from core.config_loader import config
 from core.constants import WEBHOOK_PATH, CRYPTO_PAY_WEBHOOK_PATH, BASE_DIR
 from core.logging_config import root_logger
-from db.engine import create_tables
 from core.aiogram_nodes.node import Node
 from core.aiogram_nodes.telegram_dispatcher import TelegramDispatcher
 from handlers_bot.fallback import setup as setup_fallback
@@ -46,12 +44,13 @@ def init_dispatcher() -> Dispatcher:
                 out.append(sub)
                 out.extend(_all_subclasses(sub))
             return out
+
         subclasses = list(set(_all_subclasses(cls)))
         subclasses.sort(key=lambda x: x.__name__)
         return subclasses
 
-    def import_node_dir(dir: Path, parent: str):
-        for path in dir.iterdir():
+    def import_node_dir(directory: Path, parent: str):
+        for path in directory.iterdir():
             if path.name.startswith('_'):
                 continue
             if path.is_dir():
@@ -121,15 +120,9 @@ def make_app(init_bot=False):
 
         root_logger.warning('Bye!')
 
-    async def startup_db(_: web.Application):
-        root_logger.info('Initializing database')
-        await create_tables()
-
     aiohttp_app = web.Application(middlewares=[cors_middleware])
     if config.debug:
         aiohttp_app.middlewares.insert(0, debug_middleware)
-
-    aiohttp_app.on_startup.append(startup_db)
 
     if init_bot:
         aiohttp_app.router.add_route('POST', WEBHOOK_PATH, webhooks.telegram_webhook)
@@ -140,20 +133,6 @@ def make_app(init_bot=False):
     root_logger.info('Initializing routes')
 
     aiohttp_app.router.add_route('POST', CRYPTO_PAY_WEBHOOK_PATH, webhooks.crypto_pay_webhook)
-
-    aiohttp_app.router.add_route('GET', '/test', api.index)
-
-    aiohttp_app.router.add_route('POST', '/getUser', api.GetUserApi)
-    aiohttp_app.router.add_route('OPTIONS', '/getUser', api.GetUserApi)
-
-    aiohttp_app.router.add_route('POST', '/newGame', api.NewGameApi)
-    aiohttp_app.router.add_route('OPTIONS', '/newGame', api.NewGameApi)
-
-    aiohttp_app.router.add_route('POST', '/revealCell', api.RevealCellApi)
-    aiohttp_app.router.add_route('OPTIONS', '/revealCell', api.RevealCellApi)
-
-    aiohttp_app.router.add_route('POST', '/cashout', api.CashoutApi)
-    aiohttp_app.router.add_route('OPTIONS', '/cashout', api.CashoutApi)
 
     return aiohttp_app
 

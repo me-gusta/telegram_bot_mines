@@ -1,9 +1,6 @@
-from typing import List, Union
+from typing import List
 
-from aiogram import types
-
-from core.aiogram_nodes.node import Node, TransitionButton, Button
-
+from core.aiogram_nodes.node import Node, Button
 
 
 class AdminMenu(Node):
@@ -15,8 +12,7 @@ class AdminMenu(Node):
     def title(self) -> str:
         return 'Admin Menu'
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         msg = 'admin menu'
         return msg
 

@@ -8,13 +8,6 @@ import hmac
 from core.constants import FILES_DIR
 
 
-class DB(BaseModel):
-    host: str
-    db_name: str
-    user: str
-    password: str
-
-
 class Wallet(BaseModel):
     min_deposit: Decimal
     max_deposit: Decimal
@@ -22,13 +15,21 @@ class Wallet(BaseModel):
     max_withdraw: Decimal
 
 
+class Game(BaseModel):
+    min_bet: Decimal
+    max_bet: Decimal
+
+class WebApps(BaseModel):
+    mines: str
+
 class Config(BaseModel):
-    db: DB
+    mongodb: str
     wallet: Wallet
+    webapps: WebApps
+    game: Game
     operator_id: int
     token: str
     crypto_pay_token: str
-    webapp_url: str
     server_name: str
 
     dev_mode: bool

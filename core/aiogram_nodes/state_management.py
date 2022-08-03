@@ -1,6 +1,7 @@
 from typing import Type, Dict
 
 import ujson
+from ujson import JSONDecodeError
 
 from core.constants import FILES_DIR
 
@@ -38,7 +39,7 @@ def load_states() -> Dict[str, int]:
     with open(FILES_DIR / STATE_MANAGEMENT_FILE_NAME, 'r') as f:
         try:
             return ujson.loads(f.read())
-        except ujson.JSONDecodeError:
+        except JSONDecodeError:
             return {}
 
 

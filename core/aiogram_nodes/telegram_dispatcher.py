@@ -1,14 +1,9 @@
-import binascii
 import traceback
-import typing
 from typing import TypeVar, Type
 
-import ujson
 from aiogram import Dispatcher, types
 
-from core.logging_config import root_logger
 from db.models import User
-from core.aiogram_nodes.util import decode_callback_data
 
 T = TypeVar('T')
 
@@ -22,7 +17,11 @@ class TelegramDispatcher(Dispatcher):
         super().__init__(bot)
 
     async def process_update(self, update: types.Update):
-        await super(TelegramDispatcher, self).process_update(update)
+        try:
+            await super(TelegramDispatcher, self).process_update(update)
+        except Exception:
+            traceback.print_exc()
+            exit()
 
     @classmethod
     def get_current(cls: Type[T], no_error=True) -> T:

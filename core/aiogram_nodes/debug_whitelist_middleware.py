@@ -1,13 +1,12 @@
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.middlewares import BaseMiddleware
 
-
 from bot import bot
 from core.aiogram_nodes.util import get_current_user
 from core.config_loader import config
 from core.logging_config import root_logger
-from db.helpers import get_or_create_user
 from i18n import _
+
 
 class DebugWhitelistMiddleware(BaseMiddleware):
     logger = root_logger.getChild('DebugWhitelistMiddleware')

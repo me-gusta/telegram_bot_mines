@@ -19,7 +19,6 @@ class GetUserMiddleware(BaseMiddleware):
         else:
             self.logger.error('Cannot extract user.')
             raise ValueError('Cannot extract user.')
-
         user = await get_or_create_user(user_data)
 
         dp = Dispatcher.get_current()

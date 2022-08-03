@@ -8,11 +8,11 @@ from pydantic import BaseModel
 from core.config_loader import config
 from core.constants import URL_SUPPORT
 from core.logging_config import root_logger
-from db.engine import session
 from core.aiogram_nodes.telegram_dispatcher import TelegramDispatcher
 from core.aiogram_nodes.util import encode_callback_data, decode_callback_data, is_msg, is_cq, \
     get_current_user
 from core.aiogram_nodes.state_management import StateManager
+from db.engine import dbs
 from i18n import _
 
 
@@ -145,8 +145,7 @@ class Node:
     def footer(self) -> str:
         return _('Choose an Option')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         return ''
 
     @property
@@ -193,7 +192,8 @@ class Node:
                 switch_node = NullNode()
             else:
                 switch_node = await self.process(update)
-            session.commit()
+
+            dbs.users.update_one({'_id': user.id}, {'$set': user.dict()})
 
             # switch
             if switch_node:
@@ -206,7 +206,7 @@ class Node:
                 return
 
             # compile
-            text = self._compile_text()
+            text = await self._compile_text()
             markup = self._compile_markup()
             # reset
             self.props = self.Props()
@@ -233,12 +233,12 @@ class Node:
 
         return _dispatch
 
-    def _compile_text(self):
+    async def _compile_text(self):
         """
         :return: Compiled text to be rendered to user
         """
         text = f'*{self.header}*\n\n' if self.show_header else ''
-        text += f'{self.text}'
+        text += f'{await self.text()}'
         text += f'\n\n*{self.footer}*' if self.show_footer else ''
         return text
 
@@ -279,8 +279,7 @@ class ErrorNode(Node):
     def title(self) -> str:
         return _('Something went wrong....')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         msg = self.props.msg + '\n\n' if self.props.msg else ''
         return msg + _('Please contact our support for details or try again.')
 

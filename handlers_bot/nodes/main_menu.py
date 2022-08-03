@@ -5,18 +5,18 @@ from aiogram import types
 from aiogram.utils.exceptions import BadRequest
 
 from bot import bot
+from core.aiogram_nodes.node import Node, Button, TransitionButton, URLButton
+from core.aiogram_nodes.util import get_current_user
+from core.aiogram_nodes.util import is_msg
 from core.config_loader import config
 from core.constants import URL_NEWS, URL_SUPPORT
-from db.engine import session
+from db.helpers import get_user_by_user_id
 from db.models import User
-from core.aiogram_nodes.node import Node, Button, TransitionButton, URLButton
-from core.aiogram_nodes.util import is_msg
 from handlers_bot.nodes.games import Games
 from handlers_bot.nodes.referral import Referral
 from handlers_bot.nodes.settings import Settings
 from handlers_bot.nodes.wallet.deposit import CryptoBotDI
 from handlers_bot.nodes.wallet.withdraw import WithdrawDI
-from core.aiogram_nodes.util import get_current_user
 from i18n import _
 
 
@@ -38,8 +38,7 @@ class MainMenu(Node):
     def title(self) -> str:
         return _('Main Menu')
 
-    @property
-    def text(self) -> str:
+    async def text(self) -> str:
         user = get_current_user()
         msg = _('🖐 {welcome}, {name}!\n'
                 '👛 Your balance: {balance} 💎').format(
@@ -66,8 +65,9 @@ class MainMenu(Node):
             user = get_current_user()
             if user.last_active < user.date_registered + datetime.timedelta(seconds=2):
                 referrer_id = User.ref_decode(update.get_args())
-                self._logger.info('new user')
-                referrer: User = session.query(User).filter(User.user_id == referrer_id).first()
+                self._logger.info('new user. decoded ref: %s', referrer_id)
+                referrer = await get_user_by_user_id(referrer_id)
+
                 if referrer:
                     self._logger.info(f'referer: {referrer}')
                     user.deposit_bonus = config.referral_deposit_bonus

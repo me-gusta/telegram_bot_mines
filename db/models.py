@@ -1,52 +1,95 @@
+import asyncio
 import base64
 import binascii
-import datetime
-import enum
 import random
+from datetime import datetime
 from decimal import Decimal, ROUND_DOWN
-from functools import cached_property
-from typing import List, Union
+from typing import Union, Optional
 
-import ujson
-from sqlalchemy import Column, BigInteger, String, ForeignKey, DECIMAL, Enum, Integer, DateTime, Boolean
-from sqlalchemy.orm import relationship, backref, declarative_base
+from aiogram import types
+from bson import ObjectId
+from pydantic import BaseModel, Field
 
-Base = declarative_base()
-
+from core.pure import to_decimal
 
 
+class PyObjectId(ObjectId):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
 
-class User(Base):
-    __tablename__ = 'user'
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    user_id = Column(BigInteger, unique=True)
-    username = Column(String(32), default='')
-    first_name = Column(String(64), default='')
-    last_name = Column(String(64), default='')
-    language_code = Column(String(10), default='en')
+    @classmethod
+    def validate(cls, v):
+        if not ObjectId.is_valid(v):
+            raise ValueError("Invalid ObjectId value")
+        return ObjectId(v)
 
-    last_active = Column(DateTime(), default=datetime.datetime.now)
-    date_registered = Column(DateTime(), default=datetime.datetime.now)
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type="string")
 
-    balance = Column(DECIMAL, default=0)
-    deposit_bonus = Column(Integer, default=0)
 
-    referrer_user_id = Column(BigInteger, default=0)
-    referral_balance = Column(DECIMAL, default=0)
+class MongoModel(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
-    sum_deposit = Column(DECIMAL, default=0)
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: int}
+        use_enum_values = True
 
-    payed_games_played = Column(Integer, default=0)
+    def dict(self, *args, **kwargs):
+        kwargs.setdefault('by_alias', True)
+        return super(MongoModel, self).dict(*args, **kwargs)
 
-    def __repr__(self):
+
+class User(MongoModel):
+    user_id: int
+    first_name: str
+    last_name: Optional[str]
+    username: Optional[str]
+    language_code: str = 'en'
+
+    last_active: datetime = datetime.now()
+    date_registered: datetime = datetime.now()
+
+    balance: Decimal = to_decimal(0)
+    deposit_bonus: Decimal = to_decimal(0)
+
+    referrer_user_id: int = 0
+    referral_balance: Decimal = to_decimal(0)
+
+    sum_deposit: Decimal = to_decimal(0)
+
+    payed_games_played: int = 0
+
+    state: str = 0
+    menu_message_id: int = 0
+
+    @classmethod
+    def from_telegram(cls, u: types.User):
+        data = u.to_python()
+        data['user_id'] = data['id']
+        del data['id']
+        return cls(**data)
+
+    def __str__(self):
+        short_id = str(self.id)[:4:]
         if self.username:
-            return f'<User {self.id} @{self.username}>'
+            return f'<User {short_id} @{self.username}>'
         else:
-            return f'<User {self.id}>'
+            return f'<User {short_id} {self.full_name}>'
+
+    @property
+    def full_name(self):
+        name = self.first_name
+        if self.last_name:
+            name += ' ' + self.last_name
+        return name
 
     def change_balance(self, n: Union[float, Decimal]):
-        value = Decimal(str(n)) if isinstance(n, float) else n
-        total = Decimal(str(self.balance)) + value
+        value = to_decimal(n)
+        total = self.balance + value
         total = total.quantize(Decimal('.01'), rounding=ROUND_DOWN)
         self.balance = total
 
@@ -64,82 +107,45 @@ class User(Base):
             return 0
 
 
-class MinesGameSettings(Base):
-    __tablename__ = 'mines_game_settings'
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User', backref=backref('mines_game_settings', uselist=False))
-    last_bet = Column(DECIMAL, default=1)
-    last_mines = Column(Integer, default=1)
+class MinesGamePreference(MongoModel):
+    # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    user_id: int
+    last_bet: Decimal = 1
+    last_mines: int = 1
 
     def __str__(self) -> str:
-        return f'<MGS {self.last_bet}>'
-
-    def dict(self):
-        return {'last_bet': self.last_bet, 'last_mines': self.last_mines}
+        return f'<MGS {self.id}>'
 
 
-class MinesGameStatus(enum.Enum):
-    WON = 'won'
-    LOST = 'lost'
-    RUNNING = 'running'
-    CASHOUT = 'cashout'
-
-
-class MinesGame(Base):
-    __tablename__ = 'mines_game'
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
-    bet = Column(DECIMAL)
-    check_string = Column(String(255))
-    hash = Column(String(255))
-    mines_json = Column(String(255))
-    revealed_json = Column(String(255), default='[]')
-    status = Column(Enum(MinesGameStatus), default=MinesGameStatus.RUNNING)
-    date = Column(DateTime, default=datetime.datetime.now())
-
-    @cached_property
-    def mines(self):
-        return ujson.loads(self.mines_json)
-
-    @property
-    def revealed(self):
-        if not hasattr(self, '_revealed'):
-            self._revealed = ujson.loads(self.revealed_json)
-        return self._revealed
-
-    def set_revealed(self, revealed: List[int]):
-        if hasattr(self, '_revealed'):
-            del self._revealed
-        self.revealed_json = ujson.dumps(revealed)
-
-    def __str__(self) -> str:
-        return f'<Mines {self.id}>'
-
-
-class Invoice(Base):
-    __tablename__ = 'invoice'
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
-    amount = Column(DECIMAL)
-    hash = Column(String(32))
-    is_payed = Column(Boolean, default=False)
+class Invoice(MongoModel):
+    # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    user_id: int
+    amount: Decimal
+    hash: str
+    is_payed: bool = False
 
     def __repr__(self):
         return f'<Invoice {self.id} {self.amount}>'
 
 
+class WithdrawRequest(MongoModel):
+    # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    user_id: int
+    amount: Decimal
+    is_payed: bool = False
+    date: datetime = datetime.now()
+    spend_id: str = random.randbytes(8).hex()
 
 
+async def lol():
+    from db.helpers import get_or_create_user
+    u = {'id': 429531850433, 'first_name': 'Maxim', 'username': 'nacevd'}
+    tg_user = types.User(**u)
 
-class WithdrawRequest(Base):
-    __tablename__ = 'withdraw_request'
-    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
-    amount = Column(DECIMAL)
-    is_payed = Column(Boolean, default=False)
-    date = Column(DateTime(), default=datetime.datetime.now)
-    spend_id = Column(String, default=random.randbytes(8).hex())
+    db_user = await get_or_create_user(tg_user)
+    print(dict(db_user))
+    print(db_user.id.generation_time)
+
+
+if __name__ == '__main__':
+    asyncio.run(lol())

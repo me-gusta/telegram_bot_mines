@@ -4,9 +4,8 @@ from aiogram import types
 from aiogram.utils.exceptions import MessageNotModified
 
 from core.aiogram_nodes.node import Shortcuts
-from core.aiogram_nodes.state_management import StateManager
 from core.aiogram_nodes.telegram_dispatcher import TelegramDispatcher
-from core.aiogram_nodes.util import decode_callback_data, encode_callback_data
+from core.aiogram_nodes.util import encode_callback_data
 from handlers_bot.nodes.main_menu import MainMenu
 from i18n import _
 

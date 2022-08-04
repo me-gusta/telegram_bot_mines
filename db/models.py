@@ -74,7 +74,7 @@ class User(MongoModel):
         return cls(**data)
 
     def __str__(self):
-        short_id = str(self.id)[:4:]
+        short_id = str(self.id)[-4::]
         if self.username:
             return f'<User {short_id} @{self.username}>'
         else:

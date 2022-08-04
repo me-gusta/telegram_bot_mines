@@ -56,14 +56,14 @@ async def crypto_pay_webhook(request: web.Request):
     ]
 
     invoice.is_payed = True
-    amount = to_decimal(invoice.amount)
+    amount = invoice.amount
     admin_bonus_text = ''
     if invoice_user.deposit_bonus:
-        bonus = (amount / 100 * to_decimal(invoice_user.deposit_bonus))
+        bonus = (amount / 100 * invoice_user.deposit_bonus)
         admin_bonus_text = f'\n\ndeposit bonus activated. User got {bonus} free TON'
         amount += bonus
         invoice_user.deposit_bonus = to_decimal(0)
-
+    amount = to_decimal(amount)
     invoice_user.balance += amount
     invoice_user.sum_deposit += invoice.amount
 

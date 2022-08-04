@@ -36,7 +36,7 @@ async def crypto_pay_webhook(request: web.Request):
     if update.get('update_type') != 'invoice_paid' or update['payload'].get('status') != 'paid':
         return Response(text='not ok')
     invoice_hash = update['payload']['hash']
-    invoice_query = dbs.invoices.find_one({'hash': invoice_hash})
+    invoice_query = await dbs.invoices.find_one({'hash': invoice_hash})
     if invoice_query is None:
         return Response(text='ok')
 

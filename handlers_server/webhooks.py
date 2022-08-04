@@ -50,7 +50,6 @@ async def crypto_pay_webhook(request: web.Request):
         root_logger.error('user not found')
         return Response(text='ok')
 
-    text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=invoice.amount)
     buttons = [
         [TransitionButton(to_node=MainMenu).compile()],
         [TransitionButton(to_node=Games).compile()]
@@ -68,25 +67,21 @@ async def crypto_pay_webhook(request: web.Request):
     invoice_user.balance += amount
     invoice_user.sum_deposit += invoice.amount
 
-    await dbs.invoices.update_one({'_id': invoice_user.id}, {'$set': {
-        'balance': invoice_user.balance,
-        'sum_deposit': invoice_user.sum_deposit,
-        'deposit_bonus': invoice_user.deposit_bonus
-    }})
+    await dbs.users.update_one({'_id': invoice_user.id}, {'$set': invoice_user.dict()})
 
     await dbs.invoices.update_one({'_id': invoice.id}, {'$set': invoice.dict()})
+
+    text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=amount)
     with suppress(TelegramAPIError):
         await bot.send_message(
-                text=text,
-                chat_id=invoice_user.user_id,
-                parse_mode='markdown',
-                reply_markup=types.InlineKeyboardMarkup(1, buttons),
-            )
+            text=text,
+            chat_id=invoice_user.user_id,
+            parse_mode='markdown',
+            reply_markup=types.InlineKeyboardMarkup(1, buttons),
+        )
         await bot.send_message(config.operator_id,
                                text=f'DEPOSIT\n'
                                     f'user: {invoice_user}\n'
                                     f'amount: {invoice.amount}'
                                     f'{admin_bonus_text}')
     return Response(text='ok')
-
-

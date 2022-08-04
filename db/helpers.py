@@ -26,6 +26,7 @@ async def get_or_create_user(tg_user: types.User) -> User:
     update_data = tg_user.to_python()
     del update_data['id']
     del update_data['is_bot']
+    del update_data['language_code']
     update_data['last_active'] = datetime.now()
     db_user = await dbs.users.find_one_and_update({'user_id': tg_user.id},
                                                   {'$set': update_data},

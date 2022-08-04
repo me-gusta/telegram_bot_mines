@@ -73,11 +73,11 @@ async def crypto_pay_webhook(request: web.Request):
                 parse_mode='markdown',
                 reply_markup=types.InlineKeyboardMarkup(1, buttons),
             )
-    await bot.send_message(config.operator_id,
-                           text=f'DEPOSIT\n'
-                                f'user: {invoice_user}\n'
-                                f'amount: {invoice.amount}'
-                                f'{admin_bonus_text}')
+        await bot.send_message(config.operator_id,
+                               text=f'DEPOSIT\n'
+                                    f'user: {invoice_user}\n'
+                                    f'amount: {invoice.amount}'
+                                    f'{admin_bonus_text}')
     return Response(text='ok')
 
 

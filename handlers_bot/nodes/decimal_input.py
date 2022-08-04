@@ -55,7 +55,6 @@ class DecimalInput(Node):
         ]
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
-        print(update)
         if is_msg(update):
             await update.delete()
             self._logger.info('got new input. text = %s', update.text)

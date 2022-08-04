@@ -17,11 +17,7 @@ class TelegramDispatcher(Dispatcher):
         super().__init__(bot)
 
     async def process_update(self, update: types.Update):
-        try:
-            await super(TelegramDispatcher, self).process_update(update)
-        except Exception:
-            traceback.print_exc()
-            exit()
+        await super(TelegramDispatcher, self).process_update(update)
 
     @classmethod
     def get_current(cls: Type[T], no_error=True) -> T:

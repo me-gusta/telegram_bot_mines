@@ -7,7 +7,6 @@ from i18n import _
 async def inline_query_referral(query: types.InlineQuery):
     user = get_current_user()
     text = _('🍀 Try your luck and win TON with me!\n') + 'https://t.me/LuckyTonBot?start=' + user.ref
-    print(text)
     results = [
         types.InlineQueryResultArticle(
             id='result',

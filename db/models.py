@@ -136,16 +136,3 @@ class WithdrawRequest(MongoModel):
     date: datetime = datetime.now()
     spend_id: str = random.randbytes(8).hex()
 
-
-async def lol():
-    from db.helpers import get_or_create_user
-    u = {'id': 429531850433, 'first_name': 'Maxim', 'username': 'nacevd'}
-    tg_user = types.User(**u)
-
-    db_user = await get_or_create_user(tg_user)
-    print(dict(db_user))
-    print(db_user.id.generation_time)
-
-
-if __name__ == '__main__':
-    asyncio.run(lol())

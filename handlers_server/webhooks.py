@@ -46,6 +46,9 @@ async def crypto_pay_webhook(request: web.Request):
     root_logger.info(f'crypto_pay_webhook; {invoice=}')
     if invoice.is_payed:
         return Response(text='ok')
+    if not invoice_user:
+        root_logger.error('user not found')
+        return Response(text='ok')
 
     text = _('You deposited {amount} 💎 to you wallet!\n\n').format(amount=invoice.amount)
     buttons = [
@@ -59,13 +62,19 @@ async def crypto_pay_webhook(request: web.Request):
     if invoice_user.deposit_bonus:
         bonus = (amount / 100 * to_decimal(invoice_user.deposit_bonus))
         admin_bonus_text = f'\n\ndeposit bonus activated. User got {bonus} free TON'
-        amount = amount
+        amount += bonus
+        invoice_user.deposit_bonus = to_decimal(0)
+
     invoice_user.balance += amount
     invoice_user.sum_deposit += invoice.amount
 
-    await dbs.invoices.update_one({'_id': invoice_user.id}, {'$set': invoice_user.dict()})
+    await dbs.invoices.update_one({'_id': invoice_user.id}, {'$set': {
+        'balance': invoice_user.balance,
+        'sum_deposit': invoice_user.sum_deposit,
+        'deposit_bonus': invoice_user.deposit_bonus
+    }})
 
-    dbs.invoices.update_one({'_id': invoice.id}, {'$set': invoice.dict()})
+    await dbs.invoices.update_one({'_id': invoice.id}, {'$set': invoice.dict()})
     with suppress(TelegramAPIError):
         await bot.send_message(
                 text=text,

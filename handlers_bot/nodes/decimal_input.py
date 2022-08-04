@@ -20,7 +20,7 @@ class DecimalInput(Node):
     on_text = True
 
     class Props(BaseModel):
-        amounts: List[List[Decimal]] = [[to_decimal(1), to_decimal(10)], [to_decimal(50), to_decimal(100)]]
+        amounts: List[List[Decimal]] = [[to_decimal(5), to_decimal(10)], [to_decimal(50), to_decimal(100)]]
         amount: Decimal = 0
         error_msg: str = ''
 

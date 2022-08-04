@@ -29,7 +29,7 @@ class ConfirmWithdrawalAdmin(Node):
     only_admin = True
 
     class Props(BaseModel):
-        r: str = '' # request_id
+        r: str = ''
         msg: str = ''
 
     @property
@@ -107,8 +107,10 @@ class ConfirmWithdrawalAdmin(Node):
 
         request_user.balance -= request.amount
         request.is_payed = True
-        dbs.users.update_one({'_id': request_user.id},
-                             {'$set': request.dict()})
+        await dbs.users.update_one({'_id': request_user.id},
+                                   {'$set': request_user.dict()})
+        await dbs.withdraw_requests.update_one({'_id': request.id},
+                                               {'$set': request.dict()})
 
         with suppress(TelegramAPIError):
             await bot.send_message(

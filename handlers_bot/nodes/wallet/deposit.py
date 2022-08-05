@@ -85,7 +85,7 @@ class DepositCryptoBot(Node):
         invoice = Invoice(user_id=get_current_user().user_id,
                           amount=amount,
                           hash=invoice_dict['result']['hash'])
-        dbs.invoices.insert_one(invoice.dict())
+        await dbs.invoices.insert_one(invoice.dict())
         self._logger.info('new deposit invoice: %s', invoice)
         self.props.invoice_hash = invoice.hash
         return None

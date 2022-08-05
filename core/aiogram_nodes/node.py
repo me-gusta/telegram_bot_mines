@@ -193,7 +193,7 @@ class Node:
             else:
                 switch_node = await self.process(update)
 
-            dbs.users.update_one({'_id': user.id}, {'$set': user.dict()})
+            await dbs.users.update_one({'_id': user.id}, {'$set': user.dict()})
 
             # switch
             if switch_node:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-29 22:32+0300\n"
+"POT-Creation-Date: 2022-08-19 20:59+0400\n"
 "PO-Revision-Date: 2022-06-04 21:55+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: core/aiogram_nodes/debug_whitelist_middleware.py:20
+#: core/aiogram_nodes/debug_whitelist_middleware.py:19
 msgid ""
 "🆕 We are updating the bot now.\n"
 "⏰ Please try again later.\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Choose an Option"
 msgstr ""
 
-#: core/aiogram_nodes/node.py:167 handlers_bot/nodes/main_menu.py:37
+#: core/aiogram_nodes/node.py:166 handlers_bot/nodes/main_menu.py:39
 msgid "Main Menu"
 msgstr ""
 
@@ -43,15 +43,15 @@ msgstr ""
 msgid "Something went wrong...."
 msgstr ""
 
-#: core/aiogram_nodes/node.py:285
+#: core/aiogram_nodes/node.py:284
 msgid "Please contact our support for details or try again."
 msgstr ""
 
-#: core/aiogram_nodes/node.py:290 handlers_bot/nodes/main_menu.py:58
+#: core/aiogram_nodes/node.py:289 handlers_bot/nodes/main_menu.py:59
 msgid "Support"
 msgstr ""
 
-#: handlers_bot/fallback.py:15
+#: handlers_bot/fallback.py:14
 msgid ""
 "😐 *Oops....*\n"
 "Something unexpected happened."
@@ -61,7 +61,7 @@ msgstr ""
 msgid "🍀 Try your luck and win TON with me!\n"
 msgstr ""
 
-#: handlers_bot/inline_queries.py:14
+#: handlers_bot/inline_queries.py:13
 msgid "Invite Friend"
 msgstr ""
 
@@ -69,11 +69,11 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: handlers_bot/nodes/confirm.py:28
+#: handlers_bot/nodes/confirm.py:27
 msgid "Are you sure you want to {msg}?"
 msgstr ""
 
-#: handlers_bot/nodes/confirm.py:33 handlers_bot/nodes/wallet/withdraw.py:35
+#: handlers_bot/nodes/confirm.py:32 handlers_bot/nodes/wallet/withdraw.py:37
 msgid "Confirm"
 msgstr ""
 
@@ -85,22 +85,22 @@ msgstr ""
 msgid "----"
 msgstr ""
 
-#: handlers_bot/nodes/decimal_input.py:37
+#: handlers_bot/nodes/decimal_input.py:36
 msgid ""
 "{error}{text}Limits:\n"
 "• Minimum: {min}\n"
 "• Maximum: {max}"
 msgstr ""
 
-#: handlers_bot/nodes/decimal_input.py:65
+#: handlers_bot/nodes/decimal_input.py:64
 msgid "The entered value is not a number."
 msgstr ""
 
-#: handlers_bot/nodes/decimal_input.py:69
+#: handlers_bot/nodes/decimal_input.py:68
 msgid "The entered number is less than the minimum."
 msgstr ""
 
-#: handlers_bot/nodes/decimal_input.py:72
+#: handlers_bot/nodes/decimal_input.py:71
 msgid "The entered number is greater than the maximum."
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Choose a Game"
 msgstr ""
 
-#: handlers_bot/nodes/games.py:30
+#: handlers_bot/nodes/games.py:29
 msgid ""
 "💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
 "💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n"
@@ -121,7 +121,7 @@ msgid ""
 "_You can play every game for free if you set your bet to 0_"
 msgstr ""
 
-#: handlers_bot/nodes/games.py:38
+#: handlers_bot/nodes/games.py:37
 msgid "Mines"
 msgstr ""
 
@@ -139,38 +139,38 @@ msgid ""
 "notified!"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:23 handlers_bot/nodes/main_menu.py:25
-#: handlers_bot/nodes/main_menu.py:28 handlers_bot/nodes/main_menu.py:44
+#: handlers_bot/nodes/main_menu.py:25 handlers_bot/nodes/main_menu.py:27
+#: handlers_bot/nodes/main_menu.py:30 handlers_bot/nodes/main_menu.py:45
 msgid "hello"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:24 handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:26 handlers_bot/nodes/main_menu.py:27
 msgid "you look great today"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:24 handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:26 handlers_bot/nodes/main_menu.py:27
 msgid "nice to see you again"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:27
 msgid "have a nice day"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:26
+#: handlers_bot/nodes/main_menu.py:28
 msgid "good luck"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:42
+#: handlers_bot/nodes/main_menu.py:43
 msgid ""
 "🖐 {welcome}, {name}!\n"
 "👛 Your balance: {balance} 💎"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:49
+#: handlers_bot/nodes/main_menu.py:50
 msgid "*You have deposit bonus +{bonus}%*"
 msgstr ""
 
-#: handlers_bot/nodes/main_menu.py:58
+#: handlers_bot/nodes/main_menu.py:59
 msgid "News"
 msgstr ""
 
@@ -178,14 +178,14 @@ msgstr ""
 msgid "Referral Program Rules"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:25
+#: handlers_bot/nodes/referral.py:24
 msgid ""
 "Invite your friends and earn up to *15%* of their bets! Your referrals "
 "will get +10% to their first deposit.\n"
 "\n"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:26
+#: handlers_bot/nodes/referral.py:25
 msgid ""
 "The more people use your invite code, the more percent from their bets "
 "you will get.\n"
@@ -199,7 +199,7 @@ msgid ""
 "10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:35
+#: handlers_bot/nodes/referral.py:34
 msgid ""
 "_Active referral is someone who plays at least once a week_\n"
 "_Cheating, botting and other malicious actions related to the referral "
@@ -209,40 +209,40 @@ msgid ""
 "us. We can discuss special referral program with a bigger share up to 15%"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:44
+#: handlers_bot/nodes/referral.py:43
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:55
+#: handlers_bot/nodes/referral.py:54
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:68 handlers_bot/nodes/wallet/withdraw.py:189
+#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:197
 msgid "Withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:72 handlers_bot/nodes/wallet/withdraw.py:154
+#: handlers_bot/nodes/referral.py:70 handlers_bot/nodes/wallet/withdraw.py:161
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Conversion rate: 1 💎 = 1 TON"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:82
+#: handlers_bot/nodes/referral.py:80
 msgid "Nothing to withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:85
+#: handlers_bot/nodes/referral.py:83
 msgid ""
 "You can not withdraw your referrals balance until you invite 5 active "
 "referrals."
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:105
+#: handlers_bot/nodes/referral.py:103
 msgid "Referral Program"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:112
+#: handlers_bot/nodes/referral.py:109
 msgid ""
 "Invite your friends and earn up to *15%* of all their winning and losing "
 "bets! Your referrals will get +10% to their first first deposit.\n"
@@ -259,16 +259,16 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: handlers_bot/nodes/settings.py:40
+#: handlers_bot/nodes/settings.py:39
 msgid "You can customize bot settings here\n"
 msgstr ""
 
-#: handlers_bot/nodes/settings.py:46
+#: handlers_bot/nodes/settings.py:45
 msgid "Change Language"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:36
-#: handlers_bot/nodes/wallet/deposit.py:107
+#: handlers_bot/nodes/wallet/deposit.py:37
+#: handlers_bot/nodes/wallet/deposit.py:109
 msgid "Deposit via @CryptoBot"
 msgstr ""
 
@@ -286,52 +286,52 @@ msgstr ""
 msgid "Go to Payment"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:103
+#: handlers_bot/nodes/wallet/deposit.py:105
 msgid "Deposit"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:111
+#: handlers_bot/nodes/wallet/deposit.py:113
 msgid "Please enter or choose the amount for deposit."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:115
+#: handlers_bot/nodes/wallet/deposit.py:117
 msgid "deposit {amount} TON"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:119
+#: handlers_bot/nodes/wallet/deposit.py:121
 msgid ""
 "⚠ Right now we only accept deposit via @CryptoBot\n"
 "⚠ Conversion rate: 1 TON = 1 💎"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/deposit.py:128
+#: handlers_bot/nodes/wallet/deposit.py:130
 msgid "ℹ How to use @CryptoBot"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:56
+#: handlers_bot/nodes/wallet/withdraw.py:61
 msgid ""
 "❌ Your withdrawal request has been declined.\n"
 "Reason: not enough funds in your wallet"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:70
+#: handlers_bot/nodes/wallet/withdraw.py:75
 msgid ""
 "❌ Your withdrawal request has been declined.\n"
 "Reason: you need to play at least 5 payed games to unlock withdrawals\n"
 "You played: {amount} games out of 5"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:109
+#: handlers_bot/nodes/wallet/withdraw.py:118
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:124
+#: handlers_bot/nodes/wallet/withdraw.py:133
 msgid "About withdrawals"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:128
+#: handlers_bot/nodes/wallet/withdraw.py:136
 msgid ""
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Minimum amount: 0.5 💎\n"
@@ -340,31 +340,31 @@ msgid ""
 "⚠ You can still use your funds while withdrawal request is pending\n"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:150
+#: handlers_bot/nodes/wallet/withdraw.py:158
 msgid "Withdrawal Request"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:193
+#: handlers_bot/nodes/wallet/withdraw.py:201
 msgid "Please enter or choose the amount for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:197
+#: handlers_bot/nodes/wallet/withdraw.py:205
 msgid "withdraw {amount} TON"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:201
+#: handlers_bot/nodes/wallet/withdraw.py:209
 msgid "👛 Your Balance: {balance} 💎"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:219
+#: handlers_bot/nodes/wallet/withdraw.py:227
 msgid "Sorry, your balance is less than the required minimum for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:223
+#: handlers_bot/nodes/wallet/withdraw.py:231
 msgid "Your balance is less than the entered amount"
 msgstr ""
 
-#: handlers_server/webhooks.py:40
+#: handlers_server/webhooks.py:74
 msgid ""
 "You deposited {amount} 💎 to you wallet!\n"
 "\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-29 22:32+0300\n"
+"POT-Creation-Date: 2022-08-19 20:59+0400\n"
 "PO-Revision-Date: 2022-06-04 22:02+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: core/aiogram_nodes/debug_whitelist_middleware.py:20
+#: core/aiogram_nodes/debug_whitelist_middleware.py:19
 msgid ""
 "🆕 We are updating the bot now.\n"
 "⏰ Please try again later.\n"
@@ -41,7 +41,7 @@ msgstr "Назад"
 msgid "Choose an Option"
 msgstr "Выберите пункт"
 
-#: core/aiogram_nodes/node.py:167 handlers_bot/nodes/main_menu.py:37
+#: core/aiogram_nodes/node.py:166 handlers_bot/nodes/main_menu.py:39
 msgid "Main Menu"
 msgstr "Главное Меню"
 
@@ -49,17 +49,17 @@ msgstr "Главное Меню"
 msgid "Something went wrong...."
 msgstr ""
 
-#: core/aiogram_nodes/node.py:285
+#: core/aiogram_nodes/node.py:284
 msgid "Please contact our support for details or try again."
 msgstr ""
 "Пожалуйста, свяжитесь с нашей службой поддержки для получения более "
 "подробной информации или повторите попытку."
 
-#: core/aiogram_nodes/node.py:290 handlers_bot/nodes/main_menu.py:58
+#: core/aiogram_nodes/node.py:289 handlers_bot/nodes/main_menu.py:59
 msgid "Support"
 msgstr "Поддержка"
 
-#: handlers_bot/fallback.py:15
+#: handlers_bot/fallback.py:14
 msgid ""
 "😐 *Oops....*\n"
 "Something unexpected happened."
@@ -71,7 +71,7 @@ msgstr ""
 msgid "🍀 Try your luck and win TON with me!\n"
 msgstr "🍀 Испытай свою удачу и выигрывай криптовалюту TON вместе со мной!\n"
 
-#: handlers_bot/inline_queries.py:14
+#: handlers_bot/inline_queries.py:13
 msgid "Invite Friend"
 msgstr "Пригласить друга"
 
@@ -79,11 +79,11 @@ msgstr "Пригласить друга"
 msgid "Confirmation"
 msgstr "Подтвердить"
 
-#: handlers_bot/nodes/confirm.py:28
+#: handlers_bot/nodes/confirm.py:27
 msgid "Are you sure you want to {msg}?"
-msgstr "Вы уверены, что хотите {msg}"
+msgstr "Вы уверены, что хотите {msg}?"
 
-#: handlers_bot/nodes/confirm.py:33 handlers_bot/nodes/wallet/withdraw.py:35
+#: handlers_bot/nodes/confirm.py:32 handlers_bot/nodes/wallet/withdraw.py:37
 msgid "Confirm"
 msgstr "Подтвердить"
 
@@ -95,7 +95,7 @@ msgstr "ввести {amount} TON"
 msgid "----"
 msgstr "----"
 
-#: handlers_bot/nodes/decimal_input.py:37
+#: handlers_bot/nodes/decimal_input.py:36
 msgid ""
 "{error}{text}Limits:\n"
 "• Minimum: {min}\n"
@@ -105,15 +105,15 @@ msgstr ""
 "• Минимум: {min}\n"
 "• Максимум: {max}"
 
-#: handlers_bot/nodes/decimal_input.py:65
+#: handlers_bot/nodes/decimal_input.py:64
 msgid "The entered value is not a number."
 msgstr "Пожалуйста, введите число"
 
-#: handlers_bot/nodes/decimal_input.py:69
+#: handlers_bot/nodes/decimal_input.py:68
 msgid "The entered number is less than the minimum."
 msgstr "Введенное число меньше минимального."
 
-#: handlers_bot/nodes/decimal_input.py:72
+#: handlers_bot/nodes/decimal_input.py:71
 msgid "The entered number is greater than the maximum."
 msgstr "Введенное число больше максимального."
 
@@ -125,7 +125,7 @@ msgstr "Игры"
 msgid "Choose a Game"
 msgstr "Выберите игру"
 
-#: handlers_bot/nodes/games.py:30
+#: handlers_bot/nodes/games.py:29
 msgid ""
 "💣 *Mines*: Uncover all diamonds to maximize your profit!\n"
 "💸 *Coinflip*: _[soon]_ Simple 50-50 game of chance.\n"
@@ -133,7 +133,6 @@ msgid ""
 "\n"
 "_You can play every game for free if you set your bet to 0_"
 msgstr ""
-"🕹️ Игры\n"
 "💣 *Мины*: Откройте все алмазы, чтобы увеличить выигрыш!\n"
 "💸 *Монетка*: _[soon]_ Простая игра 50 на 50.\n"
 "🚀 *Ракета*: _[soon]_ Успей забрать выигрыш, пока ракета не рухнула!\n"
@@ -141,7 +140,7 @@ msgstr ""
 "_Вы можете играть в каждую игру бесплатно, если установите свою ставку "
 "равной 0_"
 
-#: handlers_bot/nodes/games.py:38
+#: handlers_bot/nodes/games.py:37
 msgid "Mines"
 msgstr "Мины"
 
@@ -161,28 +160,28 @@ msgstr ""
 "Эта игра все еще находится в разработке. Подпишитесь на наши новости 📰, "
 "чтобы получить уведомление о выходе!"
 
-#: handlers_bot/nodes/main_menu.py:23 handlers_bot/nodes/main_menu.py:25
-#: handlers_bot/nodes/main_menu.py:28 handlers_bot/nodes/main_menu.py:44
+#: handlers_bot/nodes/main_menu.py:25 handlers_bot/nodes/main_menu.py:27
+#: handlers_bot/nodes/main_menu.py:30 handlers_bot/nodes/main_menu.py:45
 msgid "hello"
 msgstr "привет"
 
-#: handlers_bot/nodes/main_menu.py:24 handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:26 handlers_bot/nodes/main_menu.py:27
 msgid "you look great today"
 msgstr "вы сегодня отлично выглядите"
 
-#: handlers_bot/nodes/main_menu.py:24 handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:26 handlers_bot/nodes/main_menu.py:27
 msgid "nice to see you again"
 msgstr "так приятно видеть вас снова"
 
-#: handlers_bot/nodes/main_menu.py:25
+#: handlers_bot/nodes/main_menu.py:27
 msgid "have a nice day"
 msgstr "добрый день"
 
-#: handlers_bot/nodes/main_menu.py:26
+#: handlers_bot/nodes/main_menu.py:28
 msgid "good luck"
 msgstr "удачи"
 
-#: handlers_bot/nodes/main_menu.py:42
+#: handlers_bot/nodes/main_menu.py:43
 msgid ""
 "🖐 {welcome}, {name}!\n"
 "👛 Your balance: {balance} 💎"
@@ -190,11 +189,11 @@ msgstr ""
 "{welcome}, {name}!\n"
 "_Ваш баланс_: {balance} 💎"
 
-#: handlers_bot/nodes/main_menu.py:49
+#: handlers_bot/nodes/main_menu.py:50
 msgid "*You have deposit bonus +{bonus}%*"
 msgstr "*У вас есть бонус к депозиту +{bonus}%*"
 
-#: handlers_bot/nodes/main_menu.py:58
+#: handlers_bot/nodes/main_menu.py:59
 msgid "News"
 msgstr "Новости"
 
@@ -202,7 +201,7 @@ msgstr "Новости"
 msgid "Referral Program Rules"
 msgstr "Правила реферальной программы"
 
-#: handlers_bot/nodes/referral.py:25
+#: handlers_bot/nodes/referral.py:24
 msgid ""
 "Invite your friends and earn up to *15%* of their bets! Your referrals "
 "will get +10% to their first deposit.\n"
@@ -212,7 +211,7 @@ msgstr ""
 "рефералы получат +10% к своему первому первому депозиту.\n"
 "\n"
 
-#: handlers_bot/nodes/referral.py:26
+#: handlers_bot/nodes/referral.py:25
 msgid ""
 "The more people use your invite code, the more percent from their bets "
 "you will get.\n"
@@ -224,7 +223,8 @@ msgid ""
 "8% — Total deposit of referrals 500-700 TON + 30 active referrals\n"
 "9% — Total deposit of referrals 700-1000 TON + 30 active referrals\n"
 "10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n"
-msgstr "Чем больше людей используют ваш пригласительный код, тем больший процент "
+msgstr ""
+"Чем больше людей используют ваш пригласительный код, тем больший процент "
 "от их ставок вы получите.\n"
 "3% — Общий депозит рефералов 0-50 TON + 5 активных рефералов\n"
 "4% — Общий депозит рефералов 50-125 TON + 15 активных рефералов\n"
@@ -235,7 +235,7 @@ msgstr "Чем больше людей используют ваш пригла�
 "9% — Общий депозит рефералов 700-1000 TON + 30 активных рефералов\n"
 "10% — Общий депозит рефералов 1000-2000 TON + 30 активных рефералов\n"
 
-#: handlers_bot/nodes/referral.py:35
+#: handlers_bot/nodes/referral.py:34
 msgid ""
 "_Active referral is someone who plays at least once a week_\n"
 "_Cheating, botting and other malicious actions related to the referral "
@@ -243,39 +243,41 @@ msgid ""
 "\n"
 "If you are a content maker and have a large audience get in touch with "
 "us. We can discuss special referral program with a bigger share up to 15%"
-msgstr "_Активный реферал это тот, кто играет как минимум раз в неделю_\n"
+msgstr ""
+"_Активный реферал это тот, кто играет как минимум раз в неделю_\n"
 "_Мошенничество, использование ботов и другие вредоносные действия, "
 "связанные с реферальной системой, недопустимы._\n"
 "\n"
 "Если вы создаете контент и у вас большая аудитория, свяжитесь с нами. Мы "
 "можем обсудить специальную реферальную программу с большей долей до 15%"
 
-#: handlers_bot/nodes/referral.py:44
+#: handlers_bot/nodes/referral.py:43
 msgid "Contact Us"
 msgstr "Связаться с нами"
 
-#: handlers_bot/nodes/referral.py:55
+#: handlers_bot/nodes/referral.py:54
 msgid "Invite a friend"
 msgstr "Пригласить друга"
 
-#: handlers_bot/nodes/referral.py:68 handlers_bot/nodes/wallet/withdraw.py:189
+#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:197
 msgid "Withdraw"
 msgstr "Вывести"
 
-#: handlers_bot/nodes/referral.py:72 handlers_bot/nodes/wallet/withdraw.py:154
+#: handlers_bot/nodes/referral.py:70 handlers_bot/nodes/wallet/withdraw.py:161
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Conversion rate: 1 💎 = 1 TON"
 msgstr ""
 "Запрос на вывод средств обрабатывается\n"
-" ⚠ Обработка может занять до 24 часов⚠ Курс конвертации: 1 💎 = 1 TON"
+"⚠ Обработка может занять до 24 часов\n"
+"⚠ Курс конвертации: 1 💎 = 1 TON"
 
-#: handlers_bot/nodes/referral.py:82
+#: handlers_bot/nodes/referral.py:80
 msgid "Nothing to withdraw"
 msgstr "Недостаточно средств для вывода"
 
-#: handlers_bot/nodes/referral.py:85
+#: handlers_bot/nodes/referral.py:83
 msgid ""
 "You can not withdraw your referrals balance until you invite 5 active "
 "referrals."
@@ -283,11 +285,11 @@ msgstr ""
 "Вы не можете вывести свой реферальный баланс, пока не пригласите 5 "
 "активных рефералов."
 
-#: handlers_bot/nodes/referral.py:105
+#: handlers_bot/nodes/referral.py:103
 msgid "Referral Program"
 msgstr "Реферальная программа"
 
-#: handlers_bot/nodes/referral.py:112
+#: handlers_bot/nodes/referral.py:109
 msgid ""
 "Invite your friends and earn up to *15%* of all their winning and losing "
 "bets! Your referrals will get +10% to their first first deposit.\n"
@@ -313,16 +315,16 @@ msgstr ""
 msgid "Settings"
 msgstr "Настройки"
 
-#: handlers_bot/nodes/settings.py:40
+#: handlers_bot/nodes/settings.py:39
 msgid "You can customize bot settings here\n"
 msgstr "Вы можете изменить настройки бота."
 
-#: handlers_bot/nodes/settings.py:46
+#: handlers_bot/nodes/settings.py:45
 msgid "Change Language"
 msgstr "Изменить язык"
 
-#: handlers_bot/nodes/wallet/deposit.py:36
-#: handlers_bot/nodes/wallet/deposit.py:107
+#: handlers_bot/nodes/wallet/deposit.py:37
+#: handlers_bot/nodes/wallet/deposit.py:109
 msgid "Deposit via @CryptoBot"
 msgstr "Пополнить через @CryptoBot"
 
@@ -346,21 +348,19 @@ msgstr ""
 msgid "Go to Payment"
 msgstr "Перейти к оплате"
 
-#: handlers_bot/nodes/wallet/deposit.py:103
+#: handlers_bot/nodes/wallet/deposit.py:105
 msgid "Deposit"
 msgstr "Пополнить"
 
-#: handlers_bot/nodes/wallet/deposit.py:111
+#: handlers_bot/nodes/wallet/deposit.py:113
 msgid "Please enter or choose the amount for deposit."
 msgstr "Пожалуйста, введите или выберите сумму для внесения депозита."
 
-#: handlers_bot/nodes/wallet/deposit.py:115
+#: handlers_bot/nodes/wallet/deposit.py:117
 msgid "deposit {amount} TON"
-msgstr ""
-"пополнить баланс на {amount} 💎!\n"
-"\n"
+msgstr "пополнить баланс на {amount} TON"
 
-#: handlers_bot/nodes/wallet/deposit.py:119
+#: handlers_bot/nodes/wallet/deposit.py:121
 msgid ""
 "⚠ Right now we only accept deposit via @CryptoBot\n"
 "⚠ Conversion rate: 1 TON = 1 💎"
@@ -368,11 +368,11 @@ msgstr ""
 "⚠ Сейчас мы принимаем депозиты только через @CryptoBot\n"
 "⚠ Курс конвертации: 1 TON = 1 💎"
 
-#: handlers_bot/nodes/wallet/deposit.py:128
+#: handlers_bot/nodes/wallet/deposit.py:130
 msgid "ℹ How to use @CryptoBot"
 msgstr "ℹ Как использовать @CryptoBot"
 
-#: handlers_bot/nodes/wallet/withdraw.py:56
+#: handlers_bot/nodes/wallet/withdraw.py:61
 msgid ""
 "❌ Your withdrawal request has been declined.\n"
 "Reason: not enough funds in your wallet"
@@ -380,7 +380,7 @@ msgstr ""
 "❌ Ваш запрос на вывод средств был отклонен.\n"
 "Причина: не достаточно средств в вашем кошельке"
 
-#: handlers_bot/nodes/wallet/withdraw.py:70
+#: handlers_bot/nodes/wallet/withdraw.py:75
 msgid ""
 "❌ Your withdrawal request has been declined.\n"
 "Reason: you need to play at least 5 payed games to unlock withdrawals\n"
@@ -391,7 +391,7 @@ msgstr ""
 "разблокировать вывод средств\n"
 "Вы сыграли: {amount} игр из 5"
 
-#: handlers_bot/nodes/wallet/withdraw.py:109
+#: handlers_bot/nodes/wallet/withdraw.py:118
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
@@ -399,11 +399,11 @@ msgstr ""
 "✅ Ваш запрос на вывод средств был обработан.\n"
 "{amount} 💎 отправлено на ваш кошелек"
 
-#: handlers_bot/nodes/wallet/withdraw.py:124
+#: handlers_bot/nodes/wallet/withdraw.py:133
 msgid "About withdrawals"
 msgstr "Правила вывода"
 
-#: handlers_bot/nodes/wallet/withdraw.py:128
+#: handlers_bot/nodes/wallet/withdraw.py:136
 msgid ""
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Minimum amount: 0.5 💎\n"
@@ -419,89 +419,35 @@ msgstr ""
 "⚠ Вы все еще можете использовать свои средства, пока запрос на вывод "
 "средств находится на рассмотрении\n"
 
-#: handlers_bot/nodes/wallet/withdraw.py:150
+#: handlers_bot/nodes/wallet/withdraw.py:158
 msgid "Withdrawal Request"
 msgstr "Запрос на вывод средств"
 
-#: handlers_bot/nodes/wallet/withdraw.py:193
+#: handlers_bot/nodes/wallet/withdraw.py:201
 msgid "Please enter or choose the amount for withdrawal."
 msgstr "Пожалуйста, введите или выберите сумму для вывода."
 
-#: handlers_bot/nodes/wallet/withdraw.py:197
+#: handlers_bot/nodes/wallet/withdraw.py:205
 msgid "withdraw {amount} TON"
 msgstr "вывести {amount} TON"
 
-#: handlers_bot/nodes/wallet/withdraw.py:201
+#: handlers_bot/nodes/wallet/withdraw.py:209
 msgid "👛 Your Balance: {balance} 💎"
 msgstr "👛 Ваш баланс: {balance} 💎"
 
-#: handlers_bot/nodes/wallet/withdraw.py:219
+#: handlers_bot/nodes/wallet/withdraw.py:227
 msgid "Sorry, your balance is less than the required minimum for withdrawal."
 msgstr "К сожалению, ваш баланс меньше необходимого минимума для вывода средств."
 
-#: handlers_bot/nodes/wallet/withdraw.py:223
+#: handlers_bot/nodes/wallet/withdraw.py:231
 msgid "Your balance is less than the entered amount"
 msgstr "Ваш баланс меньше введенной суммы"
 
-#: handlers_server/webhooks.py:40
+#: handlers_server/webhooks.py:74
 msgid ""
 "You deposited {amount} 💎 to you wallet!\n"
 "\n"
 msgstr ""
 "Вы пополнили баланс на {amount} 💎!\n"
 "\n"
-
-#~ msgid ""
-#~ "Invite your friends and earn up to"
-#~ " *15%* of their bets! Your referrals"
-#~ " will get +10% to their first "
-#~ "deposit.\n"
-#~ "\n"
-#~ "The more people use your invite "
-#~ "code, the more percent from their "
-#~ "bets you will get.\n"
-#~ "3% — Total deposit of referrals 0-50 TON + 5 active referrals\n"
-#~ "4% — Total deposit of referrals 50-125 TON + 15 active referrals\n"
-#~ "5% — Total deposit of referrals 125-225 TON + 20 active referrals\n"
-#~ "6% — Total deposit of referrals 225-350 TON + 25 active referrals\n"
-#~ "7% — Total deposit of referrals 350-500 TON + 30 active referrals\n"
-#~ "8% — Total deposit of referrals 500-700 TON + 30 active referrals\n"
-#~ "9% — Total deposit of referrals 700-1000 TON + 30 active referrals\n"
-#~ "10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n"
-#~ "_Active referral is someone who plays at least once a week_\n"
-#~ "_Cheating, botting and other malicious "
-#~ "actions related to the referral system"
-#~ " would not be tolerated._\n"
-#~ "\n"
-#~ "If you are a content maker and "
-#~ "have a large audience get in touch"
-#~ " with us. We can discuss special "
-#~ "referral program with a bigger share "
-#~ "up to 15%"
-#~ msgstr ""
-#~ "Приглашайте своих друзей и зарабатывайте "
-#~ "до *15%* от их ставок! Ваши "
-#~ "рефералы получат +10% к своему первому"
-#~ " первому депозиту.\n"
-#~ "\n"
-#~ "Чем больше людей используют ваш "
-#~ "пригласительный код, тем больший процент "
-#~ "от их ставок вы получите.\n"
-#~ "3% — Общий депозит рефералов 0-50 TON + 5 активных рефералов\n"
-#~ "4% — Общий депозит рефералов 50-125 TON + 15 активных рефералов\n"
-#~ "5% — Общий депозит рефералов 125-225 TON + 20 активных рефералов\n"
-#~ "6% — Общий депозит рефералов 225-350 TON + 25 активных рефералов\n"
-#~ "7% — Общий депозит рефералов 350-500 TON + 30 активных рефералов\n"
-#~ "8% — Общий депозит рефералов 500-700 TON + 30 активных рефералов\n"
-#~ "9% — Общий депозит рефералов 700-1000 TON + 30 активных рефералов\n"
-#~ "10% — Общий депозит рефералов 1000-2000 TON + 30 активных рефералов\n"
-#~ "_Активный реферал это тот, кто играет как минимум раз в неделю_\n"
-#~ "_Мошенничество, использование ботов и другие"
-#~ " вредоносные действия, связанные с "
-#~ "реферальной системой, недопустимы._\n"
-#~ "\n"
-#~ "Если вы создаете контент и у вас"
-#~ " большая аудитория, свяжитесь с нами. "
-#~ "Мы можем обсудить специальную реферальную "
-#~ "программу с большей долей до 15%"
 

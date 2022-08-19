@@ -21,6 +21,7 @@ class Game(BaseModel):
 
 class WebApps(BaseModel):
     mines: str
+    coinflip: str
 
 class Config(BaseModel):
     mongodb: str

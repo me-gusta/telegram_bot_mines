@@ -35,7 +35,7 @@ class Games(Node):
     def buttons(self) -> List[List[Button]]:
         return [
             [URLButton(text='💣 ' + _('Mines'), url=config.webapps.mines, is_webapp=True)],
-            [TransitionButton(to_node=Games, props={'show_alert': 1}, text='💸 ' + _('Coinflip'))],
+            [URLButton(text='💸 ' + _('Coinflip'), url=config.webapps.mines, is_webapp=True)],
             [TransitionButton(to_node=Games, props={'show_alert': 2}, text='🚀 ' + _('Rocket Launch'))]
         ]
 

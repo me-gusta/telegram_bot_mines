@@ -74,7 +74,7 @@ class ReferralWithdraw(Node):
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         user = get_current_user()
         share, total_revenue, count = await user_referral_stats(user)
-        referral_balance = to_decimal(total_revenue * to_decimal(100 / share))
+        referral_balance = to_decimal(total_revenue * to_decimal(share / 100))
         if referral_balance <= config.wallet.min_withdraw:
             self.props.error_msg = '❌ ' + _('Nothing to withdraw')
             return
@@ -102,7 +102,7 @@ class Referral(Node):
     async def text(self) -> str:
         user = get_current_user()
         share, total_revenue, count = await user_referral_stats(user)
-        referral_balance = to_decimal(total_revenue * to_decimal(100 / share))
+        referral_balance = to_decimal(total_revenue * to_decimal(share / 100))
 
         return _('Invite your friends and earn up to *90%* of our revenue from bets placed by them!\n'
                  'Your referrals will get +10% to their first deposit.\n\n') + _(

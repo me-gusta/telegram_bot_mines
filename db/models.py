@@ -61,8 +61,6 @@ class User(MongoModel):
 
     sum_deposit: Decimal = to_decimal(0)
 
-    payed_games_played: int = 0
-
     state: str = 0
     menu_message_id: int = 0
 

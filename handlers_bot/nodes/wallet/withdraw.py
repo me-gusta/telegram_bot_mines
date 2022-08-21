@@ -67,20 +67,6 @@ class ConfirmWithdrawalAdmin(Node):
             return ErrorNode(msg=f'user has not enough funds\n'
                                  f'balance: {request_user.balance}\n'
                                  f'amount: {request.amount}')
-        if request_user.payed_games_played < 5:
-            self._logger.warn('request is canceled. not enough payed_games_played %s', request)
-            with suppress(TelegramAPIError):
-                await bot.send_message(
-                    chat_id=request_user.user_id,
-                    text=_('❌ Your withdrawal request has been declined.\n'
-                           'Reason: you need to play at least 5 payed games to unlock withdrawals\n'
-                           'You played: {amount} games out of 5').format(amount=request_user.payed_games_played),
-                    reply_markup=types.InlineKeyboardMarkup(1, inline_keyboard=[[
-                        TransitionButton(to_node='MainMenu', text='Main Menu').compile()
-                    ]])
-                )
-            return ErrorNode(msg=f'user has not enough payed games\n'
-                                 f'{request_user.payed_games_played}/5')
         headers = {
             'Crypto-Pay-API-Token': config.crypto_pay_token,
             'Content-Type': 'application/x-www-form-urlencoded'

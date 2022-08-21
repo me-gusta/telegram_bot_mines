@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-08-19 20:59+0400\n"
+"POT-Creation-Date: 2022-08-21 17:03+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,15 +124,15 @@ msgstr ""
 msgid "Mines"
 msgstr ""
 
-#: handlers_bot/nodes/games.py:39
+#: handlers_bot/nodes/games.py:38
 msgid "Coinflip"
 msgstr ""
 
-#: handlers_bot/nodes/games.py:40
+#: handlers_bot/nodes/games.py:39
 msgid "Rocket Launch"
 msgstr ""
 
-#: handlers_bot/nodes/games.py:48 handlers_bot/nodes/games.py:52
+#: handlers_bot/nodes/games.py:46
 msgid ""
 "This game is still in development. Subscribe to our 📰 News to get "
 "notified!"
@@ -177,78 +177,63 @@ msgstr ""
 msgid "Referral Program Rules"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:24
+#: handlers_bot/nodes/referral.py:24 handlers_bot/nodes/referral.py:102
 msgid ""
-"Invite your friends and earn up to *15%* of their bets! Your referrals "
-"will get +10% to their first deposit.\n"
+"Invite your friends and earn up to *90%* of our revenue from bets placed "
+"by them!\n"
+"Your referrals will get +10% to their first deposit.\n"
 "\n"
 msgstr ""
 
 #: handlers_bot/nodes/referral.py:25
 msgid ""
-"The more people use your invite code, the more percent from their bets "
-"you will get.\n"
-"3% — Total deposit of referrals 0-50 TON + 5 active referrals\n"
-"4% — Total deposit of referrals 50-125 TON + 15 active referrals\n"
-"5% — Total deposit of referrals 125-225 TON + 20 active referrals\n"
-"6% — Total deposit of referrals 225-350 TON + 25 active referrals\n"
-"7% — Total deposit of referrals 350-500 TON + 30 active referrals\n"
-"8% — Total deposit of referrals 500-700 TON + 30 active referrals\n"
-"9% — Total deposit of referrals 700-1000 TON + 30 active referrals\n"
-"10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n"
-msgstr ""
-
-#: handlers_bot/nodes/referral.py:34
-msgid ""
-"_Active referral is someone who plays at least once a week_\n"
+"The more people use your invite code, the more percent of revenue you "
+"will get.\n"
+"25% — Net revenue 0-200 TON\n"
+"35% — Net revenue 201-1000 TON\n"
+"45% — Net revenue 1001-5000 TON\n"
+"60% — Net revenue 5001-10000 TON\n"
+"80% — Net revenue 10001-50001 TON\n"
+"90% — Net revenue 50001 TON or more\n"
 "_Cheating, botting and other malicious actions related to the referral "
 "system would not be tolerated._\n"
 "\n"
 "If you are a content maker and have a large audience get in touch with "
-"us. We can discuss special referral program with a bigger share up to 15%"
+"us. We can discuss special referral program with a bigger share"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:43
+#: handlers_bot/nodes/referral.py:40
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:54
+#: handlers_bot/nodes/referral.py:51
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:197
+#: handlers_bot/nodes/referral.py:64 handlers_bot/nodes/wallet/withdraw.py:183
 msgid "Withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:70 handlers_bot/nodes/wallet/withdraw.py:161
+#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:147
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Conversion rate: 1 💎 = 1 TON"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:80
+#: handlers_bot/nodes/referral.py:77
 msgid "Nothing to withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:83
-msgid ""
-"You can not withdraw your referrals balance until you invite 5 active "
-"referrals."
-msgstr ""
-
-#: handlers_bot/nodes/referral.py:103
+#: handlers_bot/nodes/referral.py:96
 msgid "Referral Program"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:109
+#: handlers_bot/nodes/referral.py:103
 msgid ""
-"Invite your friends and earn up to *15%* of all their winning and losing "
-"bets! Your referrals will get +10% to their first first deposit.\n"
-"\n"
 "Your share: {share}%\n"
-"Active referrals: {count}\n"
-"Referrals deposit: {sum_deposit}\n"
+"Referrals: {count}\n"
+"Net revenue: {total_revenue}\n"
 "Total income: {balance} 💎\n"
 "\n"
 "Invite link: `https://t.me/LuckyTonBot?start={ref}`"
@@ -313,24 +298,17 @@ msgid ""
 "Reason: not enough funds in your wallet"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:75
-msgid ""
-"❌ Your withdrawal request has been declined.\n"
-"Reason: you need to play at least 5 payed games to unlock withdrawals\n"
-"You played: {amount} games out of 5"
-msgstr ""
-
-#: handlers_bot/nodes/wallet/withdraw.py:118
+#: handlers_bot/nodes/wallet/withdraw.py:104
 msgid ""
 "✅ Your withdrawal request has been processed.\n"
 "{amount} 💎 sent to you wallet"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:133
+#: handlers_bot/nodes/wallet/withdraw.py:119
 msgid "About withdrawals"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:136
+#: handlers_bot/nodes/wallet/withdraw.py:122
 msgid ""
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Minimum amount: 0.5 💎\n"
@@ -339,27 +317,27 @@ msgid ""
 "⚠ You can still use your funds while withdrawal request is pending\n"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:158
+#: handlers_bot/nodes/wallet/withdraw.py:144
 msgid "Withdrawal Request"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:201
+#: handlers_bot/nodes/wallet/withdraw.py:187
 msgid "Please enter or choose the amount for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:205
+#: handlers_bot/nodes/wallet/withdraw.py:191
 msgid "withdraw {amount} TON"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:209
+#: handlers_bot/nodes/wallet/withdraw.py:195
 msgid "👛 Your Balance: {balance} 💎"
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:227
+#: handlers_bot/nodes/wallet/withdraw.py:213
 msgid "Sorry, your balance is less than the required minimum for withdrawal."
 msgstr ""
 
-#: handlers_bot/nodes/wallet/withdraw.py:231
+#: handlers_bot/nodes/wallet/withdraw.py:217
 msgid "Your balance is less than the entered amount"
 msgstr ""
 

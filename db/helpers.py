@@ -42,33 +42,20 @@ async def get_or_create_user(tg_user: types.User) -> User:
     return db_user
 
 
-async def user_referral_stats(user: User) -> Tuple[Decimal, Decimal, int]:
-    referrals: List[User] = await dbs.users.find({'referrer_id': user.user_id}).to_list(None)
-    active_referrals = [x for x in referrals if x.last_active >= datetime.now() - timedelta(days=7)]
-    sum_deposit = to_decimal(sum([x.sum_deposit for x in active_referrals]))
-    count = len(active_referrals)
-    share = 3
+async def user_referral_stats(user: User) -> Tuple[int, Decimal, int]:
+    referrals: List[dict] = await dbs.users.find({'referrer_id': user.user_id}).to_list(None)
+    total_revenue = to_decimal(sum([x.get('sum_revenue') for x in referrals if x.get('sum_revenue')]))
+    share = 25
 
-    if count >= 15:
-        if sum_deposit > 50:
-            share = 4
+    if total_revenue > 50000:
+        share = 90
+    elif total_revenue > 10000:
+        share = 80
+    elif total_revenue > 5000:
+        share = 60
+    elif total_revenue > 1000:
+        share = 45
+    elif total_revenue > 200:
+        share = 35
 
-    if count >= 20:
-        if sum_deposit > 125:
-            share = 5
-    if count >= 25:
-        if sum_deposit > 225:
-            share = 6
-
-    if count >= 30:
-        if sum_deposit > 1000:
-            share = 10
-        elif sum_deposit > 700:
-            share = 9
-        elif sum_deposit > 500:
-            share = 8
-        elif sum_deposit > 350:
-            share = 7
-
-    share = Decimal(share)
-    return share, sum_deposit, count
+    return share, total_revenue, len(referrals)

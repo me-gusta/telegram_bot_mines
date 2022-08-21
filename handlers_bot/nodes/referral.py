@@ -21,21 +21,18 @@ class ReferralRules(Node):
         return _('Referral Program Rules')
 
     async def text(self) -> str:
-        return _('Invite your friends and earn up to *15%* of their bets! '
+        return _('Invite your friends and earn up to *90%* of our revenue from bets placed by them!\n'
                  'Your referrals will get +10% to their first deposit.\n\n') + _(
-            'The more people use your invite code, the more percent from their bets you will get.\n'
-            '3% — Total deposit of referrals 0-50 TON + 5 active referrals\n'
-            '4% — Total deposit of referrals 50-125 TON + 15 active referrals\n'
-            '5% — Total deposit of referrals 125-225 TON + 20 active referrals\n'
-            '6% — Total deposit of referrals 225-350 TON + 25 active referrals\n'
-            '7% — Total deposit of referrals 350-500 TON + 30 active referrals\n'
-            '8% — Total deposit of referrals 500-700 TON + 30 active referrals\n'
-            '9% — Total deposit of referrals 700-1000 TON + 30 active referrals\n'
-            '10% — Total deposit of referrals 1000-2000 TON + 30 active referrals\n') + _(
-            '_Active referral is someone who plays at least once a week_\n'
+            'The more people use your invite code, the more percent of revenue you will get.\n'
+            '25% — Net revenue 0-200 TON\n'
+            '35% — Net revenue 201-1000 TON\n'
+            '45% — Net revenue 1001-5000 TON\n'
+            '60% — Net revenue 5001-10000 TON\n'
+            '80% — Net revenue 10001-50001 TON\n'
+            '90% — Net revenue 50001 TON or more\n'
             '_Cheating, botting and other malicious actions related to the referral system would not be tolerated._\n\n'
             'If you are a content maker and have a large audience get in touch with us. '
-            'We can discuss special referral program with a bigger share up to 15%')
+            'We can discuss special referral program with a bigger share')
 
     @property
     def buttons(self) -> List[List[Button]]:
@@ -75,21 +72,17 @@ class ReferralWithdraw(Node):
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         user = get_current_user()
-        share, sum_deposit, count = await user_referral_stats(user)
+        __, total_revenue, count = await user_referral_stats(user)
         if user.referral_balance <= 0:
             self.props.error_msg = '❌ ' + _('Nothing to withdraw')
-            return
-        if count < 5:
-            self.props.error_msg = '❌ ' + _(
-                'You can not withdraw your referrals balance until you invite 5 active referrals.')
             return
         await bot.send_message(
             chat_id=config.operator_id,
             text=f'Кто-то захотел вывести реферальные деньги.\n'
                  f'Нужно как-то это решать......\n'
-                 f'вперед, автоматика)))\n'
-                 f'sum_deposit: {sum_deposit}\n\n'
-                 f'ref count: {count}')
+                 f'вперед, автоматика :)))\n\n'
+                 f'total revenue: {total_revenue}\n'
+                 f'amount referrals: {count}')
         return
 
 
@@ -104,17 +97,17 @@ class Referral(Node):
 
     async def text(self) -> str:
         user = get_current_user()
-        share, sum_deposit, count = await user_referral_stats(user)
+        share, total_revenue, count = await user_referral_stats(user)
 
-        return _('Invite your friends and earn up to *15%* of all their winning and losing bets! '
-                 'Your referrals will get +10% to their first first deposit.\n\n'
+        return _('Invite your friends and earn up to *90%* of our revenue from bets placed by them!\n'
+                 'Your referrals will get +10% to their first deposit.\n\n') + _(
                  'Your share: {share}%\n'
-                 'Active referrals: {count}\n'
-                 'Referrals deposit: {sum_deposit}\n'
+                 'Referrals: {count}\n'
+                 'Net revenue: {total_revenue}\n'
                  'Total income: {balance} 💎\n\n'
                  'Invite link: `https://t.me/LuckyTonBot?start={ref}`').format(ref=user.ref,
                                                                                count=count,
-                                                                               sum_deposit=sum_deposit,
+                                                                               total_revenue=total_revenue,
                                                                                share=share,
                                                                                balance=user.referral_balance)
 

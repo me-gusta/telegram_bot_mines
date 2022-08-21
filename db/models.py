@@ -60,6 +60,7 @@ class User(MongoModel):
     referral_balance: Decimal = to_decimal(0)
 
     sum_deposit: Decimal = to_decimal(0)
+    sum_revenue: Decimal = to_decimal(0)
 
     state: str = 0
     menu_message_id: int = 0

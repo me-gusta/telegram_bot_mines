@@ -43,7 +43,7 @@ async def get_or_create_user(tg_user: types.User) -> User:
 
 
 async def user_referral_stats(user: User) -> Tuple[int, Decimal, int]:
-    referrals: List[dict] = await dbs.users.find({'referrer_id': user.user_id}).to_list(None)
+    referrals: List[dict] = await dbs.users.find({'referrer_user_id': user.user_id}).to_list(None)
     total_revenue = to_decimal(sum([x.get('sum_revenue') for x in referrals if x.get('sum_revenue')]))
     share = 25
 

@@ -81,6 +81,7 @@ class ReferralWithdraw(Node):
             text=f'Кто-то захотел вывести реферальные деньги.\n'
                  f'Нужно как-то это решать......\n'
                  f'вперед, автоматика :)))\n\n'
+                 f'user id: {user.user_id}\n'
                  f'total revenue: {total_revenue}\n'
                  f'amount referrals: {count}')
         return

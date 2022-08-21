@@ -41,13 +41,8 @@ class Games(Node):
 
     async def process(self, update: Union[types.CallbackQuery, types.Message]) -> Union['Node', None]:
         if is_cq(update):
-            if self.props.show_alert:
-                if self.props.show_alert == 1:
-                    await update.answer(
-                        text=_('This game is still in development. Subscribe to our 📰 News to get notified!'),
-                        show_alert=True)
-                elif self.props.show_alert == 2:
-                    await update.answer(
-                        text=_('This game is still in development. Subscribe to our 📰 News to get notified!'),
-                        show_alert=True)
+            if self.props.show_alert > 0:
+                await update.answer(
+                    text=_('This game is still in development. Subscribe to our 📰 News to get notified!'),
+                    show_alert=True)
                 return NullNode()

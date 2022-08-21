@@ -57,7 +57,6 @@ class User(MongoModel):
     deposit_bonus: Decimal = to_decimal(0)
 
     referrer_user_id: int = 0
-    referral_balance: Decimal = to_decimal(0)
 
     sum_deposit: Decimal = to_decimal(0)
     sum_revenue: Decimal = to_decimal(0)
@@ -88,9 +87,8 @@ class User(MongoModel):
 
     def change_balance(self, n: Union[float, Decimal]):
         value = to_decimal(n)
-        total = self.balance + value
-        total = total.quantize(Decimal('.01'), rounding=ROUND_DOWN)
-        self.balance = total
+        self.balance += value
+        self.sum_revenue -= value
 
     @property
     def ref(self):

@@ -33,7 +33,9 @@ class ReferralRules(Node):
             '90% — Net revenue 50001 TON or more\n'
             '_Cheating, botting and other malicious actions related to the referral system would not be tolerated._\n\n'
             'If you are a content maker and have a large audience get in touch with us. '
-            'We can discuss special referral program with a bigger share')
+            'We can discuss special referral program with a bigger share') + '\n\n' + _(
+            'Earn 0.5 TON for free! Simply post a review about LuckyTON in any social media and send proof to our support.'
+        )
 
     @property
     def buttons(self) -> List[List[Button]]:

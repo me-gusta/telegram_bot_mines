@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-08-21 17:03+0400\n"
+"POT-Creation-Date: 2022-09-01 14:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,11 +173,11 @@ msgstr ""
 msgid "News"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:21
+#: handlers_bot/nodes/referral.py:22
 msgid "Referral Program Rules"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:24 handlers_bot/nodes/referral.py:102
+#: handlers_bot/nodes/referral.py:25 handlers_bot/nodes/referral.py:109
 msgid ""
 "Invite your friends and earn up to *90%* of our revenue from bets placed "
 "by them!\n"
@@ -185,7 +185,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:25
+#: handlers_bot/nodes/referral.py:26
 msgid ""
 "The more people use your invite code, the more percent of revenue you "
 "will get.\n"
@@ -202,34 +202,40 @@ msgid ""
 "us. We can discuss special referral program with a bigger share"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:40
+#: handlers_bot/nodes/referral.py:36
+msgid ""
+"Earn 0.5 TON for free! Simply post a review about LuckyTON in any social "
+"media and send proof to our support."
+msgstr ""
+
+#: handlers_bot/nodes/referral.py:43
 msgid "Contact Us"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:51
+#: handlers_bot/nodes/referral.py:54
 msgid "Invite a friend"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:64 handlers_bot/nodes/wallet/withdraw.py:183
+#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:183
 msgid "Withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:67 handlers_bot/nodes/wallet/withdraw.py:147
+#: handlers_bot/nodes/referral.py:70 handlers_bot/nodes/wallet/withdraw.py:147
 msgid ""
 "⚠ Your withdrawal request is being processed\n"
 "⚠ Withdrawals can take up to 24h\n"
 "⚠ Conversion rate: 1 💎 = 1 TON"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:77
+#: handlers_bot/nodes/referral.py:81
 msgid "Nothing to withdraw"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:96
+#: handlers_bot/nodes/referral.py:102
 msgid "Referral Program"
 msgstr ""
 
-#: handlers_bot/nodes/referral.py:103
+#: handlers_bot/nodes/referral.py:110
 msgid ""
 "Your share: {share}%\n"
 "Referrals: {count}\n"
